@@ -23,10 +23,14 @@ const Login = () => {
       <div className="loginWrapper h-full w-full bg-[#111112] max-sm:flex-col flex p-5 max-sm:pt-0 max-sm:gap-0 gap-20 overflow-hidden">
         <div className="md:hidden ribbon relative h-1/2 w-full flex justify-center items-center">
           <div className="  bg-[#576CEC] w-20 h-full"></div>
-          <img className="z-20 bottom-20 opacity-75 absolute w-20 h-20 object-cover" src={monster} alt="" />
+          <img
+            className="z-20 bottom-20 opacity-75 absolute w-20 h-20 object-cover"
+            src={monster}
+            alt=""
+          />
         </div>
         {/* Login section1 */}
-        <div className="max-sm:w-full h-full w-1/2 flex flex-col  items-center ">
+        <div className="max-sm:w-full h-full w-1/2 flex flex-col md:justify-center items-center ">
           <form
             onSubmit={handleSubmit(handleRegistration)}
             className=" w-full flex flex-col justify-center items-center max-sm:p-2 max-sm:pt-0 p-20 py-10"
@@ -105,7 +109,12 @@ const Login = () => {
           </p>
         </div>
         {/* Login section2 */}
-        <div className="max-sm:hidden h-full w-1/2 relative rounded-2xl bg-gradient-to-b from-orange-100 via-orange-100 to-gray-100 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0,filter:"blur(1px)" }}
+          animate={{ opacity: 1,filter:"blur(0px)" }}
+          transition={{ duration:0.5, ease: "easeInOut" }}
+          className="max-sm:hidden h-full w-1/2 relative rounded-2xl bg-gradient-to-b from-orange-100 via-orange-100 to-gray-100 overflow-hidden"
+        >
           <img className="h-full w-full object-cover" src={character} alt="" />
           <motion.img
             initial={{ y: 0 }}
@@ -147,7 +156,7 @@ const Login = () => {
             src={coin}
             alt=""
           />
-        </div>
+        </motion.div>
       </div>
     </>
   );
