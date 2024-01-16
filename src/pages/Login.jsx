@@ -1,4 +1,5 @@
 import character from "../assets/images/3dlogin.png";
+import spiralgif from "../assets/images/spiralgif.gif";
 import coin from "../assets/images/3dcoin.png";
 import gift from "../assets/images/giftbox.png";
 import monster from "../assets/images/monster.png";
@@ -116,6 +117,7 @@ const Login = () => {
           className="max-sm:hidden h-full w-1/2 relative rounded-2xl bg-gradient-to-b from-orange-100 via-orange-100 to-gray-100 overflow-hidden"
         >
           <img className="z-30 relative h-full w-full object-cover" src={character} alt="" />
+          <img className="z-10 absolute   object-cover top-0 left-1/2 -translate-x-[55%]" src={spiralgif} alt="" />
           <motion.img
             initial={{ y: 0 }}
             animate={{ y: [5, -5], rotateZ: [-5, 5] }}
