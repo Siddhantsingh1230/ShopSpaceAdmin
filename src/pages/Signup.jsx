@@ -46,7 +46,7 @@ const Signup = () => {
             />
           </motion.div>
           {/* Section 2 */}
-          <div className="md:h-full max-sm:w-full w-1/2 flex flex-col md:justify-center items-center">
+          <div className=" max-sm:w-full w-1/2 flex flex-col md:justify-center items-center">
             <form
               onSubmit={handleSubmit(handleRegistration)}
               className="w-full h-full flex flex-col justify-center items-center max-sm:p-2 max-sm:pt-0 p-20 py-10"
