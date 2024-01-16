@@ -115,7 +115,7 @@ const Login = () => {
           transition={{ duration:0.5, ease: "easeInOut" }}
           className="max-sm:hidden h-full w-1/2 relative rounded-2xl bg-gradient-to-b from-orange-100 via-orange-100 to-gray-100 overflow-hidden"
         >
-          <img className="h-full w-full object-cover" src={character} alt="" />
+          <img className="z-30 relative h-full w-full object-cover" src={character} alt="" />
           <motion.img
             initial={{ y: 0 }}
             animate={{ y: [5, -5], rotateZ: [-5, 5] }}
@@ -125,7 +125,7 @@ const Login = () => {
               repeat: Infinity,
               repeatType: "reverse",
             }}
-            className="h-32  w-32 object-cover absolute top-10 left-20"
+            className="h-20 z-10 w-20 object-cover absolute top-10 left-20"
             src={gift}
             alt=""
           />
@@ -139,7 +139,7 @@ const Login = () => {
               repeat: Infinity,
               repeatType: "reverse",
             }}
-            className="h-10  blur-[0.5px]  w-10 -rotate-45 object-contain absolute top-2 left-16"
+            className="h-5 blur-[0.5px]  w-5 -rotate-45 object-contain absolute top-5 left-16"
             src={coin}
             alt=""
           />
@@ -152,7 +152,7 @@ const Login = () => {
               repeat: Infinity,
               repeatType: "reverse",
             }}
-            className="h-10    w-10 object-contain  absolute top-12 left-10 "
+            className="h-7  w-7 object-contain  absolute top-12 left-12 "
             src={coin}
             alt=""
           />
