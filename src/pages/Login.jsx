@@ -42,7 +42,7 @@ const Login = () => {
             </p>
             <div className="w-full rounded-md mb-5 bg-[#201F25]">
               <input
-                className="text-white w-full rounded-md p-3 bg-transparent"
+                className="text-white w-full rounded-md p-3 bg-transparent outline-none"
                 type="text"
                 placeholder="Email"
                 {...register("email", {
@@ -61,7 +61,7 @@ const Login = () => {
             )}
             <div className="relative w-full rounded-md mb-5 bg-[#201F25]">
               <input
-                className="w-full rounded-md p-3 bg-transparent pr-10 text-white "
+                className="w-full rounded-md p-3 bg-transparent pr-10 text-white outline-none"
                 type={showPass ? "text" : "password"}
                 placeholder="Password"
                 {...register("password", {
