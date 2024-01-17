@@ -4,9 +4,13 @@ import coin from "../assets/images/3dcoin.png";
 import gift from "../assets/images/giftbox.png";
 import monster from "../assets/images/monster.png";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Loader from "../components/Loader";
+// state and dispatch imports
+import { loginAsync } from "../slices/authSlice.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
@@ -17,11 +21,32 @@ const Login = () => {
   } = useForm();
 
   const handleRegistration = (data) => {
-    console.log(data);
+    const { email, password } = data;
+    const sanitizedObject = {
+      email: email.trim(),
+      password,
+    };
+    dispatch(loginAsync(sanitizedObject));
   };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  //fetching loading states from store to render Loader
+  const status = useSelector((state) => state.auth.status);
+  const user = useSelector((state) => state.auth.user);
+  useEffect(() => {
+    if (user) {
+      // user successfully logged in
+      navigate("/");
+    }
+  }, [user]);
   return (
     <>
-      <div className="loginWrapper h-full w-full bg-[#111112] max-sm:flex-col flex p-5 max-sm:pt-0 max-sm:gap-0 gap-20 overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, filter: "blur(1px)" }}
+        animate={{ opacity: 1, filter: "blur(0px)" }}
+        transition={{ duration: 1, ease: "easeIn" }}
+        className="loginWrapper h-full w-full bg-[#111112] max-sm:flex-col flex p-5 max-sm:pt-0 max-sm:gap-0 gap-20 overflow-hidden"
+      >
         <div className="md:hidden ribbon relative h-1/2 w-full flex justify-center items-center">
           <div className="  bg-[#576CEC] w-20 h-full"></div>
           <img
@@ -111,18 +136,26 @@ const Login = () => {
         </div>
         {/* Login section2 */}
         <motion.div
-          initial={{ opacity: 0,filter:"blur(1px)" }}
-          animate={{ opacity: 1,filter:"blur(0px)" }}
-          transition={{ duration:0.5, ease: "easeInOut" }}
           className="max-sm:hidden h-full w-1/2 relative rounded-2xl bg-gradient-to-b from-orange-100 via-orange-100 to-gray-100 overflow-hidden"
         >
-          <img className="z-30 relative h-full w-full object-cover" src={character} alt="" />
-          <motion.img initial={{opacity:0}} animate={{opacity:1}} transition={{
+          <img
+            className="z-30 relative h-full w-full object-cover"
+            src={character}
+            alt=""
+          />
+          <motion.img
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
               duration: 6,
               ease: "easeOut",
               repeat: Infinity,
               repeatType: "reverse",
-            }} className="z-10 absolute   object-cover -top-10 left-1/2 -translate-x-[55%]" src={spiralgif} alt="" />
+            }}
+            className="z-10 absolute   object-cover -top-10 left-1/2 -translate-x-[55%]"
+            src={spiralgif}
+            alt=""
+          />
           <motion.img
             initial={{ y: 0 }}
             animate={{ y: [5, -5], rotateZ: [-5, 5] }}
@@ -164,7 +197,10 @@ const Login = () => {
             alt=""
           />
         </motion.div>
-      </div>
+      </motion.div>
+      {/*  Loader */}
+      {status == "loading" ? <Loader /> : null}
+      {/* if user is present redirect to home */}
     </>
   );
 };
