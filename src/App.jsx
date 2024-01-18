@@ -21,7 +21,7 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route exact path="/" element={<Protected Component={Home} />} />
+        <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="*" element={<PageNotFound />} />
