@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAsync } from "../slices/authSlice";
-import LoginModal from "../components/LoginModal";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
