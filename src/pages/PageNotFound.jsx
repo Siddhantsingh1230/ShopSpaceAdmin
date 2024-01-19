@@ -14,7 +14,7 @@ const PageNotFound = () => {
     >
       <div className=" sm:w-[600px] max-sm:w-80 flex items-center flex-col gap-4 ">
         <img className="flex w-96 max-sm:w-72 max-sm:h-64 h-72" src={`${notFound}`}></img>
-        <p className="sm:text-sm text-white font-bold tracking-wide ">
+        <p className="sm:text-sm text-white sm:font-bold tracking-wide max-sm:text-center ">
           It seems like the page that you are looking for is no longer here.
         </p>
         <Link to="/" className="p-3 px-10 font-bold text-xs bg-violet-800 rounded-full text-white hover:cursor-pointer">
