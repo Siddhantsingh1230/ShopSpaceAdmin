@@ -7,3 +7,4 @@
 ## Started creating login page
 ## Completed Signup page
 ## Adding Auth API , States and Slices
+## Added 404 page
