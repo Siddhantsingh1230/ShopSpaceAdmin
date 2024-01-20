@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { getUserAsync } from "./slices/authSlice";
 import { useEffect } from "react";
 import Profile from "./pages/Profile";
+import Statistics from "./pages/Statistics";
 
 const App = () => {
   // dispatching getuser to get if user is already signed in or not
@@ -25,6 +26,7 @@ const App = () => {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
+        <Route exact path="/statistics" element={<Statistics />} />
         <Route exact path="*" element={<PageNotFound />} />
         
       </Routes>

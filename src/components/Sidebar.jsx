@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
 
-const Sidebar = ({ navigation }) => {
+const Sidebar = ({ navigation,selected }) => {
   const navigate = useNavigate();
-  const [selectedItem, setSelectedItem] = useState("Dashboard");
+  const [selectedItem, setSelectedItem] = useState(selected);
   return (
     <div className="flex flex-col w-full h-full justify-between">
       <div className="flex flex-col">

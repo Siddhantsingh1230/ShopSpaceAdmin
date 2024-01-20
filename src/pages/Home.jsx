@@ -18,7 +18,7 @@ const Home = () => {
     },
     {
       name: "Statistics",
-      link: "/",
+      link: "/statistics",
       icon: "ri-bar-chart-box-line",
     },
     { name: "Chats", link: "/", icon: "ri-chat-3-line" },
@@ -41,7 +41,7 @@ const Home = () => {
         <div className="flex bg-black w-full pt-8 h-screen">
           {/* side bar */}
           <div className=" w-1/5  py-4 px-8 pr-4">
-            <Sidebar {...{ navigation }} />
+            <Sidebar navigation = {navigation} selected = {"Dashboard"} />
           </div>
           <div className="flex flex-col w-full py-2 px-4  h-full">
             {/* navbar */}
