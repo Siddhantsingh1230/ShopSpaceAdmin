@@ -10,6 +10,7 @@ import ResetScroll from "./components/ResetScroll"; // To move the app to the to
 import { useDispatch } from "react-redux";
 import { getUserAsync } from "./slices/authSlice";
 import { useEffect } from "react";
+import Profile from "./pages/Profile";
 
 const App = () => {
   // dispatching getuser to get if user is already signed in or not
