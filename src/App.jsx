@@ -26,6 +26,7 @@ const App = () => {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="*" element={<PageNotFound />} />
+        
       </Routes>
       {/* Toast container to manage all toasts it act as parent container for toast calls */}
       <ToastContainer
