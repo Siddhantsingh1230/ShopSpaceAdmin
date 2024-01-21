@@ -11,7 +11,6 @@ const Home = () => {
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
-  
   return (
     <>
       <div className="flex bg-[#0b0d10] w-full pt-8 h-full ">
@@ -23,8 +22,10 @@ const Home = () => {
         <div className="flex flex-col w-full py-2 px-4  h-full ">
           {/* navbar */}
           <div className="flex justify-between mb-3">
-            <p className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">Dashboard</p>
-            <div className="flex gap-5 justify-center items-center ">
+            <p className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
+              Dashboard
+            </p>
+            <div className="flex gap-4 justify-center items-center ">
               {/* Search Bar */}
               <div className="flex p-3 px-5 bg-[#181818] text-gray-200 gap-3 rounded-full w-[26rem]">
                 <i className="ri-search-line cursor-pointer opacity-55 hover:opacity-100 transition-all"></i>
@@ -34,8 +35,29 @@ const Home = () => {
                   placeholder="Search"
                 />
               </div>
+              {/* Notification */}
+              <div
+                title="Notification"
+                className="cursor-pointer relative flex justify-center items-center rounded-full w-10 h-10 bg-[#181818]"
+              >
+                <i className="cursor-pointer text-xl ri-notification-2-line text-white"></i>
+                <span className="top-0 right-0 absolute w-2 h-2 bg-red-500 rounded-full"></span>
+              </div>
+              {/* Language */}
+              <div
+                title="Language"
+                className="cursor-pointer flex justify-center items-center  text-white overflow-hidden"
+              >
+                En
+                <i class="text-white ri-arrow-drop-down-fill"></i>
+              </div>
+              {/* divider */}
+              <span className="h-3/5 border-r-2 border-gray-800"></span>
               {/* User Avatar */}
-              <div title="User" className="cursor-pointer rounded-full w-10 h-10 bg-[#181818] overflow-hidden">
+              <div
+                title="User"
+                className="cursor-pointer rounded-full w-10 h-10 bg-[#181818] overflow-hidden"
+              >
                 <img src={user?.profileImageURL} alt="" />
               </div>
             </div>
@@ -70,7 +92,7 @@ const Home = () => {
               {/* cards */}
               <div className="flex mt-6 w-full gap-6">
                 <div className="w-96 h-64 overflow-hidden rounded-lg">
-                  <ContentPlaceholder/>
+                  <ContentPlaceholder />
                 </div>
               </div>
             </div>
