@@ -42,15 +42,17 @@ const Sidebar = ({ navigation, selected }) => {
       <div className="flex flex-col relative justify-center items-center gap-1 p-4  bg-[#181818] h-48 mb-6 mr-4 rounded-lg ">
         <motion.img
           initial={{ x: 0, y: 0 }}
-          animate={{ y: [5, -5], rotateZ: [10, -10] }}
+          animate={{ y: [5, -5], rotateZ: [5 , -5 ] }}
           transition={{
             duration: 2,
-            ease: "easeOut",
+            ease: "easeIn",
             repeat: Infinity,
             repeatType: "reverse",
           }}
+          drag
+          dragConstraints={{top:0,right:0,left:0,bottom:0}}
           src={monster}
-          className="h-[40%] w-[40%] absolute -top-7 "
+          className="h-[40%] w-[40%] absolute -top-7 z-40 cursor-pointer"
         ></motion.img>
         <p className="text-md text-center text-white mt-10 select-none">Smart Dashboard</p>
         <p className=" text-xs text-center text-gray-400 mb-2 select-none" >
