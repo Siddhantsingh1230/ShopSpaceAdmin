@@ -41,7 +41,7 @@ const Home = () => {
         <div className="flex flex-col w-full py-2 px-4  h-full ">
           {/* navbar */}
           <div className="flex justify-between mb-3">
-            <p className="text-4xl text-white">Dashboard</p>
+            <p className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">Dashboard</p>
             <div className="flex gap-5 justify-center items-center ">
               {/* Search Bar */}
               <div className="flex p-3 px-5 bg-[#181818] text-gray-200 gap-3 rounded-lg w-96">

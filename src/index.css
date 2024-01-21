@@ -139,3 +139,22 @@ html {
   -moz-box-shadow: 0px 0px 65px 10px rgba(52, 111, 247, 0.71);
   box-shadow: 0px 0px 65px 10px rgba(52, 111, 247, 0.71);
 }
+
+/* Animated gradient */
+.animate-gradient{
+  background-size: 200%;
+  -webkit-animation: animatedgradient 6s ease infinite alternate;
+  -moz-animation: animatedgradient 6s ease infinite alternate;
+  animation: animatedgradient 6s ease infinite alternate;
+}
+@keyframes animatedgradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

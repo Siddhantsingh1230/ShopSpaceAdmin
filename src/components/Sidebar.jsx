@@ -10,9 +10,10 @@ const Sidebar = ({ navigation, selected }) => {
   return (
     <div className="flex flex-col w-full h-full justify-between">
       {/* Desk Buttons */}
-      <div className="flex flex-col">
-        <p className="font-bold text-white text-xl">
-          <i className="text-white font-normal ri-planet-line"> </i>DESK
+      <div className="flex flex-col text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 animate-gradient select-none">
+        {/* Title */}
+        <p className="font-bold  text-xl px-5">
+          <i className=" font-normal ri-planet-line"> </i>Desk Space 
         </p>
         <div className="flex flex-col gap-2 pt-8 text-gray-400 text-lg ">
           {navigation
