@@ -34,14 +34,14 @@ const Sidebar = ({ navigation, selected }) => {
         </div>
       </div>
       {/* Bottom card */}
-      <div className="flex flex-col relative justify-center items-center gap-2 p-4 bg-[#181818] h-48 mb-6 mr-4 rounded-lg ">
-        <img src={monster} className="h-[40%] w-[40%] absolute -top-5 left-1/2 -translate-x-1/2 "></img>
-        <p className="text-md text-center text-white mt-11">Smart Investment</p>
-        <p className=" text-xs text-center text-gray-300">
-          We have developed a service for novice investors
+      <div className="flex flex-col relative justify-center items-center gap-1 p-4  bg-[#181818] h-48 mb-6 mr-4 rounded-lg ">
+        <img src={monster} className="h-[40%] w-[40%] absolute -top-7 left-1/2 -translate-x-1/2 "></img>
+        <p className="text-md text-center text-white mt-10">Smart Dashboard</p>
+        <p className=" text-xs text-center text-gray-400 mb-2">
+          We have developed a new service for Astro Users
         </p>
-        <Link className="p-2 w-32 text-center bg-[#5C85E7] rounded-xl text-white text-sm ">
-          More detailed
+        <Link className=" glow-theme py-2 px-5 text-center bg-[#5C85E7] rounded-xl text-white text-sm ">
+          Details
         </Link>
       </div>
     </div>
