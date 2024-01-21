@@ -11,6 +11,9 @@ const Home = () => {
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
+  const options = ["one", "two", "three"];
+  const defaultOption = options[0];
+
   return (
     <>
       <div className="flex bg-[#0b0d10] w-full pt-8 h-full ">
