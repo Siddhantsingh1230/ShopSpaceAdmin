@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import monster from "../assets/images/monster.png";
 
-const Sidebar = ({ navigation,selected }) => {
+const Sidebar = ({ navigation, selected }) => {
   const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState(selected);
   return (
     <div className="flex flex-col w-full h-full justify-between">
+      {/* Desk Buttons */}
       <div className="flex flex-col">
-        <p className="font-bold text-white text-xl">SHOP SPACE DESK</p>
+        <p className="font-bold text-white text-xl"><i className="text-white font-normal ri-planet-line"> </i>DESK</p>
         <div className="flex flex-col gap-2 pt-8 text-gray-400 text-lg ">
           {navigation
             ? navigation.length > 0 &&
@@ -18,11 +20,11 @@ const Sidebar = ({ navigation,selected }) => {
                     setSelectedItem(item.name);
                     navigate(item.link);
                   }}
-                  className={
-                    item.name === selectedItem
-                      ? "flex gap-3 p-2 px-5 bg-[#5C85E7] rounded-xl text-white"
-                      : "flex gap-3 p-2 px-5 bg-[#101010] rounded-xl"
-                  }
+                  className={`flex gap-3 p-2 px-5 ${
+                    item.name !== selectedItem ? "hover:bg-[#212121]" : "   "
+                  } transition-all rounded-xl cursor-pointer ${
+                    item.name === selectedItem ? "bg-[#5C85E7] text-white" : ""
+                  }`}
                 >
                   <i className={`${item.icon}`}></i>
                   <p>{item.name}</p>
@@ -31,11 +33,16 @@ const Sidebar = ({ navigation,selected }) => {
             : null}
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center gap-2 p-4 bg-[#181818] h-48 mb-6 mr-4 rounded-lg ">
-        <img></img>
-        <p className="text-md text-center text-white">Smart Investment</p>
-        <p className=" text-xs text-center text-gray-300">We have developed a service for novice investors</p>
-        <Link className="p-2 w-32 text-center bg-[#5C85E7] rounded-xl text-white text-sm ">More detailed</Link>
+      {/* Bottom card */}
+      <div className="flex flex-col relative justify-center items-center gap-2 p-4 bg-[#181818] h-48 mb-6 mr-4 rounded-lg ">
+        <img src={monster} className="h-[40%] w-[40%] absolute -top-5 left-1/2 -translate-x-1/2 "></img>
+        <p className="text-md text-center text-white mt-11">Smart Investment</p>
+        <p className=" text-xs text-center text-gray-300">
+          We have developed a service for novice investors
+        </p>
+        <Link className="p-2 w-32 text-center bg-[#5C85E7] rounded-xl text-white text-sm ">
+          More detailed
+        </Link>
       </div>
     </div>
   );

@@ -23,12 +23,11 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Protected Component={Home}/>} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/statistics" element={<Statistics />} />
         <Route exact path="*" element={<PageNotFound />} />
-        
       </Routes>
       {/* Toast container to manage all toasts it act as parent container for toast calls */}
       <ToastContainer
