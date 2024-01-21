@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { navigation } from "../constants/navigation.js";
 import { logoutAsync } from "../slices/authSlice";
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
@@ -10,26 +11,7 @@ const Home = () => {
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
-  const navigation = [
-    {
-      name: "Dashboard",
-      link: "/",
-      icon: "ri-dashboard-line",
-    },
-    {
-      name: "Statistics",
-      link: "/statistics",
-      icon: "ri-bar-chart-box-line",
-    },
-    { name: "Chats", link: "/", icon: "ri-chat-3-line" },
-    { name: "My Wallet", link: "/", icon: "ri-wallet-line" },
-    {
-      name: "Transfers",
-      link: "/",
-      icon: "ri-arrow-up-down-line",
-    },
-    { name: "Settings", link: "/", icon: "ri-settings-line" },
-  ];
+  
   return (
     <>
       <div className="flex bg-[#0b0d10] w-full pt-8 h-full ">
