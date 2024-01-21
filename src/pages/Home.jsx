@@ -40,9 +40,9 @@ const Home = () => {
         {/* Main */}
         <div className="flex flex-col w-full py-2 px-4  h-full ">
           {/* navbar */}
-          <div className="flex justify-between text-white">
-            <p className="text-4xl ">Dashboard</p>
-            <div className="flex gap-5 justify-center items-center">
+          <div className="flex justify-between mb-3">
+            <p className="text-4xl text-white">Dashboard</p>
+            <div className="flex gap-5 justify-center items-center ">
               {/* Search Bar */}
               <div className="flex p-3 px-5 bg-[#181818] text-gray-200 gap-3 rounded-lg w-96">
                 <i className="ri-search-line cursor-pointer opacity-55 hover:opacity-100 transition-all"></i>
@@ -53,7 +53,7 @@ const Home = () => {
                 />
               </div>
               {/* User Avatar */}
-              <div className="rounded-full w-10 h-10 bg-[#181818] overflow-hidden">
+              <div title="User" className="cursor-pointer rounded-full w-10 h-10 bg-[#181818] overflow-hidden">
                 <img src={user?.profileImageURL} alt="" />
               </div>
             </div>
