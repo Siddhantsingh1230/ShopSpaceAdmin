@@ -26,7 +26,7 @@ const Home = () => {
             <p className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">Dashboard</p>
             <div className="flex gap-5 justify-center items-center ">
               {/* Search Bar */}
-              <div className="flex p-3 px-5 bg-[#181818] text-gray-200 gap-3 rounded-lg w-96">
+              <div className="flex p-3 px-5 bg-[#181818] text-gray-200 gap-3 rounded-full w-[26rem]">
                 <i className="ri-search-line cursor-pointer opacity-55 hover:opacity-100 transition-all"></i>
                 <input
                   className="bg-transparent outline-none w-full"
