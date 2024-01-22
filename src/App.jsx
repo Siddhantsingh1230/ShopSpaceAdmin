@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import Profile from "./pages/Profile";
 import Statistics from "./pages/Statistics";
 import Settings from "./pages/Settings";
-import { getProductsAsync } from "./slices/productsSlice";
+import { getMostOrderedProductsAsync, getProductsAsync } from "./slices/productsSlice";
 import Extras from "./pages/Extras";
 import Products from "./pages/Products";
 import Orders from "./pages/Orders";
@@ -25,6 +25,7 @@ const App = () => {
   useEffect(() => {
     dispatch(getUserAsync());
     dispatch(getProductsAsync());
+    dispatch(getMostOrderedProductsAsync());
   }, []);
   return (
     <>

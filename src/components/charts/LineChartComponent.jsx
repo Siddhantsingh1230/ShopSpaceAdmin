@@ -31,6 +31,7 @@ const LineChartComponent = ({data,x,line,stroke}) => {
                 stroke={stroke}
                 activeDot={{ r: 8 }}
                 strokeWidth={2}
+                dot={false}
               />
             </LineChart>
           </ResponsiveContainer>

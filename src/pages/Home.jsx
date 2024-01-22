@@ -13,6 +13,7 @@ const Home = () => {
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
   const products = useSelector((state) => state.product.products);
+  const mostOrderedProducts = useSelector((state) => state.product.mostOrderedProducts);
   const productsStatus = useSelector((state) => state.product.status);
   return (
     <>
@@ -91,7 +92,7 @@ const Home = () => {
             <div>
               <div className="flex justify-between text-white font-bold  mt-8">
                 <p className="text-xl">Overview</p>
-                <Link className="text-[#5C85E7] " to={"/"}>
+                <Link className="text-[#5C85E7] " to={"/statistics"}>
                   More
                 </Link>
               </div>
@@ -115,10 +116,24 @@ const Home = () => {
                   {productsStatus === "loading" ? (
                     <ContentPlaceholder />
                   ) : (
-                    <AreaChartComponent
+                    <LineChartComponent
                       data={products.slice(0, 15)}
                       x="title"
-                      area="rating"
+                      line="rating"
+                      stroke="#5C85E7"
+                      fill={"#436fbc"}
+                    />
+                  )}
+                </div>
+                {/* graph 3 */}
+                <div className="w-96 h-64 overflow-hidden rounded-lg">
+                  {productsStatus === "loading" ? (
+                    <ContentPlaceholder />
+                  ) : (
+                    <AreaChartComponent
+                      data={mostOrderedProducts}
+                      x="title"
+                      area="orders"
                       stroke="#5C85E7"
                       fill={"#436fbc"}
                     />

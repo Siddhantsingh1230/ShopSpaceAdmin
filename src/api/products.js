@@ -8,10 +8,14 @@ const options = {
 };
 
 export const getAllProducts = async () => {
-    const { data } = await axios.get(
-      process.env.REACT_APP_SERVER_BASE_URL +
-        `/v1/products`
-    );
-    return data;
-  };
-  
+  const { data } = await axios.get(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/products`
+  );
+  return data;
+};
+export const getMostOrderedProducts = async () => {
+  const { data } = await axios.get(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/mostordered`
+  );
+  return data;
+};
