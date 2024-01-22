@@ -14,6 +14,9 @@ import Profile from "./pages/Profile";
 import Statistics from "./pages/Statistics";
 import Settings from "./pages/Settings";
 import { getProductsAsync } from "./slices/productsSlice";
+import Extras from "./pages/Extras";
+import Products from "./pages/Products";
+import Orders from "./pages/Orders";
 
 const App = () => {
   // dispatching getuser to get if user is already signed in or not
@@ -31,6 +34,9 @@ const App = () => {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/statistics" element={<Protected Component = {Statistics} />} />
         <Route exact path="/settings" element={<Protected Component = {Settings} />} />
+        <Route exact path="/extras" element={<Protected Component = {Extras} />} />
+        <Route exact path="/products" element={<Protected Component = {Products} />} />
+        <Route exact path="/orders" element={<Protected Component = {Orders} />} />
         <Route exact path="*" element={<PageNotFound />} />
       </Routes>
       {/* Toast container to manage all toasts it act as parent container for toast calls */}

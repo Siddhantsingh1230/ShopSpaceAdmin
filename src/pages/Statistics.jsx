@@ -1,11 +1,9 @@
-import React from 'react'
-
 const Statistics = () => {
   return (
     <>
-      
+      Stats
     </>
   )
 }
 
-export default Statistics
+export default Statistics;
