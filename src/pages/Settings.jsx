@@ -19,7 +19,6 @@ const Settings = () => {
   const [passError, setPassError] = useState(false); //show error if password is not matched
   // opening a delete modal to warn user about the delete action
   const [openModal, setOpenModal] = useState(false);
-  const [openSidebar, setopenSidebar] = useState(false);
   // handling forminputs here
   const handleUpdate = (data) => {
     if (data.password === data.conf_password) {
@@ -42,29 +41,20 @@ const Settings = () => {
   const [confPassType, setConfPassType] = useState("password");
   return (
     <>
-      <div className="flex bg-[#0b0d10] w-full pt-8 h-full max-sm:relative ">
+      <div className="flex bg-[#0b0d10] w-full pt-8 h-full ">
         {/* side bar */}
         <div
-          className={`${
-            openSidebar ? " translate-x-0 " : "max-sm:hidden -translate-x-full"
-          }flex sm:w-1/5 w-4/5 py-4 sm:px-8 px-4 sm:pr-4 flex-row-reverse max-sm:absolute z-10 bg-[#0B0D10] transform transition-transform duration-100 ease-in-out`}
+          className={`w-[18%]  py-4 px-8 pr-4`}
         >
-          <i class="ri-close-line sm:hidden text-white text-2xl" onClick={()=>{setopenSidebar(false)}}></i>
           <Sidebar navigation={navigation} selected={"Settings"} />
         </div>
         {/* Settings div*/}
         <div
-          className={`flex flex-col w-full py-2 px-8 max-sm:px-4 h-full`}
+          className={`flex flex-col w-[82%] py-2 px-4  h-full   `}
         >
           {/* navbar */}
           <div className="flex justify-between sm:pr-5">
             <div className="flex font-bold text-2xl text-white gap-4 items-center">
-              <i
-                className="ri-menu-line sm:hidden"
-                onClick={() => {
-                  setopenSidebar(true);
-                }}
-              ></i>
               <p className="sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
                 Account Settings
               </p>
@@ -78,7 +68,7 @@ const Settings = () => {
             </div>
           </div>
           {/* content */}
-          <div className="flex flex-col overflow-y-auto sm:pr-8 mt-2 mb-7  ">
+          <div className="flex flex-col overflow-y-auto  mt-2 mb-7  ">
             <h1 className="text-xl text-white font-bold my-6">General</h1>
             <form onSubmit={handleSubmit(handleUpdate)}>
               <div className="flex max-sm:flex-col w-full sm:gap-32 gap-5">
@@ -130,7 +120,7 @@ const Settings = () => {
                         })}
                       />
                       <i
-                        className={passTogglePwd}
+                        className={`cursor-pointer ${passTogglePwd}`}
                         onClick={(e) => {
                           if (passTogglePwd === "ri-eye-off-line") {
                             setPassTogglePwd("ri-eye-line");
@@ -165,7 +155,7 @@ const Settings = () => {
                         })}
                       />
                       <i
-                        className={confPassTogglePwd}
+                        className={`cursor-pointer ${confPassTogglePwd}`}
                         onClick={(e) => {
                           if (confPassTogglePwd === "ri-eye-off-line") {
                             setConfPassTogglePwd("ri-eye-line");
@@ -186,7 +176,7 @@ const Settings = () => {
                     </label>
                     <input
                       className="max-sm:p-4 p-2 px-5 bg-[#181818] text-white border rounded-lg outline-none sm:text-sm border-gray-500"
-                      type="number"
+                      type="text"
                       id="mobileNo"
                       defaultValue={user?.mobileNo}
                       placeholder="Enter  Mobile"
@@ -258,7 +248,7 @@ const Settings = () => {
                 </motion.div>
               </div>
             </form>
-            <hr className="bg-gray-500 my-6" />
+            <hr className="border-t border-gray-800 my-6" />
             <h1 className="text-xl text-white font-bold my-3">Danger Zone</h1>
             <p className="w-[40%] max-sm:w-full mb-4 sm:text-sm text-gray-500">
               Once you delete your account, there is no going back. You will
