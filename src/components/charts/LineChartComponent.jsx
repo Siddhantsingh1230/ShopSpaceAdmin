@@ -55,6 +55,8 @@ const LineChartComponent = () => {
     },
   ];
   return (
+    <div className="w-full h-full ">
+
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
         width={500}
@@ -67,7 +69,7 @@ const LineChartComponent = () => {
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
+        <CartesianGrid horizontal={false} vertical={false} />
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
@@ -81,6 +83,7 @@ const LineChartComponent = () => {
         <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
       </LineChart>
     </ResponsiveContainer>
+    </div>
   );
 };
 

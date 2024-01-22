@@ -12,9 +12,6 @@ const Home = () => {
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
-  const options = ["one", "two", "three"];
-  const defaultOption = options[0];
-
   return (
     <>
       <div className="flex bg-[#0b0d10] w-full pt-8 h-full ">
@@ -69,17 +66,20 @@ const Home = () => {
           {/* content */}
           <div className="flex flex-col overflow-y-auto pr-8 mt-0 mb-7  ">
             {/* card div */}
-            <div className="">
+            <div>
               <div className="flex justify-between text-white font-bold text-xl mt-6">
                 <p>My cards</p>
                 <i className="ri-add-line cursor-pointer opacity-55 transition-all hover:opacity-100"></i>
               </div>
               {/* cards */}
-              <div className="thinScroll flex mt-6 w-full gap-6 overflow-x-auto py-2">
+              <div className="thinScroll flex mt-6 w-full gap-6 overflow-x-scroll py-2">
                 {/* If cards are not loaded */}
                 {!false &&
-                  new Array(4).fill(0).map((_,idx) => (
-                    <div key={idx} className="flex-1 min-w-60 w-60 h-40 rounded-lg overflow-hidden">
+                  new Array(4).fill(0).map((_, idx) => (
+                    <div
+                      key={idx}
+                      className="flex-1 min-w-60 w-60 h-40 rounded-lg overflow-hidden"
+                    >
                       <ContentPlaceholder />
                     </div>
                   ))}
@@ -96,7 +96,7 @@ const Home = () => {
               {/* cards */}
               <div className="flex mt-6 w-full gap-6">
                 <div className="w-96 h-64 overflow-hidden rounded-lg">
-                  <ContentPlaceholder />
+                  {false?<ContentPlaceholder />:<LineChartComponent/>}
                 </div>
               </div>
             </div>
@@ -130,7 +130,6 @@ const Home = () => {
                 <p className=" text-green-600 text-xs">+12%</p>
               </div>
             </div>
-            <LineChartComponent/>
           </div>
         </div>
       </div>

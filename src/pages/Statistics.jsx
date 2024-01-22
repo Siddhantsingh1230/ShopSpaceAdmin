@@ -19,7 +19,6 @@ const Statistics = () => {
             <Sidebar navigation = {navigation} selected = {"Statistics"} />
           </div>
           <div className="flex flex-col w-full py-2 px-4  h-full text-white">
-            hello
           </div>
           
           {/* <button
