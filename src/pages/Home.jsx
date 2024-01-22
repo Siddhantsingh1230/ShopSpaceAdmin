@@ -16,11 +16,11 @@ const Home = () => {
     <>
       <div className="flex bg-[#0b0d10] w-full pt-8 h-full ">
         {/* side bar */}
-        <div className="w-1/5  py-4 px-8 pr-4">
+        <div className="w-[18%]  py-4 px-8 pr-4">
           <Sidebar navigation={navigation} selected={"Dashboard"} />
         </div>
         {/* Main */}
-        <div className="flex flex-col w-4/5 py-2 px-4  h-full ">
+        <div className="flex flex-col w-[82%] py-2 px-4  h-full ">
           {/* navbar */}
           <div className="flex justify-between mb-3">
             <p className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">

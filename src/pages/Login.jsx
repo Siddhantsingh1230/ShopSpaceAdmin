@@ -1,4 +1,4 @@
-import character from "../assets/images/3dlogin.png";
+import character from "../assets/images/3dlogin.webp";
 import spiralgif from "../assets/images/spiralgif.gif";
 import coin from "../assets/images/3dcoin.png";
 import gift from "../assets/images/giftbox.png";

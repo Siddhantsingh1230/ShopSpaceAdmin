@@ -12,6 +12,7 @@ import { getUserAsync } from "./slices/authSlice";
 import { useEffect } from "react";
 import Profile from "./pages/Profile";
 import Statistics from "./pages/Statistics";
+import { getProductsAsync } from "./slices/productsSlice";
 
 const App = () => {
   // dispatching getuser to get if user is already signed in or not
@@ -19,6 +20,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getUserAsync());
+    dispatch(getProductsAsync());
   }, []);
   return (
     <>

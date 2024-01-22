@@ -1,4 +1,4 @@
-import character2 from "../assets/images/character2.png";
+import character2 from "../assets/images/character2.webp";
 import heartgif from "../assets/images/heartgif.gif";
 import { motion } from "framer-motion";
 import { useState } from "react";
