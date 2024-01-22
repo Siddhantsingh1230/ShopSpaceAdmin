@@ -66,7 +66,7 @@ const Home = () => {
             </div>
           </div>
           {/* content */}
-          <div className="flex flex-col overflow-y-auto pr-8 mt-0 mb-7  ">
+          <div className="flex flex-col overflow-y-auto pr-8 mt-0 mb-2  ">
             {/* card div */}
             <div>
               <div className="flex justify-between text-white font-bold text-xl mt-6">

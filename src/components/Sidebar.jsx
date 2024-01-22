@@ -39,7 +39,7 @@ const Sidebar = ({ navigation, selected }) => {
         </div>
       </div>
       {/* Bottom card */}
-      <div className="flex flex-col relative justify-center items-center gap-1 p-4 max-sm:mt-7  bg-[#181818] h-48 mb-6 mr-4 rounded-lg ">
+      <div className="flex flex-col relative justify-center items-center gap-1 p-4 bg-[#181818] h-[30%] mb-6 mr-4 rounded-lg ">
         <motion.img
           initial={{ x: 0, y: 0 }}
           animate={{ y: [5, -5], rotateZ: [5 , -5 ] }}
@@ -54,9 +54,9 @@ const Sidebar = ({ navigation, selected }) => {
           src={monster}
           className="h-[40%] w-[40%] absolute -top-7 z-40 cursor-pointer"
         ></motion.img>
-        <p className="text-md text-center text-white mt-10 select-none">Smart Dashboard</p>
-        <p className=" text-xs text-center text-gray-400 mb-2 select-none" >
-          We have developed a new service for Astro Users
+        <p className="text-md text-center text-white mt-12 select-none">Smart Dashboard</p>
+        <p className=" text-xs text-center text-gray-400 mb-3 select-none" >
+          We develop better systems for Astro Users
         </p>
         <Link className=" glow-theme py-2 px-5 text-center bg-[#5C85E7] rounded-xl text-white text-sm ">
           Details
