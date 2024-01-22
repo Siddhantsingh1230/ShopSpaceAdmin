@@ -158,3 +158,8 @@ html {
     background-position: 0% 50%;
   }
 }
+
+/* Thin scrollbar class */
+.thinScroll::-webkit-scrollbar {
+  height: 10px;
+}

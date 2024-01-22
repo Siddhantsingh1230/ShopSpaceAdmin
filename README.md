@@ -8,3 +8,4 @@
 ## Completed Signup page
 ## Adding Auth API , States and Slices
 ## Added 404 page
+## Added Recharts

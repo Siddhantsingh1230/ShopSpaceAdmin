@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import ContentPlaceholder from "../components/ContentPlaceholder";
+import LineChartComponent from "../components/charts/LineChartComponent.jsx";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -18,11 +19,11 @@ const Home = () => {
     <>
       <div className="flex bg-[#0b0d10] w-full pt-8 h-full ">
         {/* side bar */}
-        <div className=" w-1/5  py-4 px-8 pr-4">
+        <div className="w-1/5  py-4 px-8 pr-4">
           <Sidebar navigation={navigation} selected={"Dashboard"} />
         </div>
         {/* Main */}
-        <div className="flex flex-col w-full py-2 px-4  h-full ">
+        <div className="flex flex-col w-4/5 py-2 px-4  h-full ">
           {/* navbar */}
           <div className="flex justify-between mb-3">
             <p className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
@@ -52,7 +53,7 @@ const Home = () => {
                 className="cursor-pointer flex justify-center items-center  text-white overflow-hidden"
               >
                 En
-                <i class="text-white ri-arrow-drop-down-fill"></i>
+                <i className="text-white ri-arrow-drop-down-fill"></i>
               </div>
               {/* divider */}
               <span className="h-3/5 border-r-2 border-gray-800"></span>
@@ -74,11 +75,11 @@ const Home = () => {
                 <i className="ri-add-line cursor-pointer opacity-55 transition-all hover:opacity-100"></i>
               </div>
               {/* cards */}
-              <div className="flex mt-6 w-full gap-6 ">
+              <div className="thinScroll flex mt-6 w-full gap-6 overflow-x-auto py-2">
                 {/* If cards are not loaded */}
                 {!false &&
-                  new Array(4).fill(0).map(() => (
-                    <div className=" w-60 h-40 rounded-lg overflow-hidden">
+                  new Array(4).fill(0).map((_,idx) => (
+                    <div key={idx} className="flex-1 min-w-60 w-60 h-40 rounded-lg overflow-hidden">
                       <ContentPlaceholder />
                     </div>
                   ))}
@@ -129,6 +130,7 @@ const Home = () => {
                 <p className=" text-green-600 text-xs">+12%</p>
               </div>
             </div>
+            <LineChartComponent/>
           </div>
         </div>
       </div>
