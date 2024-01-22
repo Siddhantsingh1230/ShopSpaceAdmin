@@ -58,9 +58,9 @@ const Sidebar = ({ navigation, selected }) => {
         <p className=" text-xs text-center text-gray-400 mb-3 select-none" >
           We develop better systems for Astro Users
         </p>
-        <Link className=" glow-theme py-2 px-5 text-center bg-[#5C85E7] rounded-xl text-white text-sm ">
+        <a href="https://github.com/Siddhantsingh1230/" target="_blank" className=" glow-theme py-2 px-5 text-center bg-[#5C85E7] rounded-xl text-white text-sm ">
           Details
-        </Link>
+        </a>
       </div>
     </div>
   );
