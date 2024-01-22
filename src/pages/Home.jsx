@@ -74,7 +74,7 @@ const Home = () => {
                 <i className="ri-add-line cursor-pointer opacity-55 transition-all hover:opacity-100"></i>
               </div>
               {/* cards */}
-              <div className="thinScroll flex mt-6 w-full gap-6 overflow-x-scroll py-2">
+              <div className="thinScroll flex mt-6 w-full gap-6 overflow-x-auto py-2">
                 {/* If cards are not loaded */}
                 {!false &&
                   new Array(4).fill(0).map((_, idx) => (
