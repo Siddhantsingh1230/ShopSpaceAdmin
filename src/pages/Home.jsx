@@ -6,12 +6,14 @@ import { Navigate, useNavigate, Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import ContentPlaceholder from "../components/ContentPlaceholder";
 import LineChartComponent from "../components/charts/LineChartComponent.jsx";
+import AreaChartComponent from "../components/charts/AreaChartComponent.jsx";
 
 const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
-
+  const products = useSelector((state) => state.product.products);
+  const productsStatus = useSelector((state) => state.product.status);
   return (
     <>
       <div className="flex bg-[#0b0d10] w-full pt-8 h-full ">
@@ -93,10 +95,34 @@ const Home = () => {
                   Details
                 </Link>
               </div>
-              {/* cards */}
+              {/* Graph cards */}
               <div className="flex mt-6 w-full gap-6">
+                {/* graph 1 */}
                 <div className="w-96 h-64 overflow-hidden rounded-lg">
-                  {false?<ContentPlaceholder />:<LineChartComponent/>}
+                  {productsStatus === "loading" ? (
+                    <ContentPlaceholder />
+                  ) : (
+                    <LineChartComponent
+                      data={products.slice(0, 15)}
+                      x="title"
+                      line="viewCount"
+                      stroke="#5C85E7"
+                    />
+                  )}
+                </div>
+                {/* graph 2 */}
+                <div className="w-96 h-64 overflow-hidden rounded-lg">
+                  {productsStatus === "loading" ? (
+                    <ContentPlaceholder />
+                  ) : (
+                    <AreaChartComponent
+                      data={products.slice(0, 15)}
+                      x="title"
+                      area="rating"
+                      stroke="#5C85E7"
+                      fill={"#436fbc"}
+                    />
+                  )}
                 </div>
               </div>
             </div>
