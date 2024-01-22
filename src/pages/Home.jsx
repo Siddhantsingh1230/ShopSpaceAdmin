@@ -70,7 +70,7 @@ const Home = () => {
             {/* card div */}
             <div>
               <div className="flex justify-between text-white font-bold text-xl mt-6">
-                <p>My cards</p>
+                <p>My Cards</p>
                 <i className="ri-add-line cursor-pointer opacity-55 transition-all hover:opacity-100"></i>
               </div>
               {/* cards */}
@@ -90,9 +90,9 @@ const Home = () => {
             {/* analysis */}
             <div>
               <div className="flex justify-between text-white font-bold  mt-8">
-                <p className="text-xl">Analysis</p>
+                <p className="text-xl">Overview</p>
                 <Link className="text-[#5C85E7] " to={"/"}>
-                  Details
+                  More
                 </Link>
               </div>
               {/* Graph cards */}
