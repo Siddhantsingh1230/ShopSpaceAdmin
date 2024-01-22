@@ -7,17 +7,32 @@ import Sidebar from "../components/Sidebar";
 import ContentPlaceholder from "../components/ContentPlaceholder";
 import LineChartComponent from "../components/charts/LineChartComponent.jsx";
 import AreaChartComponent from "../components/charts/AreaChartComponent.jsx";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const [userDropDown, setUserDropDown] = useState(false);
+  const toggleUserDropDown = () => {
+    setUserDropDown((state) => !state);
+  };
   const navigate = useNavigate();
   const products = useSelector((state) => state.product.products);
-  const mostOrderedProducts = useSelector((state) => state.product.mostOrderedProducts);
+  const mostOrderedProducts = useSelector(
+    (state) => state.product.mostOrderedProducts
+  );
   const productsStatus = useSelector((state) => state.product.status);
+
   return (
     <>
-      <div className="flex bg-[#0b0d10] w-full pt-8 h-full ">
+      <div
+        onClick={() => {
+          if (userDropDown) {
+            toggleUserDropDown();
+          }
+        }}
+        className="flex bg-[#0b0d10] w-full pt-8 h-full "
+      >
         {/* side bar */}
         <div className="w-[18%]  py-4 px-8 pr-4">
           <Sidebar navigation={navigation} selected={"Dashboard"} />
@@ -60,9 +75,42 @@ const Home = () => {
               {/* User Avatar */}
               <div
                 title="User"
-                className="cursor-pointer rounded-full w-10 h-10 bg-[#181818] overflow-hidden"
+                className="relative cursor-pointer rounded-full w-10 h-10 bg-[#181818] overflow-visible"
               >
-                <img src={user?.profileImageURL} alt="" />
+                <img
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleUserDropDown();
+                  }}
+                  className="w-full  h-full rounded-full"
+                  src={user?.profileImageURL}
+                  alt=""
+                />
+                {/* Dropdown */}
+                {userDropDown && (
+                  <motion.div
+                    initial={{ opacity: 0, y: "100%" }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: "100%" }}
+                    className="z-40 rounded-md p-1 py-2 max-sm:hidden absolute top-14 right-0 w-32  bg-white flex gap-1 flex-col "
+                  >
+                    <Link
+                      to="/settings"
+                      title="settings"
+                      className="hover:bg-indigo-500 p-2 text-sm rounded-md transition-all hover:text-white"
+                    >
+                      <i className="mr-1 ri-settings-line" /> Settings
+                    </Link>
+                    <hr className="w-full border-t border-gray-300" />
+                    <p
+                      onClick={() => dispatch(logoutAsync())}
+                      title="logout"
+                      className="hover:bg-indigo-500 p-2 text-sm rounded-md transition-all hover:text-white"
+                    >
+                      <i className="mr-1 ri-logout-circle-r-line"></i> Logout
+                    </p>
+                  </motion.div>
+                )}
               </div>
             </div>
           </div>
