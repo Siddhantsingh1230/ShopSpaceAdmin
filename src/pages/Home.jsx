@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { navigation } from "../constants/navigation.js";
+import {useState} from "react"
 // import { logoutAsync } from "../slices/authSlice";
 import {Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
@@ -11,23 +12,38 @@ const Home = () => {
   const user = useSelector((state) => state.auth.user);
   const products = useSelector((state) => state.product.products);
   const productsStatus = useSelector((state) => state.product.status);
+  const [openSidebar, setopenSidebar] = useState(false);
   return (
     <>
-      <div className="flex bg-[#0b0d10] w-full pt-8 h-full ">
+      <div className="flex bg-[#0b0d10] w-full pt-8 h-full max-sm:relative ">
         {/* side bar */}
-        <div className="w-[18%]  py-4 px-8 pr-4">
-          <Sidebar navigation={navigation} selected={"Dashboard"} />
+        <div
+          className={`${
+            openSidebar ? " translate-x-0 " : "max-sm:hidden -translate-x-full"
+          }flex sm:w-1/5 w-4/5 py-4 sm:px-8 px-4 sm:pr-4 flex-row-reverse max-sm:absolute z-10 bg-[#0B0D10] transform transition-transform duration-100 ease-in-out`}
+        >
+          <i class="ri-close-line sm:hidden text-white text-2xl" onClick={()=>{setopenSidebar(false)}}></i>
+          <Sidebar navigation={navigation} selected={"Settings"} />
         </div>
         {/* Main */}
-        <div className="flex flex-col w-[82%] py-2 px-4  h-full ">
+        <div className="flex flex-col sm:w-[82%] w-full py-2 px-4 max-sm:px-3  h-full ">
           {/* navbar */}
-          <div className="flex justify-between mb-3">
+          <div className="flex max-sm:flex-col justify-between max-sm:gap-4 mb-3">
+            <div className="flex font-bold text-2xl text-white gap-4 items-center">
+            <i
+                className="ri-menu-line sm:hidden"
+                onClick={() => {
+                  setopenSidebar(true);
+                }}
+              ></i>
             <p className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
               Dashboard
             </p>
+            </div>
+            
             <div className="flex gap-4 justify-center items-center ">
               {/* Search Bar */}
-              <div className="flex p-3 px-5 bg-[#181818] text-gray-200 gap-3 rounded-full w-[26rem]">
+              <div className=" flex p-3 px-5 bg-[#181818] text-gray-200 gap-3 rounded-full w-[26rem] max-sm:w-56">
                 <i className="ri-search-line cursor-pointer opacity-55 hover:opacity-100 transition-all"></i>
                 <input
                   className="bg-transparent outline-none w-full"
@@ -56,14 +72,14 @@ const Home = () => {
               {/* User Avatar */}
               <div
                 title="User"
-                className="cursor-pointer rounded-full w-10 h-10 bg-[#181818] overflow-hidden"
+                className="cursor-pointer rounded-full w-10 h-10 max-sm:w-7 max-sm:h-7 bg-[#181818] overflow-hidden"
               >
                 <img src={user?.profileImageURL} alt="" />
               </div>
             </div>
           </div>
           {/* content */}
-          <div className="flex flex-col overflow-y-auto pr-8 mt-0 mb-7  ">
+          <div className="flex flex-col overflow-y-auto sm:pr-8 mt-0 mb-7 ">
             {/* card div */}
             <div>
               <div className="flex justify-between text-white font-bold text-xl mt-6">
@@ -93,9 +109,9 @@ const Home = () => {
                 </Link>
               </div>
               {/* Graph cards */}
-              <div className="flex mt-6 w-full gap-6">
+              <div className="flex max-sm:flex-col mt-6 w-full gap-6">
                 {/* graph 1 */}
-                <div className="w-96 h-64 overflow-hidden rounded-lg">
+                <div className="sm:w-96 w-full h-64 overflow-hidden rounded-lg">
                   {productsStatus === "loading" ? (
                     <ContentPlaceholder />
                   ) : (
@@ -108,7 +124,7 @@ const Home = () => {
                   )}
                 </div>
                 {/* graph 2 */}
-                <div className="w-96 h-64 overflow-hidden rounded-lg">
+                <div className="sm:w-96 w-full h-64 overflow-hidden rounded-lg">
                   {productsStatus === "loading" ? (
                     <ContentPlaceholder />
                   ) : (
@@ -124,30 +140,30 @@ const Home = () => {
               </div>
             </div>
             {/* analysis cards */}
-            <div className="mt-8 flex gap-4 text-gray-500">
-              <div className="flex flex-col gap-2 p-4 w-48 h-32 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+            <div className="mt-8 flex max-sm:flex-col gap-4 text-gray-500 mx-6 ">
+              <div className="flex flex-col  gap-2 p-4 w-48 max-sm:w-full h-32 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
                 <div className="flex justify-between ">
                   <p>Total Bonus</p>
                   <p>+3%</p>
                 </div>
                 <p className="text-white">$762</p>
               </div>
-              <div className="flex flex-col  justify-center gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <div className="flex flex-col  justify-center gap-2 w-48 max-sm:w-full h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
                 <p>Income</p>
                 <p className="text-white">$762</p>
                 <p className=" text-green-600 text-xs">+5%</p>
               </div>
-              <div className="flex flex-col justify-center gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <div className="flex flex-col justify-center gap-2 w-48 max-sm:w-full h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
                 <p>Deposit</p>
                 <p className="text-white">$1,131</p>
                 <p className=" text-green-600 text-xs">+12%</p>
               </div>
-              <div className="flex flex-col  justify-center gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <div className="flex flex-col  justify-center gap-2 w-48 max-sm:w-full h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
                 <p>Income</p>
                 <p className="text-white">$762</p>
                 <p className=" text-green-600 text-xs">+5%</p>
               </div>
-              <div className="flex flex-col justify-center gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <div className="flex flex-col justify-center gap-2 w-48 max-sm:w-full h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
                 <p>Deposit</p>
                 <p className="text-white">$1,131</p>
                 <p className=" text-green-600 text-xs">+12%</p>
