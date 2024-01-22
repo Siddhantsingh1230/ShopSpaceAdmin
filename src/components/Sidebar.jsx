@@ -39,7 +39,7 @@ const Sidebar = ({ navigation, selected }) => {
         </div>
       </div>
       {/* Bottom card */}
-      <div className="flex flex-col relative justify-center items-center gap-1 p-4  bg-[#181818] h-48 mb-6 mr-4 rounded-lg ">
+      <div className="flex flex-col relative justify-center items-center gap-1 p-4 max-sm:mt-7  bg-[#181818] h-48 mb-6 mr-4 rounded-lg ">
         <motion.img
           initial={{ x: 0, y: 0 }}
           animate={{ y: [5, -5], rotateZ: [5 , -5 ] }}

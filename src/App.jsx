@@ -12,6 +12,7 @@ import { getUserAsync } from "./slices/authSlice";
 import { useEffect } from "react";
 import Profile from "./pages/Profile";
 import Statistics from "./pages/Statistics";
+import Settings from "./pages/Settings";
 import { getProductsAsync } from "./slices/productsSlice";
 
 const App = () => {
@@ -28,7 +29,8 @@ const App = () => {
         <Route exact path="/" element={<Protected Component={Home}/>} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/statistics" element={<Statistics />} />
+        <Route exact path="/statistics" element={<Protected Component = {Statistics} />} />
+        <Route exact path="/settings" element={<Protected Component = {Settings} />} />
         <Route exact path="*" element={<PageNotFound />} />
       </Routes>
       {/* Toast container to manage all toasts it act as parent container for toast calls */}

@@ -1,17 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { navigation } from "../constants/navigation.js";
-import { logoutAsync } from "../slices/authSlice";
-import { useEffect, useState } from "react";
-import { Navigate, useNavigate, Link } from "react-router-dom";
+// import { logoutAsync } from "../slices/authSlice";
+import {Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import ContentPlaceholder from "../components/ContentPlaceholder";
 import LineChartComponent from "../components/charts/LineChartComponent.jsx";
 import AreaChartComponent from "../components/charts/AreaChartComponent.jsx";
 
 const Home = () => {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const navigate = useNavigate();
   const products = useSelector((state) => state.product.products);
   const productsStatus = useSelector((state) => state.product.status);
   return (
