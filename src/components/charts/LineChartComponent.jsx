@@ -19,15 +19,9 @@ const LineChartComponent = () => {
         <div className="w-full h-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
-              width={500}
-              height={300}
+              width={"100%"}
+              height={"100%"}
               data={products?.slice(0, 15)}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
             >
               <CartesianGrid stroke="#1f1e1e" strokeDasharray="5 5"  />
               <XAxis  tick={false}  dataKey="title" />
