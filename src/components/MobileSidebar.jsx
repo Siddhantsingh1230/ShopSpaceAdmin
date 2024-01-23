@@ -47,7 +47,7 @@ const MobileSidebar = () => {
               ></i>
             </div>
             {/* divider */}
-            <hr className="border-t-2 border-gray-700 mb-3" />
+            <hr className="border-t-2 border-gray-800 mb-3" />
             {/* buttons */}
             <div className="flex flex-col gap-2 text-gray-400 text-lg px-2">
               {navigation
