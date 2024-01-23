@@ -3,7 +3,7 @@ import { logoutAsync } from "../slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const UserAvatar = ({ userDropDown, toggleUserDropDown }) => {
+const UserAvatar = ({ userDropDown, toggleUserDropDown,closeOther=()=>{} }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   return (
@@ -16,6 +16,7 @@ const UserAvatar = ({ userDropDown, toggleUserDropDown }) => {
           onClick={(e) => {
             e.stopPropagation();
             toggleUserDropDown();
+            closeOther(false);
           }}
           className="w-full  h-full rounded-full"
           src={user?.profileImageURL}

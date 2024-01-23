@@ -5,11 +5,16 @@ import ContentPlaceholder from "../components/ContentPlaceholder";
 import LineChartComponent from "../components/charts/LineChartComponent.jsx";
 import AreaChartComponent from "../components/charts/AreaChartComponent.jsx";
 import UserAvatar from "../components/UserAvatar.jsx";
+import Notifications from "../components/Notifications.jsx";
 
 const Home = () => {
   const [userDropDown, setUserDropDown] = useState(false);
+  const [notificationDropDown, setNotificationDropDown] = useState(false);
   const toggleUserDropDown = () => {
     setUserDropDown((state) => !state);
+  };
+  const toggleNotificationDropDown = () => {
+    setNotificationDropDown((state) => !state);
   };
   const products = useSelector((state) => state.product.products);
   const mostOrderedProducts = useSelector(
@@ -25,6 +30,9 @@ const Home = () => {
           e.stopPropagation();
           if (userDropDown) {
             toggleUserDropDown();
+          }
+          if (notificationDropDown) {
+            toggleNotificationDropDown();
           }
         }}
         className="flex justify-between mb-3 w-full"
@@ -43,13 +51,11 @@ const Home = () => {
             />
           </div>
           {/* Notification */}
-          <div
-            title="Notification"
-            className="cursor-pointer relative flex justify-center items-center rounded-full w-10 h-10 bg-[#181818]"
-          >
-            <i className="cursor-pointer text-xl ri-notification-2-line text-white"></i>
-            <span className="top-0 right-0 absolute w-2 h-2 bg-red-500 rounded-full"></span>
-          </div>
+          <Notifications
+            notificationDropDown={notificationDropDown}
+            toggleNotificationDropDown={toggleNotificationDropDown}
+            closeOther={setUserDropDown}
+          />
           {/* Language */}
           <div
             title="Language"
@@ -64,6 +70,7 @@ const Home = () => {
           <UserAvatar
             userDropDown={userDropDown}
             toggleUserDropDown={toggleUserDropDown}
+            closeOther={setNotificationDropDown}
           />
         </div>
       </div>
@@ -73,6 +80,9 @@ const Home = () => {
           e.stopPropagation();
           if (userDropDown) {
             toggleUserDropDown();
+          }
+          if (notificationDropDown) {
+            toggleNotificationDropDown();
           }
         }}
         className="flex flex-col overflow-y-auto pr-8 mt-0 mb-2  "
