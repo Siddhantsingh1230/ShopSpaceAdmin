@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const Notifications = ({
   notificationDropDown,
   toggleNotificationDropDown,
-  closeOther,
+  closeOther=()=>{},
 }) => {
   return (
     <>
@@ -24,7 +24,7 @@ const Notifications = ({
             initial={{ opacity: 0, y: "100%" }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "100%" }}
-            className="z-40 rounded-md p-1 py-2 max-sm:hidden absolute top-14 right-0 w-44  bg-white flex gap-1 flex-col "
+            className="z-40 rounded-md p-1 py-2  absolute top-14 right-0 w-44  bg-white flex gap-1 flex-col "
           >
             <p
               title="notification"
