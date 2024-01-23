@@ -6,6 +6,7 @@ import LineChartComponent from "../components/charts/LineChartComponent.jsx";
 import AreaChartComponent from "../components/charts/AreaChartComponent.jsx";
 import UserAvatar from "../components/UserAvatar.jsx";
 import Notifications from "../components/Notifications.jsx";
+import MobileSidebar from "../components/MobileSidebar.jsx";
 
 const Home = () => {
   const [userDropDown, setUserDropDown] = useState(false);
@@ -35,11 +36,11 @@ const Home = () => {
             toggleNotificationDropDown();
           }
         }}
-        className="flex max-sm:flex-col max-sm:gap-4 justify-between items-center mb-3 w-full  max-sm:px-3"
+        className="flex  max-sm:flex-col max-sm:gap-4 justify-between items-center mb-3 w-full  max-sm:px-3"
       >
-        <p className="max-sm:text-3xl max-sm:w-full text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
-          Dashboard
-        </p>
+        <div className="max-sm:text-3xl max-sm:w-full text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
+        <MobileSidebar/> Dashboard
+        </div>
         <div className="flex gap-4  justify-center max-sm:justify-between items-center max-sm:w-full">
           {/* Search Bar */}
           <div className="flex p-3 px-5 max-sm:p-2 max-sm:px-3 bg-[#181818] text-gray-200 gap-3 rounded-full max-sm:w-[12rem] w-[26rem]">

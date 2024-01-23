@@ -10,6 +10,8 @@ import {
 } from "./slices/productsSlice";
 import AdminWrapper from "./components/AdminWrapper";
 
+import "react-modern-drawer/dist/index.css"; // Dependency Styles for drawer
+
 const App = () => {
   // dispatching getuser to get if user is already signed in or not
   const dispatch = useDispatch();

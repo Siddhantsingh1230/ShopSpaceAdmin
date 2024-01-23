@@ -5,6 +5,7 @@ import { updateUserAsync, deleteUserAsync } from "../slices/authSlice";
 import { motion } from "framer-motion";
 import DeleteModal from "../components/DeleteModal";
 import UserAvatar from "../components/UserAvatar";
+import MobileSidebar from "../components/MobileSidebar";
 
 const Settings = () => {
   const user = useSelector((state) => state.auth.user);
@@ -52,11 +53,11 @@ const Settings = () => {
             toggleUserDropDown();
           }
         }}
-        className="flex  items-center justify-between mb-3 max-sm:w-8 max-sm:h-8 w-full max-sm:px-3"
+        className="flex  items-center justify-between mb-3 w-full max-sm:px-3"
       >
-        <p className="max-sm:text-2xl text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
-          Account Settings
-        </p>
+        <div className="max-sm:text-3xl text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
+          <MobileSidebar /> Settings
+        </div>
         {/* User Avatar */}
         <UserAvatar
           userDropDown={userDropDown}
@@ -73,12 +74,17 @@ const Settings = () => {
         }}
         className="flex flex-col overflow-y-auto max-sm:mt-0  mt-2 mb-7  max-sm:w-full max-sm:px-3"
       >
-        <h1 className="text-xl max-sm:text-lg text-white font-bold my-6 max-sm:my-2 max-sm:mb-5">General</h1>
+        <h1 className="text-xl max-sm:text-lg text-white font-bold my-6 max-sm:my-2 max-sm:mb-5">
+          General
+        </h1>
         <form onSubmit={handleSubmit(handleUpdate)} className="max-sm:w-full">
           <div className="flex max-sm:flex-col w-full sm:gap-32 gap-5">
             <div className="flex flex-col gap-5 justify-center">
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="email">
+                <label
+                  className="text-gray-400 text-lg max-sm:text-sm"
+                  htmlFor="email"
+                >
                   Email Address
                 </label>
                 <input
@@ -89,7 +95,10 @@ const Settings = () => {
                 />
               </div>
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="username">
+                <label
+                  className="text-gray-400 text-lg max-sm:text-sm"
+                  htmlFor="username"
+                >
                   Username
                 </label>
                 <input
@@ -100,7 +109,10 @@ const Settings = () => {
                 />
               </div>
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="pass">
+                <label
+                  className="text-gray-400 text-lg max-sm:text-sm"
+                  htmlFor="pass"
+                >
                   Password
                 </label>
                 <div className="flex p-2 max-sm:p-3 bg-[#181818] sm:text-sm text-gray-200 border rounded-lg border-gray-500 max-sm:justify-between">
@@ -135,7 +147,10 @@ const Settings = () => {
                 </div>
               </div>
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="confPass">
+                <label
+                  className="text-gray-400 text-lg max-sm:text-sm"
+                  htmlFor="confPass"
+                >
                   Confirm Password
                 </label>
                 <div className="flex max-sm:p-3 p-2 bg-[#181818] sm:text-sm text-gray-200 border rounded-lg border-gray-500 max-sm:justify-between">
@@ -172,7 +187,10 @@ const Settings = () => {
             </div>
             <div className="flex flex-col gap-5">
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="mobileNo">
+                <label
+                  className="text-gray-400 text-lg max-sm:text-sm"
+                  htmlFor="mobileNo"
+                >
                   Mobile No.
                 </label>
                 <input
@@ -196,7 +214,10 @@ const Settings = () => {
                 </p>
               )}
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="date">
+                <label
+                  className="text-gray-400 text-lg max-sm:text-sm"
+                  htmlFor="date"
+                >
                   Date
                 </label>
                 <input
@@ -207,7 +228,10 @@ const Settings = () => {
                 />
               </div>
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="location">
+                <label
+                  className="text-gray-400 text-lg max-sm:text-sm"
+                  htmlFor="location"
+                >
                   Location
                 </label>
                 <input
@@ -250,7 +274,9 @@ const Settings = () => {
           </div>
         </form>
         <hr className="border-t border-gray-800 my-6" />
-        <h1 className="text-xl text-white font-bold my-3 max-sm:text-lg">Danger Zone</h1>
+        <h1 className="text-xl text-white font-bold my-3 max-sm:text-lg">
+          Danger Zone
+        </h1>
         <p className="w-[40%]  max-sm:w-full  mb-4 text-sm text-gray-500">
           Once you delete your account, there is no going back. You will lose
           all golden opportunities, Please be certain.
