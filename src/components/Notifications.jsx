@@ -36,7 +36,7 @@ const Notifications = ({
             <hr className="pb-2" />
             <div className="flex flex-col gap-2 w-full p-2">
               <p title="no news" className="text-gray-400 text-xs ">
-                <i class="ri-notification-off-fill"></i> No News
+                <i className="ri-notification-off-fill"></i> No News
               </p>
             </div>
           </motion.div>

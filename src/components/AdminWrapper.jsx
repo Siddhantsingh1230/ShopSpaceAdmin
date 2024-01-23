@@ -17,13 +17,13 @@ import Offers from "../pages/Offers";
 const AdminWrapper = () => {
   return (
     <>
-      <div className="flex bg-[#0b0d10] w-full pt-8 h-full ">
+      <div className="flex bg-[#0b0d10] w-full pt-8 h-full max-sm:pt-3">
         {/* side bar */}
-        <div className="w-[18%]  py-4 px-8 pr-4">
+        <div className="w-[18%]  py-4 px-8 pr-4 max-sm:hidden">
           <Sidebar navigation={navigation} selected={"Dashboard"} />
         </div>
         {/* Main */}
-        <div className="flex flex-col w-[82%] py-2 px-4  h-full ">
+        <div className="flex flex-col w-[82%] py-2 px-4 h-auto max-sm:w-full max-sm:px-0">
           {/* Everything will render/change here */}
           <Routes>
             <Route exact path="/" element={<Protected Component={Home} />} />

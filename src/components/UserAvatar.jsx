@@ -10,7 +10,7 @@ const UserAvatar = ({ userDropDown, toggleUserDropDown,closeOther=()=>{} }) => {
     <>
       <div
         title="User"
-        className="relative cursor-pointer rounded-full w-10 h-10 bg-[#181818] overflow-visible"
+        className="relative cursor-pointer rounded-full  max-sm:w-8 max-sm:h-8 w-10 h-10 bg-[#181818] overflow-visible"
       >
         <img
           onClick={(e) => {

@@ -52,13 +52,11 @@ const Settings = () => {
             toggleUserDropDown();
           }
         }}
-        className="flex justify-between mb-3 w-full"
+        className="flex  items-center justify-between mb-3 max-sm:w-8 max-sm:h-8 w-full max-sm:px-3"
       >
-        <div className="flex font-bold text-2xl text-white gap-4 items-center">
-          <p className="sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
-            Account Settings
-          </p>
-        </div>
+        <p className="max-sm:text-2xl text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
+          Account Settings
+        </p>
         {/* User Avatar */}
         <UserAvatar
           userDropDown={userDropDown}
@@ -73,41 +71,41 @@ const Settings = () => {
             toggleUserDropDown();
           }
         }}
-        className="flex flex-col overflow-y-auto  mt-2 mb-7  "
+        className="flex flex-col overflow-y-auto max-sm:mt-0  mt-2 mb-7  max-sm:w-full max-sm:px-3"
       >
-        <h1 className="text-xl text-white font-bold my-6">General</h1>
-        <form onSubmit={handleSubmit(handleUpdate)}>
+        <h1 className="text-xl max-sm:text-lg text-white font-bold my-6 max-sm:my-2 max-sm:mb-5">General</h1>
+        <form onSubmit={handleSubmit(handleUpdate)} className="max-sm:w-full">
           <div className="flex max-sm:flex-col w-full sm:gap-32 gap-5">
             <div className="flex flex-col gap-5 justify-center">
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg" htmlFor="email">
+                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="email">
                   Email Address
                 </label>
                 <input
-                  className="max-sm:p-4 p-2 px-5 bg-[#181818] border rounded-lg outline-none sm:text-sm text-white border-gray-500 pointer-events-none"
+                  className="max-sm:p-3  p-2 px-5 bg-[#181818] border rounded-lg outline-none sm:text-sm text-white border-gray-500 pointer-events-none"
                   type="email"
                   defaultValue={user?.email}
                   placeholder="Enter email"
                 />
               </div>
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg " htmlFor="username">
+                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="username">
                   Username
                 </label>
                 <input
-                  className="max-sm:p-4 p-2 px-5 bg-[#181818] sm:text-sm border rounded-lg text-white outline-none border-gray-500 pointer-events-none"
+                  className="max-sm:p-3 p-2 px-5 bg-[#181818] sm:text-sm border rounded-lg text-white outline-none border-gray-500 pointer-events-none"
                   type="text"
                   defaultValue={user?.username}
                   placeholder="Enter username"
                 />
               </div>
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg" htmlFor="pass">
+                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="pass">
                   Password
                 </label>
-                <div className="flex p-2 max-sm:p-4 bg-[#181818] sm:text-sm text-gray-200 border rounded-lg border-gray-500 max-sm:justify-between">
+                <div className="flex p-2 max-sm:p-3 bg-[#181818] sm:text-sm text-gray-200 border rounded-lg border-gray-500 max-sm:justify-between">
                   <input
-                    className="px-1  bg-transparent outline-none"
+                    className="px-0 bg-transparent max-sm:w-full max-sm:pr-2 outline-none"
                     type={passType}
                     id="pwd"
                     placeholder="Enter password"
@@ -137,12 +135,12 @@ const Settings = () => {
                 </div>
               </div>
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg" htmlFor="confPass">
+                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="confPass">
                   Confirm Password
                 </label>
-                <div className="flex max-sm:p-4 p-2 bg-[#181818] sm:text-sm text-gray-200 border rounded-lg border-gray-500 max-sm:justify-between">
+                <div className="flex max-sm:p-3 p-2 bg-[#181818] sm:text-sm text-gray-200 border rounded-lg border-gray-500 max-sm:justify-between">
                   <input
-                    className="px-1 bg-transparent outline-none"
+                    className="px-0 max-sm:w-full max-sm:pr-2 bg-transparent outline-none"
                     type={confPassType}
                     id="confPass"
                     placeholder="Confirm password"
@@ -174,11 +172,11 @@ const Settings = () => {
             </div>
             <div className="flex flex-col gap-5">
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg" htmlFor="mobileNo">
+                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="mobileNo">
                   Mobile No.
                 </label>
                 <input
-                  className="max-sm:p-4 p-2 px-5 bg-[#181818] text-white border rounded-lg outline-none sm:text-sm border-gray-500"
+                  className="max-sm:p-3 p-2 px-5 bg-[#181818] text-white border rounded-lg outline-none sm:text-sm border-gray-500"
                   type="text"
                   id="mobileNo"
                   defaultValue={user?.mobileNo}
@@ -198,22 +196,22 @@ const Settings = () => {
                 </p>
               )}
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg" htmlFor="date">
+                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="date">
                   Date
                 </label>
                 <input
-                  className="max-sm:p-4 p-2 px-5 bg-[#181818] text-white sm:text-sm border rounded-lg outline-none border-gray-500 pointer-events-none"
+                  className="max-sm:p-3 p-2 px-5 bg-[#181818] text-white sm:text-sm border rounded-lg outline-none border-gray-500 pointer-events-none"
                   type="text"
                   id="date"
                   defaultValue={new Date().toLocaleDateString()}
                 />
               </div>
               <div className="flex max-sm:flex-col sm:gap-12 max-sm:gap-2 max-sm:w-full  sm:justify-between sm:items-center">
-                <label className="text-gray-400 text-lg" htmlFor="location">
+                <label className="text-gray-400 text-lg max-sm:text-sm" htmlFor="location">
                   Location
                 </label>
                 <input
-                  className="max-sm:p-4 p-2 px-5 bg-[#181818] text-white sm:text-sm border rounded-lg outline-none border-gray-500 pointer-events-none"
+                  className="max-sm:p-3 p-2 px-5 bg-[#181818] text-white sm:text-sm border rounded-lg outline-none border-gray-500 pointer-events-none"
                   type="text"
                   id="location"
                   defaultValue={"India"}
@@ -245,15 +243,15 @@ const Settings = () => {
             <motion.div
               whileHover={{ scale: 1.015 }}
               whileTap={{ scale: 0.99 }}
-              className="px-5 text-white font-bold sm:text-sm py-3 bg-[#6C52BD] cursor-pointer rounded-xl max-sm:rounded-md max-sm:py-3 max-sm:px-3"
+              className="px-5 text-white font-bold sm:text-sm py-3 bg-[#6C52BD] cursor-pointer rounded-xl max-sm:rounded-md max-sm:py-2 max-sm:px-3"
             >
               <button type="submit">Save Changes</button>
             </motion.div>
           </div>
         </form>
         <hr className="border-t border-gray-800 my-6" />
-        <h1 className="text-xl text-white font-bold my-3">Danger Zone</h1>
-        <p className="w-[40%] max-sm:w-full mb-4 sm:text-sm text-gray-500">
+        <h1 className="text-xl text-white font-bold my-3 max-sm:text-lg">Danger Zone</h1>
+        <p className="w-[40%]  max-sm:w-full  mb-4 text-sm text-gray-500">
           Once you delete your account, there is no going back. You will lose
           all golden opportunities, Please be certain.
         </p>
@@ -261,7 +259,7 @@ const Settings = () => {
           onClick={() => {
             setOpenModal(true);
           }}
-          className="bg-red-500 cursor-pointer w-48 hover:bg-red-700 font-bold text-white px-5 py-3 text-center rounded-xl sm:text-sm max-sm:rounded-md  max-sm:py-3 max-sm:px-3 max-sm:mb-20 "
+          className="bg-red-500 cursor-pointer w-48 max-sm:w-full hover:bg-red-700 font-bold text-white px-5 py-3 text-center rounded-xl text-sm max-sm:rounded-md  max-sm:py-2  max-sm:mb-10 "
         >
           Delete Account
         </button>
