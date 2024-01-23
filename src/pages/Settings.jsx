@@ -117,7 +117,7 @@ const Settings = () => {
                 </label>
                 <div className="flex p-2 max-sm:p-3 bg-[#181818] sm:text-sm text-gray-200 border rounded-lg border-gray-500 max-sm:justify-between">
                   <input
-                    className="px-0 bg-transparent max-sm:w-full max-sm:pr-2 outline-none"
+                    className="px-1 bg-transparent max-sm:w-full max-sm:pr-2 outline-none"
                     type={passType}
                     id="pwd"
                     placeholder="Enter password"
@@ -155,7 +155,7 @@ const Settings = () => {
                 </label>
                 <div className="flex max-sm:p-3 p-2 bg-[#181818] sm:text-sm text-gray-200 border rounded-lg border-gray-500 max-sm:justify-between">
                   <input
-                    className="px-0 max-sm:w-full max-sm:pr-2 bg-transparent outline-none"
+                    className="px-1 max-sm:w-full max-sm:pr-2 bg-transparent outline-none"
                     type={confPassType}
                     id="confPass"
                     placeholder="Confirm password"
