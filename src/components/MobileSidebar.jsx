@@ -1,5 +1,5 @@
 import Drawer from "react-modern-drawer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { navigation } from "../constants/navigation";
@@ -17,6 +17,9 @@ const MobileSidebar = () => {
   //navigation
   const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState(pathname.split("/")[1]);
+  useEffect(() => {
+    setSelectedItem(pathname.split("/")[1]);
+  }, [pathname]);
   return (
     <>
       <div className="hidden max-sm:inline-flex justify-center items-center ">
@@ -54,7 +57,6 @@ const MobileSidebar = () => {
                     <div
                       key={idx}
                       onClick={() => {
-                        setSelectedItem(item.name.toLowerCase());
                         navigate(item.link);
                       }}
                       className={`flex gap-3 p-2 px-5 ${
@@ -68,7 +70,7 @@ const MobileSidebar = () => {
                       }`}
                     >
                       <i className={`${item.icon}`}></i>
-                      <p>{item.name===""?"Dashboard":item.name}</p>
+                      <p>{item.name === "" ? "Dashboard" : item.name}</p>
                     </div>
                   ))
                 : null}
