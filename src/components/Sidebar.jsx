@@ -22,17 +22,17 @@ const Sidebar = ({ navigation, selected }) => {
                 <div
                   key={idx}
                   onClick={() => {
-                    setSelectedItem(item.name);
+                    setSelectedItem(item.name.toLowerCase());
                     navigate(item.link);
                   }}
                   className={`flex gap-3 p-2 px-5 ${
-                    item.name !== selectedItem ? "hover:bg-[#212121]" : "   "
+                    item.name.toLowerCase() !== selectedItem ? "hover:bg-[#212121]" : "   "
                   } transition-all rounded-xl cursor-pointer ${
-                    item.name === selectedItem ? "bg-[#5C85E7] text-white" : ""
+                    item.name.toLowerCase() === selectedItem ? "bg-[#5C85E7] text-white" : ""
                   }`}
                 >
                   <i className={`${item.icon}`}></i>
-                  <p>{item.name}</p>
+                  <p>{item.name===""?"Dashboard":item.name}</p>
                 </div>
               ))
             : null}

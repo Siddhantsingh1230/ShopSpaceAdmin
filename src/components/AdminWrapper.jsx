@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
@@ -15,12 +15,13 @@ import { navigation } from "../constants/navigation";
 import Offers from "../pages/Offers";
 
 const AdminWrapper = () => {
+  const { pathname } = useLocation();
   return (
     <>
       <div className="flex bg-[#0b0d10] w-full pt-8 h-full max-sm:pt-3">
         {/* side bar */}
         <div className="w-[18%]  py-4 px-8 pr-4 max-sm:hidden">
-          <Sidebar navigation={navigation} selected={"Dashboard"} />
+          <Sidebar navigation={navigation} selected={pathname.split("/")[1]} />
         </div>
         {/* Main */}
         <div className="flex flex-col w-[82%] py-2 px-4 h-auto max-sm:w-full max-sm:px-0">

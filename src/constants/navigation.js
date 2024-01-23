@@ -1,6 +1,6 @@
 export const navigation = [
     {
-      name: "Dashboard",
+      name: "",// this is blank as it is handled differently then the rest
       link: "/",
       icon: "ri-dashboard-line",
     },

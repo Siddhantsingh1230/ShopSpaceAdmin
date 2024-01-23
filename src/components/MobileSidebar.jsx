@@ -14,11 +14,9 @@ const MobileSidebar = () => {
     setIsMenuOpen((prevState) => !prevState);
   };
   const { pathname } = useLocation();
-
   //navigation
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
-  const [selectedItem, setSelectedItem] = useState("Dashboard");
+  const [selectedItem, setSelectedItem] = useState(pathname.split("/")[1]);
   return (
     <>
       <div className="hidden max-sm:inline-flex justify-center items-center ">
@@ -56,21 +54,21 @@ const MobileSidebar = () => {
                     <div
                       key={idx}
                       onClick={() => {
-                        setSelectedItem(item.name);
+                        setSelectedItem(item.name.toLowerCase());
                         navigate(item.link);
                       }}
                       className={`flex gap-3 p-2 px-5 ${
-                        item.name !== selectedItem
+                        item.name.toLowerCase() !== selectedItem
                           ? "hover:bg-[#212121]"
                           : "   "
                       } transition-all rounded-xl cursor-pointer ${
-                        item.name === selectedItem
+                        item.name.toLowerCase() === selectedItem
                           ? "bg-[#5C85E7] text-white"
                           : ""
                       }`}
                     >
                       <i className={`${item.icon}`}></i>
-                      <p>{item.name}</p>
+                      <p>{item.name===""?"Dashboard":item.name}</p>
                     </div>
                   ))
                 : null}
