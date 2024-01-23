@@ -11,6 +11,6 @@ export const navigation = [
     },
     { name: "Orders", link: "/orders", icon: "ri-archive-stack-line" },
     { name: "Products", link: "/products", icon: "ri-t-shirt-air-line" },
-    { name: "Settings", link: "/settings", icon: "ri-settings-line" },
+    { name: "Offers", link: "/offers", icon: "ri-settings-line" },
     { name: "Extras", link: "/extras", icon: "ri-box-3-line" },
   ];

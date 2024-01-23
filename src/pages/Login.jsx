@@ -42,7 +42,7 @@ const Login = () => {
   return (
     <>
       {status !== "loading" ? (
-        <div className="loginWrapper h-full w-full bg-[#111112] max-sm:flex-col flex p-5 max-sm:pt-0 max-sm:gap-0 gap-20 overflow-hidden">
+        <div className="loginWrapper z-50 fixed top-0 left-0 h-screen w-screen bg-[#111112] max-sm:flex-col flex p-5 max-sm:pt-0 max-sm:gap-0 gap-20 overflow-hidden">
           <div className="md:hidden ribbon relative h-1/2 w-full flex justify-center items-center">
             <div className="  bg-[#576CEC] w-20 h-full"></div>
             <img

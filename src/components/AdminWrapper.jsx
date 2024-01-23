@@ -12,6 +12,7 @@ import Products from "../pages/Products";
 import Orders from "../pages/Orders";
 import Sidebar from "./Sidebar";
 import { navigation } from "../constants/navigation";
+import Offers from "../pages/Offers";
 
 const AdminWrapper = () => {
   return (
@@ -23,6 +24,7 @@ const AdminWrapper = () => {
         </div>
         {/* Main */}
         <div className="flex flex-col w-[82%] py-2 px-4  h-full ">
+          {/* Everything will render/change here */}
           <Routes>
             <Route exact path="/" element={<Protected Component={Home} />} />
             <Route exact path="/login" element={<Login />} />
@@ -36,6 +38,11 @@ const AdminWrapper = () => {
               exact
               path="/settings"
               element={<Protected Component={Settings} />}
+            />
+            <Route
+              exact
+              path="/offers"
+              element={<Protected Component={Offers} />}
             />
             <Route
               exact

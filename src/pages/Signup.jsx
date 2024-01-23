@@ -34,7 +34,7 @@ const Signup = () => {
   const status = useSelector((state) => state.auth.status);
   return (
     <>
-      <div className="signupWrapper h-full w-full bg-[#111112] max-sm:flex-col flex p-5 max-sm:pt-0 max-sm:gap-0 gap-20 overflow-hidden justify-center items-center">
+      <div className="signupWrapper z-50 fixed top-0 left-0 h-screen w-screen bg-[#111112] max-sm:flex-col flex p-5 max-sm:pt-0 max-sm:gap-0 gap-20 overflow-hidden justify-center items-center">
         {/* Section3(mobile) */}
         <div className="md:hidden w-full flex justify-center items-center">
           <img className="h-8 w-8" src={heartgif} alt="" />

@@ -6,7 +6,7 @@ import notFound from "../assets/images/404png.png";
 const PageNotFound = () => {
   return (
     <div
-      className="flex h-full w-full max-sm:flex-col overflow-hidden items-center justify-center object-cover object-center"
+      className="flex z-50 fixed top-0 left-0 h-screen w-screen max-sm:flex-col overflow-hidden items-center justify-center object-cover object-center"
       style={{
         backgroundImage: `url(${bgImg})`,
         backgroundRepeat: "no-repeat",
