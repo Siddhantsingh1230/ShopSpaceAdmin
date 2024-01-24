@@ -14,11 +14,11 @@ const Products = () => {
   const deleteProduct = () => {
     dispatch(deleteProductAsync(productId));
   };
-  const Update = (p) => {
+  const Action = (p) => {
     return (
       <div className="flex gap-3 justify-center items-center text-sm h-full">
         <button
-          className="p-1 px-2 bg-yellow-700 text-white rounded-md "
+          className="p-1 px-2 disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-blue-700/75 focus:ring-blue-600 bg-blue-600 text-white hover:bg-blue-700 hover:border-blue-700 text-sm font-medium  rounded-md "
           onClick={() => {
             console.log("edit", p.data._id);
           }}
@@ -26,7 +26,7 @@ const Products = () => {
           <i className="ri-pencil-line mr-2"></i>Edit
         </button>
         <button
-          className="p-1 px-2 bg-red-700 text-white rounded-md"
+          className="p-1 px-2 disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-red-700/75 focus:ring-red-600 bg-red-600 text-white hover:bg-red-700 hover:border-red-700 text-sm font-medium rounded-md"
           onClick={() => {
             setProductId(p.data._id)
             setOpenModal(true);
@@ -80,7 +80,7 @@ const Products = () => {
     { field: "discountPercentage" },
     { field: "viewCount" },
     { field: "createdAt", cellRenderer: DisplayDate },
-    { field: "Actions", cellRenderer: Update },
+    { field: "Actions", cellRenderer: Action },
   ];
 
   const defaultColDef = useMemo(() => ({
