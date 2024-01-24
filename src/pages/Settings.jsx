@@ -294,7 +294,8 @@ const Settings = () => {
       <DeleteModal
         open={openModal}
         setOpen={setOpenModal}
-        deleteUser={deleteUser}
+        task="deleteUser"
+        deleteItem={deleteUser}
       />
     </>
   );
