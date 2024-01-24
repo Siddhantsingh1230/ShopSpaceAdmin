@@ -1,7 +1,7 @@
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-const DeleteModal = ({ open, setOpen, deleteUser }) => {
+const DeleteModal = ({ open, setOpen, task, deleteItem}) => {
   const cancelButtonRef = useRef(null);
 
   return (
@@ -52,11 +52,16 @@ const DeleteModal = ({ open, setOpen, deleteUser }) => {
                         Delete account
                       </Dialog.Title>
                       <div className="mt-2">
+                        {task === "deleteUser" ? 
                         <p className="text-sm text-gray-500">
-                          Are you sure you want to delete your account? All of
-                          your data will be permanently removed. This action
-                          cannot be undone.
-                        </p>
+                        Are you sure you want to delete your account? All of
+                        your data will be permanently removed. This action
+                        cannot be undone.
+                      </p> : <p className="text-sm text-gray-500">
+                          Are you sure you want to delete this product?
+                          This action cannot be undone.
+                        </p> }
+                        
                       </div>
                     </div>
                   </div>
@@ -66,9 +71,11 @@ const DeleteModal = ({ open, setOpen, deleteUser }) => {
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                     onClick={() => {
-                      setOpen(false);
-                      deleteUser();
+                        setOpen(false);
+                        deleteItem();
+                        console.log(task);
                     }}
+
                   >
                     Delete
                   </button>
