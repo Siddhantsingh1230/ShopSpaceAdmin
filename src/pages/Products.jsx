@@ -21,21 +21,29 @@ const Products = () => {
     return (
       <div className="flex gap-3 justify-center items-center text-sm h-full">
         <button
-          className="p-1 px-2 disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-blue-700/75 focus:ring-[#5C85E7] bg-[#5C85E7] text-white hover:bg-blue-700 hover:border-blue-700 text-sm font-medium  rounded-md "
+          className=" disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-blue-400 bg-[#0B0D10] text-white  text-sm font-medium  rounded-md  "
           onClick={() => {
             console.log("edit", p.data._id);
           }}
         >
-          <i className="ri-pencil-line mr-2"></i>Edit
+          <i className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-blue-400 transition-all ri-pencil-line"></i>
         </button>
         <button
-          className="p-1 px-2 disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-red-700/75 focus:ring-red-600 bg-red-600 text-white hover:bg-red-700 hover:border-red-700 text-sm font-medium rounded-md"
+          className=" disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-red-500 bg-[#0B0D10] text-white  text-sm font-medium rounded-md "
           onClick={() => {
             setProductId(p.data._id);
             setOpenModal(true);
           }}
         >
-          <i className="ri-delete-bin-line mr-2"></i>Delete
+          <i className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-red-500 transition-all ri-delete-bin-line "></i>
+        </button>
+        <button
+          className="disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-green-500 bg-[#0B0D10] text-white text-sm font-medium rounded-md "
+          onClick={() => {
+            
+          }}
+        >
+          < i className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-green-500 transition-all ri-eye-line"></i>
         </button>
       </div>
     );
