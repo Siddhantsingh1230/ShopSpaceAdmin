@@ -186,3 +186,6 @@ html {
   background-color:#4d71c5  !important;
   cursor: pointer;
 }
+.ag-ltr .ag-cell-focus:not(.ag-cell-range-selected):focus-within{
+  border-color: rgb(255, 255, 255) !important;
+}
