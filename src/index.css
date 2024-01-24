@@ -149,7 +149,7 @@ html {
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(25, 30, 50);
+    background-color: rgb(40, 50, 93);
   }
 
   ::-webkit-scrollbar-thumb:active {
@@ -157,7 +157,7 @@ html {
   }
 
   * {
-    scrollbar-color: #5c85e7 #101010;
+    scrollbar-color: #5c85e7 #222222;
     scrollbar-width: thin;
   }
 
@@ -165,4 +165,24 @@ html {
   .thinScroll::-webkit-scrollbar {
     height: 10px;
   }
+}
+
+/* Custom AG Styling / customization */
+.ag-theme-alpine-dark {
+  /* disable all borders */
+  --ag-borders: none !important;
+  --ag-header-height: 36px !important;
+  --ag-header-foreground-color: white !important;
+  --ag-header-background-color: #121212 !important;
+  --ag-header-cell-hover-background-color: #5C85E7 !important;
+  --ag-header-cell-moving-background-color: #4573dd !important;
+  --ag-odd-row-background-color: #0B0D10  !important;
+  --ag-background-color:#0B0D10  !important;
+}
+.ag-header-cell {
+  font-size: 14px;
+}
+.ag-row-hover {
+  background-color:#4d71c5  !important;
+  cursor: pointer;
 }
