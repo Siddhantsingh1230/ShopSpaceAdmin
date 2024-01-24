@@ -49,7 +49,7 @@ const DeleteModal = ({ open, setOpen, task, deleteItem}) => {
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        Delete account
+                        {task === "deleteUser"?"Delete account":"Delete Product"}
                       </Dialog.Title>
                       <div className="mt-2">
                         {task === "deleteUser" ? 
