@@ -491,12 +491,12 @@ const Products = () => {
       editable: false,
     },
     {
-      field: "actions",
+      field: "Actions",
       headerTooltip: "Actions",
-      headerName: "action",
+      headerName: "Actions",
       cellRenderer: actionCellRenderer,
       editable: false,
-      colId: "action",
+      colId: "Actions",
     },
   ];
 
@@ -600,7 +600,7 @@ const Products = () => {
         </ContextMenu>
       )}
       {/* Graph Modal */}
-      <GraphModal open={openGraph} setOpen={setOpenGraph} title={graphTitle} />
+      <GraphModal open={openGraph} setOpen={setOpenGraph} keyField={graphTitle} />
       {/* Product Modal */}
       <ProductModal
         open={openProductModal}
