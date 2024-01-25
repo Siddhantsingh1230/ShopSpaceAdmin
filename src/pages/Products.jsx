@@ -8,9 +8,10 @@ import DeleteModal from "../components/DeleteModal";
 import MobileSidebar from "../components/MobileSidebar";
 import UserAvatar from "../components/UserAvatar";
 import ContextMenu from "../components/ContextMenu";
+import GraphModal from "../components/GraphModal";
 
 // ConTextList
-const ContextList = ({ onExportCSV }) => {
+const ContextList = ({ onExportCSV, setOpen, closeOther }) => {
   return (
     <>
       <div
@@ -20,7 +21,13 @@ const ContextList = ({ onExportCSV }) => {
         <i className="ri-file-chart-line"></i> Export CSV
       </div>
       <hr className="border-t w-full " />
-      <div className="text-gray-500 text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer">
+      <div
+        onClick={() => {
+          setOpen(true);
+          closeOther();
+        }}
+        className="text-gray-500 text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer"
+      >
         <i className="ri-bar-chart-2-fill"></i> Show Graph
       </div>
     </>
@@ -31,6 +38,7 @@ const Products = () => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
   const [productId, setProductId] = useState("");
+  const [openGraph, setOpenGraph] = useState(false);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
 
@@ -97,7 +105,7 @@ const Products = () => {
     );
   };
   const columnContextClick = (params) => {
-    console.log(params.column.colId);
+    // console.log(params.column.colId);
     setContextMenuVisible(true);
   };
 
@@ -211,9 +219,17 @@ const Products = () => {
       {/* Context Menu */}
       {contextMenuVisible && (
         <ContextMenu location={mouseLocation}>
-          <ContextList onExportCSV={onExportCSV} />
+          <ContextList
+            onExportCSV={onExportCSV}
+            setOpen={setOpenGraph}
+            closeOther={() => {
+              setContextMenuVisible(false);
+            }}
+          />
         </ContextMenu>
       )}
+      {/* Graph Modal */}
+      <GraphModal open={openGraph} setOpen={setOpenGraph} />
     </>
   );
 };
