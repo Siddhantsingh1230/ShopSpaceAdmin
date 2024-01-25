@@ -1,5 +1,6 @@
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import BarChartComponent from "./charts/BarChartComponent";
 
 const GraphModal = ({ open, setOpen, title }) => {
   const cancelButtonRef = useRef(null);
@@ -35,10 +36,11 @@ const GraphModal = ({ open, setOpen, title }) => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-lg">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-[#0B0D10] text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-lg">
                 {/* Graph div */}
-                <div className="w-full h-96 flex justify-center items-center">
-                  <p>{title}</p>
+                <div className="w-full h-96 flex justify-center items-center p-7">
+                  {/* <p>{title}</p> */}
+                  <BarChartComponent/>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
