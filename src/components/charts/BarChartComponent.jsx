@@ -51,14 +51,15 @@ const BarChartComponent = ({ data, keyField }) => {
           />
         </BarChart>
         <button 
-          className="text-gray-200 hover:bg-blue-700 hover:text-white transition-all bg-blue-500 rounded-md text-sm p-2 px-3"
+        title="Save Graph"
+          className="text-gray-200 opacity-55 hover:opacity-100 hover:bg-blue-700 hover:text-white transition-all bg-gray-600 rounded-md text-sm p-2 px-3"
           onClick={handleDownload}
         >
           {isLoading ? (
             "Downloading..."
           ) : (
             <p>
-              <i className="ri-download-2-line"></i> Save
+              <i className="ri-download-2-line"></i>
             </p>
           )}
         </button>
