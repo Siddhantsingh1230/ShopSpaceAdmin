@@ -9,24 +9,35 @@ import MobileSidebar from "../components/MobileSidebar";
 import UserAvatar from "../components/UserAvatar";
 import ContextMenu from "../components/ContextMenu";
 import GraphModal from "../components/GraphModal";
+import { graphRenderConstraints } from "../constants/graphConstants.js";
 
 // ConTextList
-const ContextList = ({ onExportCSV, setOpen, closeOther }) => {
+const ContextList = ({ onExportCSV, setOpen, closeOther, graphTitle }) => {
   return (
     <>
       <div
         onClick={onExportCSV}
-        className="text-gray-500 text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer"
+        className="text-gray-500 select-none  text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer"
       >
         <i className="ri-file-chart-line"></i> Export CSV
       </div>
       <hr className="border-t w-full " />
       <div
         onClick={() => {
-          setOpen(true);
-          closeOther();
+          if (!graphRenderConstraints[graphTitle].disabled) {
+            setOpen(true);
+            closeOther();
+          }
         }}
-        className="text-gray-500 text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer"
+        className={`${
+          graphRenderConstraints[graphTitle].disabled
+            ? " text-gray-300 "
+            : " text-gray-500 "
+        }  select-none text-sm hover:${
+          graphRenderConstraints[graphTitle].disabled ? " " : "bg-blue-500"
+        } w-full p-2 rounded-md ${
+          graphRenderConstraints[graphTitle].disabled ? "" : "hover:text-white"
+        } transition-all cursor-pointer`}
       >
         <i className="ri-bar-chart-2-fill"></i> Show Graph
       </div>
@@ -226,6 +237,7 @@ const Products = () => {
             closeOther={() => {
               setContextMenuVisible(false);
             }}
+            graphTitle={graphTitle}
           />
         </ContextMenu>
       )}
