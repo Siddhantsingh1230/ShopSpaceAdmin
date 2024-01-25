@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   deleteProductAsync,
   updateProductAsync,
+  updateProductState,
 } from "../slices/productsSlice";
 import DeleteModal from "../components/DeleteModal";
 import MobileSidebar from "../components/MobileSidebar";
@@ -191,7 +192,12 @@ const Products = () => {
         //   id: params.data._id,
         //   product: { [params.colDef.field]: params.newValue },
         // });
-        
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
         dispatch(
           updateProductAsync({
             id: params.data._id,
@@ -207,6 +213,12 @@ const Products = () => {
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
         dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
+        dispatch(
           updateProductAsync({
             id: params.data._id,
             product: { [params.colDef.field]: params.newValue },
@@ -220,6 +232,12 @@ const Products = () => {
       headerTooltip: "Product subCategory",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
         dispatch(
           updateProductAsync({
             id: params.data._id,
@@ -235,6 +253,12 @@ const Products = () => {
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
         dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
+        dispatch(
           updateProductAsync({
             id: params.data._id,
             product: { [params.colDef.field]: params.newValue },
@@ -248,6 +272,12 @@ const Products = () => {
       headerTooltip: "Product price",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
         dispatch(
           updateProductAsync({
             id: params.data._id,
@@ -264,6 +294,12 @@ const Products = () => {
       headerTooltip: "Stock",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
         dispatch(
           updateProductAsync({
             id: params.data._id,
@@ -284,6 +320,13 @@ const Products = () => {
             product: { [params.colDef.field]: params.newValue },
           })
         );
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
+        
         return true;
       },
     },
@@ -311,11 +354,6 @@ const Products = () => {
   }));
 
   const products = useSelector((state) => state.product.products);
-  const [productList, setProductList] = useState([]);
-
-  useEffect(() => {
-    setProductList(products);
-  }, [products]);
 
   const [userDropDown, setUserDropDown] = useState(false);
   const toggleUserDropDown = () => {
@@ -373,7 +411,7 @@ const Products = () => {
           }}
         >
           <AgGridReact
-            rowData={productList}
+            rowData={products}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}
             tooltipShowDelay={2000}

@@ -51,23 +51,28 @@ export const deleteProductAsync = createAsyncThunk(
 );
 export const updateProductAsync = createAsyncThunk(
   "product/update",
-  async(dataP,thunkAPI) =>{
+  async (dataP, thunkAPI) => {
     try {
-      const data = await updateProduct(dataP.id,dataP.product);
+      const data = await updateProduct(dataP.id, dataP.product);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
-)
+);
 export const productsSlice = createSlice({
   name: "products",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    //   increment: (state) => {
-    //     state.value += 1;
-    //   },
+    updateProductState: (state, action) => {
+      const { id, product } = action.payload;
+      const index = state.products.findIndex((product) => product._id === id);
+      if (index !== -1) {
+        // Update the product at the specified index
+        state.products[index] = { ...state.products[index], ...product };
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -125,26 +130,29 @@ export const productsSlice = createSlice({
         } else {
           Toasts("error", "Network Error");
         }
-      }).addCase(updateProductAsync.pending,(state)=>{
+      })
+      .addCase(updateProductAsync.pending, (state) => {
         state.status = "loading";
-      }).addCase(updateProductAsync.fulfilled,(state,action)=>{
+      })
+      .addCase(updateProductAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.products = action.payload.products;
-        Toasts("success", "Updated Product Successfully");
-      }).addCase(updateProductAsync.rejected, (state, action) => {
+        console.log("success", "Updated Product Successfully");
+      })
+      .addCase(updateProductAsync.rejected, (state, action) => {
         state.status = "idle";
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
-          Toasts(
+          console.log(
             "error",
             action.payload.response.data.message || "Error Occurred"
           );
         } else {
-          Toasts("error", "Network Error");
+          console.log("error", "Network Error");
         }
       });
   },
 });
 
-export const {} = productsSlice.actions;
+export const { updateProductState } = productsSlice.actions;
 
 export default productsSlice.reducer;
