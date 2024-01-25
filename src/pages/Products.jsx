@@ -14,11 +14,11 @@ const ContextList = () => {
   return (
     <>
       <div className="text-gray-500 text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer">
-        Export CSV
+      <i className="ri-file-chart-line"></i> Export CSV
       </div>
       <hr className="border-t w-full " />
       <div className="text-gray-500 text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer">
-        Show Graph
+      <i className="ri-bar-chart-2-fill"></i> Show Graph
       </div>
     </>
   );
