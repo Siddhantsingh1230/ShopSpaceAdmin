@@ -3,7 +3,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
-import { getProductsAsync, deleteProductAsync } from "../slices/productsSlice";
+import { deleteProductAsync } from "../slices/productsSlice";
 import DeleteModal from "../components/DeleteModal";
 import MobileSidebar from "../components/MobileSidebar";
 import UserAvatar from "../components/UserAvatar";
@@ -39,11 +39,9 @@ const Products = () => {
         </button>
         <button
           className="disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-green-500 bg-[#0B0D10] text-white text-sm font-medium rounded-md "
-          onClick={() => {
-            
-          }}
+          onClick={() => {}}
         >
-          < i className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-green-500 transition-all ri-eye-line"></i>
+          <i className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-green-500 transition-all ri-eye-line"></i>
         </button>
       </div>
     );
@@ -77,21 +75,29 @@ const Products = () => {
       </>
     );
   };
+  const columnContextClick = (params) => {
+    console.log(params.column.colId);
+  };
+
   const columnDefs = [
-    { field: "_id" },
+    { field: "_id", headerTooltip: "Product ID" },
     // { field: "thumbnail", cellRenderer: DisplayImg }, // removed this due to high client side image network request
-    { field: "title" },
-    { field: "category" },
-    { field: "subCategory" },
-    { field: "brand" },
-    { field: "price" },
-    { field: "rating" },
+    { field: "title", headerTooltip: "Product title" },
+    { field: "category", headerTooltip: "Product category" },
+    { field: "subCategory", headerTooltip: "Product subCategory" },
+    { field: "brand", headerTooltip: "Product brand" },
+    { field: "price", headerTooltip: "Product price" },
+    { field: "rating", headerTooltip: "Product rating" },
     // { field: "sale" }, //No use
-    { field: "stock" },
-    { field: "discountPercentage" },
-    { field: "viewCount" },
-    { field: "createdAt", cellRenderer: DisplayDate },
-    { field: "Actions", cellRenderer: Action },
+    { field: "stock", headerTooltip: "Stock" },
+    { field: "discountPercentage", headerTooltip: "Product discount" },
+    { field: "viewCount", headerTooltip: "Product views" },
+    {
+      field: "createdAt",
+      cellRenderer: DisplayDate,
+      headerTooltip: "createdAt",
+    },
+    { field: "Actions", cellRenderer: Action, headerTooltip: "Actions" },
   ];
 
   const defaultColDef = useMemo(() => ({
@@ -103,10 +109,6 @@ const Products = () => {
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
-    dispatch(getProductsAsync);
-  }, []);
-
-  useEffect(() => {
     setProductList(products);
   }, [products]);
 
@@ -114,6 +116,7 @@ const Products = () => {
   const toggleUserDropDown = () => {
     setUserDropDown((state) => !state);
   };
+
   return (
     <>
       {/* navbar */}
@@ -150,6 +153,9 @@ const Products = () => {
             rowData={productList}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}
+            tooltipShowDelay={2000}
+            onColumnHeaderMouseOver={columnContextClick}
+            tooltipInteraction={true}
           />
         </div>
       </div>
