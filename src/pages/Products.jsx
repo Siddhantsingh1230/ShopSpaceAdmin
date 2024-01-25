@@ -53,38 +53,80 @@ const Products = () => {
   const [openGraph, setOpenGraph] = useState(false);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
+  const [isValueChanged, setIsValueChanged] = useState(false);
 
   const deleteProduct = () => {
     dispatch(deleteProductAsync(productId));
   };
+
   // Special Cell FOR Actions
-  const Action = (p) => {
+  const actionCellRenderer = (params) => {
+    let editingCells = params.api.getEditingCells();
+    // checks if the rowIndex matches in at least one of the editing cells
+    let isCurrentRowEditing = editingCells.some((cell) => {
+      return cell.rowIndex === params.node.rowIndex;
+    });
     return (
-      <div className="flex gap-3 justify-center items-center text-sm h-full">
-        <button
-          className=" disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-blue-400 bg-[#0B0D10] text-white  text-sm font-medium  rounded-md  "
-          onClick={() => {
-            console.log("edit", p.data._id);
-          }}
-        >
-          <i className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-blue-400 transition-all ri-pencil-line"></i>
-        </button>
-        <button
-          className=" disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-red-500 bg-[#0B0D10] text-white  text-sm font-medium rounded-md "
-          onClick={() => {
-            setProductId(p.data._id);
-            setOpenModal(true);
-          }}
-        >
-          <i className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-red-500 transition-all ri-delete-bin-line "></i>
-        </button>
-        <button
-          className="disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-green-500 bg-[#0B0D10] text-white text-sm font-medium rounded-md "
-          onClick={() => {}}
-        >
-          <i className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-green-500 transition-all ri-eye-line"></i>
-        </button>
-      </div>
+      <>
+        {isCurrentRowEditing ? (
+          <div className="flex gap-3 justify-center items-center text-sm h-full">
+            <button
+              data-action="update"
+              className="transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-blue-400 bg-[#0B0D10] text-white  text-sm font-medium  rounded-md  "
+              onClick={() => {
+                params.api.stopEditing();
+              }}
+            >
+              <i className="p-1 px-5 h-full w-full opacity-55 hover:opacity-100 hover:text-green-500 transition-all ri-check-line"></i>
+            </button>
+
+            <button
+              data-action="cancel"
+              className="transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-green-500 bg-[#0B0D10] text-white text-sm font-medium rounded-md "
+              onClick={() => {
+                params.api.stopEditing();
+              }}
+            >
+              <i className="p-1 px-5 h-full w-full opacity-55 hover:opacity-100 hover:text-blue-400  transition-all ri-close-line"></i>
+            </button>
+          </div>
+        ) : (
+          <div className="flex gap-3 justify-center items-center text-sm h-full">
+            <button
+              className="action-button edit disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-blue-400 bg-[#0B0D10] text-white  text-sm font-medium  rounded-md  "
+              onClick={() => {
+                params.api.startEditingCell({
+                  rowIndex: params.node.rowIndex,
+                  colKey: params.api.getDisplayedCenterColumns()[7].colId,
+                });
+                console.log(editingCells)
+              }}
+            >
+              <i
+                data-action="edit"
+                className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-blue-400 transition-all ri-pencil-line"
+              ></i>
+            </button>
+            <button
+              data-action="delete"
+              className=" disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-red-500 bg-[#0B0D10] text-white  text-sm font-medium rounded-md "
+              onClick={() => {
+                setProductId(params.data._id);
+                setOpenModal(true);
+              }}
+            >
+              <i className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-red-500 transition-all ri-delete-bin-line "></i>
+            </button>
+            <button
+              data-action="view"
+              className="disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-green-500 bg-[#0B0D10] text-white text-sm font-medium rounded-md "
+              onClick={() => {}}
+            >
+              <i className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-green-500 transition-all ri-eye-line"></i>
+            </button>
+          </div>
+        )}
+      </>
     );
   };
 
@@ -121,30 +163,55 @@ const Products = () => {
     setContextMenuVisible(true);
   };
 
+  const onRowEditingStarted = (params) => {
+    params.api.refreshCells({
+      columns: ["action"],
+      rowNodes: [params.node],
+      force: true,
+    });
+    console.log(params.api.getEditingCells())   
+  };
+  const onRowEditingStopped = (params) => {
+    params.api.refreshCells({
+      columns: ["action"],
+      rowNodes: [params.node],
+      force: true,
+    });
+  };
+
   const columnDefs = [
-    { field: "_id", headerTooltip: "Product ID" },
+    { field: "_id", headerTooltip: "Product ID", editable: false },
     // { field: "thumbnail", cellRenderer: DisplayImg }, // removed this due to high client side image network request
     { field: "title", headerTooltip: "Product title" },
     { field: "category", headerTooltip: "Product category" },
     { field: "subCategory", headerTooltip: "Product subCategory" },
     { field: "brand", headerTooltip: "Product brand" },
     { field: "price", headerTooltip: "Product price" },
-    { field: "rating", headerTooltip: "Product rating" },
+    { field: "rating", headerTooltip: "Product rating", editable: false },
     // { field: "sale" }, //No use
     { field: "stock", headerTooltip: "Stock" },
     { field: "discountPercentage", headerTooltip: "Product discount" },
-    { field: "viewCount", headerTooltip: "Product views" },
+    { field: "viewCount", headerTooltip: "Product views", editable: false },
     {
       field: "createdAt",
       cellRenderer: DisplayDate,
       headerTooltip: "createdAt",
+      editable: false,
     },
-    { field: "Actions", cellRenderer: Action, headerTooltip: "Actions" },
+    {
+      field: "actions",
+      headerTooltip: "Actions",
+      headerName: "action",
+      cellRenderer: actionCellRenderer,
+      editable: false,
+      colId: "action",
+    },
   ];
 
   const defaultColDef = useMemo(() => ({
     sortable: true,
     filter: true,
+    editable: true,
   }));
 
   const products = useSelector((state) => state.product.products);
@@ -217,6 +284,10 @@ const Products = () => {
             onColumnHeaderContextMenu={columnContextClick}
             tooltipInteraction={true}
             ref={gridRef}
+            onRowEditingStopped={onRowEditingStopped}
+            onRowEditingStarted={onRowEditingStarted}
+            editType="fullRow"
+            suppressClickEdit={true}
           />
         </div>
       </div>

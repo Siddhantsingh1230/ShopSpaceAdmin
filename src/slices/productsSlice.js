@@ -5,6 +5,7 @@ import {
   deleteproduct,
   getAllProducts,
   getMostOrderedProducts,
+  updateProduct,
 } from "../api/products.js";
 import Toasts from "../app/Toasts.js";
 
@@ -48,7 +49,17 @@ export const deleteProductAsync = createAsyncThunk(
     }
   }
 );
-
+export const updateProductAsync = createAsyncThunk(
+  "product/update",
+  async(id,product,thunkAPI) =>{
+    try {
+      const data = await updateProduct(id,product);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+)
 export const productsSlice = createSlice({
   name: "products",
   initialState,
@@ -105,6 +116,22 @@ export const productsSlice = createSlice({
         Toasts("success", "Deleted Product Successfully");
       })
       .addCase(deleteProductAsync.rejected, (state, action) => {
+        state.status = "idle";
+        if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
+          Toasts(
+            "error",
+            action.payload.response.data.message || "Error Occurred"
+          );
+        } else {
+          Toasts("error", "Network Error");
+        }
+      }).addCase(updateProductAsync.pending,(state)=>{
+        state.status = "loading";
+      }).addCase(updateProductAsync.fulfilled,(state,action)=>{
+        state.status = "idle";
+        state.products = action.payload.products;
+        Toasts("success", "Updated Product Successfully");
+      }).addCase(updateProductAsync.rejected, (state, action) => {
         state.status = "idle";
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
           Toasts(
