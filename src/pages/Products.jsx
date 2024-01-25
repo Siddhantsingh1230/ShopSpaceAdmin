@@ -58,7 +58,7 @@ const Products = () => {
   const [openGraph, setOpenGraph] = useState(false);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
-  const [updateField, setUpdateField] = useState(false);
+  let updateField = false;
 
   const deleteProduct = () => {
     dispatch(deleteProductState(productId));
@@ -80,7 +80,7 @@ const Products = () => {
               data-action="update"
               className="transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-blue-400 bg-[#0B0D10] text-white  text-sm font-medium  rounded-md  "
               onClick={() => {
-                setUpdateField(true);
+                updateField = true;
                 params.api.stopEditing();
               }}
             >
@@ -91,7 +91,7 @@ const Products = () => {
               data-action="cancel"
               className="transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-green-500 bg-[#0B0D10] text-white text-sm font-medium rounded-md "
               onClick={() => {
-                setUpdateField(false);
+                updateField = false;
                 params.api.stopEditing();
               }}
             >
@@ -210,7 +210,7 @@ const Products = () => {
               product: { [params.colDef.field]: params.newValue },
             })
           );
-          setUpdateField(false);
+          updateField = false;
           return true;
         } else {
           return false;
@@ -235,7 +235,7 @@ const Products = () => {
               product: { [params.colDef.field]: params.newValue },
             })
           );
-          setUpdateField(false);
+          updateField= false;
           return true;
         } else {
           return false;
@@ -260,7 +260,7 @@ const Products = () => {
               product: { [params.colDef.field]: params.newValue },
             })
           );
-          setUpdateField(false);
+         updateField= false;
           return true;
         } else {
           return false;
@@ -285,7 +285,7 @@ const Products = () => {
               product: { [params.colDef.field]: params.newValue },
             })
           );
-          setUpdateField(false);
+         updateField= false;
           return true;
         } else {
           return false;
@@ -310,7 +310,7 @@ const Products = () => {
               product: { [params.colDef.field]: params.newValue },
             })
           );
-          setUpdateField(false);
+         updateField= false;
           return true;
         } else {
           return false;
@@ -337,7 +337,7 @@ const Products = () => {
               product: { [params.colDef.field]: params.newValue },
             })
           );
-          setUpdateField(false);
+         updateField= false;
           return true;
         } else {
           return false;
@@ -362,7 +362,7 @@ const Products = () => {
               product: { [params.colDef.field]: params.newValue },
             })
           );
-          setUpdateField(false);
+         updateField= false;
           return true;
         } else {
           return false;
