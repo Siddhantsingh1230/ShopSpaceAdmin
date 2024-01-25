@@ -59,6 +59,7 @@ const Products = () => {
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
   let updateField = false;
+  let updateProductRow = {};
 
   const deleteProduct = () => {
     dispatch(deleteProductState(productId));
@@ -78,24 +79,24 @@ const Products = () => {
           <div className="flex gap-3 justify-center items-center text-sm h-full">
             <button
               data-action="update"
-              className="transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-blue-400 bg-[#0B0D10] text-white  text-sm font-medium  rounded-md  "
-              onClick={() => {
-                updateField = true;
-                params.api.stopEditing();
-              }}
+              className="transition flex items-center justify-center border gap-2  shrink-0 saturate-[110%] border-gray-600  bg-[#0B0D10] text-white  text-xs font-medium p-[0.4rem]  rounded-md "
             >
-              <i className="p-1 px-5 h-full w-full opacity-55 hover:opacity-100 hover:text-green-500 transition-all ri-check-line"></i>
+              <p className="opacity-55 justify-center items-center flex ">
+                Save
+              </p>
+              <i className="hover:opacity-100 hover:text-green-500 transition-all ri-corner-down-left-fill"></i>
             </button>
 
             <button
               data-action="cancel"
-              className="transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-green-500 bg-[#0B0D10] text-white text-sm font-medium rounded-md "
-              onClick={() => {
-                updateField = false;
-                params.api.stopEditing();
-              }}
+              className="transition flex items-center justify-center border gap-2  shrink-0 saturate-[110%] border-gray-600  bg-[#0B0D10] text-white  text-xs font-medium p-[0.4rem]  rounded-md "
             >
-              <i className="p-1 px-5 h-full w-full opacity-55 hover:opacity-100 hover:text-blue-400  transition-all ri-close-line"></i>
+              <p className="opacity-55  justify-center items-center flex ">
+                Cancel
+              </p>
+              <p className="hover:opacity-100 hover:text-red-500 transition-all">
+                Esc
+              </p>
             </button>
           </div>
         ) : (
@@ -197,24 +198,23 @@ const Products = () => {
         //   id: params.data._id,
         //   product: { [params.colDef.field]: params.newValue },
         // });
-        if (updateField) {
-          dispatch(
-            updateProductState({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-          dispatch(
-            updateProductAsync({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-          updateField = false;
-          return true;
-        } else {
-          return false;
-        }
+        updateProductRow = {
+          ...updateProductRow,
+          [params.colDef.field]: params.newValue,
+        };
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        return true;
       },
     },
     {
@@ -222,24 +222,41 @@ const Products = () => {
       headerTooltip: "Product category",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        if (updateField) {
-          dispatch(
-            updateProductState({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-          dispatch(
-            updateProductAsync({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-          updateField= false;
-          return true;
-        } else {
-          return false;
-        }
+        // if (updateField) {
+        //   dispatch(
+        //     updateProductState({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //   dispatch(
+        //     updateProductAsync({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //   updateField= false;
+        //   return true;
+        // } else {
+        //   return false;
+        // }
+        updateProductRow = {
+          ...updateProductRow,
+          [params.colDef.field]: params.newValue,
+        };
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        return true;
       },
     },
     {
@@ -247,24 +264,41 @@ const Products = () => {
       headerTooltip: "Product subCategory",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        if (updateField) {
-          dispatch(
-            updateProductState({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-          dispatch(
-            updateProductAsync({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-         updateField= false;
-          return true;
-        } else {
-          return false;
-        }
+        // if (updateField) {
+        //   dispatch(
+        //     updateProductState({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //   dispatch(
+        //     updateProductAsync({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //  updateField= false;
+        //   return true;
+        // } else {
+        //   return false;
+        // }
+        updateProductRow = {
+          ...updateProductRow,
+          [params.colDef.field]: params.newValue,
+        };
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        return true;
       },
     },
     {
@@ -272,24 +306,41 @@ const Products = () => {
       headerTooltip: "Product brand",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        if (updateField) {
-          dispatch(
-            updateProductState({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-          dispatch(
-            updateProductAsync({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-         updateField= false;
-          return true;
-        } else {
-          return false;
-        }
+        // if (updateField) {
+        //   dispatch(
+        //     updateProductState({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //   dispatch(
+        //     updateProductAsync({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //  updateField= false;
+        //   return true;
+        // } else {
+        //   return false;
+        // }
+        updateProductRow = {
+          ...updateProductRow,
+          [params.colDef.field]: params.newValue,
+        };
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        return true;
       },
     },
     {
@@ -297,24 +348,41 @@ const Products = () => {
       headerTooltip: "Product price",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        if (updateField) {
-          dispatch(
-            updateProductState({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-          dispatch(
-            updateProductAsync({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-         updateField= false;
-          return true;
-        } else {
-          return false;
-        }
+        // if (updateField) {
+        //   dispatch(
+        //     updateProductState({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //   dispatch(
+        //     updateProductAsync({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //  updateField= false;
+        //   return true;
+        // } else {
+        //   return false;
+        // }
+        updateProductRow = {
+          ...updateProductRow,
+          [params.colDef.field]: params.newValue,
+        };
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        return true;
       },
     },
     { field: "rating", headerTooltip: "Product rating", editable: false },
@@ -324,24 +392,41 @@ const Products = () => {
       headerTooltip: "Stock",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        if (updateField) {
-          dispatch(
-            updateProductState({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-          dispatch(
-            updateProductAsync({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-         updateField= false;
-          return true;
-        } else {
-          return false;
-        }
+        // if (updateField) {
+        //   dispatch(
+        //     updateProductState({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //   dispatch(
+        //     updateProductAsync({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //  updateField= false;
+        //   return true;
+        // } else {
+        //   return false;
+        // }
+        updateProductRow = {
+          ...updateProductRow,
+          [params.colDef.field]: params.newValue,
+        };
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        return true;
       },
     },
     {
@@ -349,24 +434,41 @@ const Products = () => {
       headerTooltip: "Product discount",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        if (updateField) {
-          dispatch(
-            updateProductState({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-          dispatch(
-            updateProductAsync({
-              id: params.data._id,
-              product: { [params.colDef.field]: params.newValue },
-            })
-          );
-         updateField= false;
-          return true;
-        } else {
-          return false;
-        }
+        // if (updateField) {
+        //   dispatch(
+        //     updateProductState({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //   dispatch(
+        //     updateProductAsync({
+        //       id: params.data._id,
+        //       product: { [params.colDef.field]: params.newValue },
+        //     })
+        //   );
+        //  updateField= false;
+        //   return true;
+        // } else {
+        //   return false;
+        // }
+        updateProductRow = {
+          ...updateProductRow,
+          [params.colDef.field]: params.newValue,
+        };
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        return true;
       },
     },
     { field: "viewCount", headerTooltip: "Product views", editable: false },
