@@ -73,6 +73,13 @@ export const productsSlice = createSlice({
         state.products[index] = { ...state.products[index], ...product };
       }
     },
+    deleteProductState: (state, action) => {
+      const index = state.products.findIndex((product) => product._id === action.payload);
+      if (index !== -1) {
+        // Update the product at the specified index
+        state.products = state.products.filter(product => product._id !== action.payload);
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -153,6 +160,6 @@ export const productsSlice = createSlice({
   },
 });
 
-export const { updateProductState } = productsSlice.actions;
+export const { updateProductState,deleteProductState } = productsSlice.actions;
 
 export default productsSlice.reducer;

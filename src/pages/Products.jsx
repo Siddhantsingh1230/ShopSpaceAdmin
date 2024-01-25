@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   deleteProductAsync,
+  deleteProductState,
   updateProductAsync,
   updateProductState,
 } from "../slices/productsSlice";
@@ -59,6 +60,8 @@ const Products = () => {
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
 
   const deleteProduct = () => {
+    
+    dispatch(deleteProductState(productId));
     dispatch(deleteProductAsync(productId));
   };
 
