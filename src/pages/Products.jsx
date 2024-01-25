@@ -214,6 +214,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
+        updateProductRow={};
         return true;
       },
     },
@@ -256,6 +257,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
+        updateProductRow={};
         return true;
       },
     },
@@ -298,6 +300,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
+        updateProductRow={};
         return true;
       },
     },
@@ -340,6 +343,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
+        updateProductRow={};
         return true;
       },
     },
@@ -382,6 +386,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
+        updateProductRow={};
         return true;
       },
     },
@@ -426,6 +431,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
+        updateProductRow={};
         return true;
       },
     },
@@ -468,6 +474,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
+        updateProductRow={};
         return true;
       },
     },
