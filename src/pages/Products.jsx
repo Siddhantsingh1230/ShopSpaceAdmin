@@ -2,7 +2,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { deleteProductAsync } from "../slices/productsSlice";
 import DeleteModal from "../components/DeleteModal";
 import MobileSidebar from "../components/MobileSidebar";
@@ -10,15 +10,18 @@ import UserAvatar from "../components/UserAvatar";
 import ContextMenu from "../components/ContextMenu";
 
 // ConTextList
-const ContextList = () => {
+const ContextList = ({ onExportCSV }) => {
   return (
     <>
-      <div className="text-gray-500 text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer">
-      <i className="ri-file-chart-line"></i> Export CSV
+      <div
+        onClick={onExportCSV}
+        className="text-gray-500 text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer"
+      >
+        <i className="ri-file-chart-line"></i> Export CSV
       </div>
       <hr className="border-t w-full " />
       <div className="text-gray-500 text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer">
-      <i className="ri-bar-chart-2-fill"></i> Show Graph
+        <i className="ri-bar-chart-2-fill"></i> Show Graph
       </div>
     </>
   );
@@ -135,6 +138,12 @@ const Products = () => {
   const toggleUserDropDown = () => {
     setUserDropDown((state) => !state);
   };
+
+  // CSV
+  const gridRef = useRef();
+  const onExportCSV = useCallback(() => {
+    gridRef.current.api.exportDataAsCsv();
+  }, []);
   return (
     <>
       {/* navbar */}
@@ -187,6 +196,7 @@ const Products = () => {
             tooltipShowDelay={2000}
             onColumnHeaderContextMenu={columnContextClick}
             tooltipInteraction={true}
+            ref={gridRef}
           />
         </div>
       </div>
@@ -200,7 +210,9 @@ const Products = () => {
       />
       {/* Context Menu */}
       {contextMenuVisible && (
-        <ContextMenu location={mouseLocation} Children={ContextList} />
+        <ContextMenu location={mouseLocation}>
+          <ContextList onExportCSV={onExportCSV} />
+        </ContextMenu>
       )}
     </>
   );
