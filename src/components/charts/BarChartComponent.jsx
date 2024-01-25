@@ -77,7 +77,7 @@ const BarChartComponent = () => {
           <Bar
             dataKey="pv"
             fill="#5C85E7"
-            activeBar={<Rectangle fill="#5C85E7" stroke="white" />}
+            activeBar={<Rectangle fill="#5C85E7" stroke="#5C85E7" />}
             
           />
         </BarChart>
