@@ -15,6 +15,7 @@ import UserAvatar from "../components/UserAvatar";
 import ContextMenu from "../components/ContextMenu";
 import GraphModal from "../components/GraphModal";
 import { graphRenderConstraints } from "../constants/graphConstants.js";
+import ProductModal from "../components/ProductModal.jsx";
 
 // ConTextList
 const ContextList = ({ onExportCSV, setOpen, closeOther, graphTitle }) => {
@@ -56,6 +57,7 @@ const Products = () => {
   const [productId, setProductId] = useState("");
   const [graphTitle, setGraphTitle] = useState("");
   const [openGraph, setOpenGraph] = useState(false);
+  const [openProductModal, setOpenProductModal] = useState(false);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
   let updateField = false;
@@ -128,7 +130,10 @@ const Products = () => {
             <button
               data-action="view"
               className="disabled:opacity-50 transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-green-500 bg-[#0B0D10] text-white text-sm font-medium rounded-md "
-              onClick={() => {}}
+              onClick={() => {
+                setProductId(params.data._id);
+                setOpenProductModal(true);
+              }}
             >
               <i className="p-1 px-2 h-full w-full opacity-55 hover:opacity-100 hover:text-green-500 transition-all ri-eye-line"></i>
             </button>
@@ -137,7 +142,7 @@ const Products = () => {
       </>
     );
   };
-  //  To display product images columns
+  //  To display product images columns (but not used currently)
   const DisplayImg = (p) => {
     return (
       <div className="p-2 h-full flex justify-center items-center">
@@ -214,7 +219,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
-        updateProductRow={};
+        updateProductRow = {};
         return true;
       },
     },
@@ -257,7 +262,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
-        updateProductRow={};
+        updateProductRow = {};
         return true;
       },
     },
@@ -300,7 +305,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
-        updateProductRow={};
+        updateProductRow = {};
         return true;
       },
     },
@@ -343,7 +348,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
-        updateProductRow={};
+        updateProductRow = {};
         return true;
       },
     },
@@ -386,7 +391,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
-        updateProductRow={};
+        updateProductRow = {};
         return true;
       },
     },
@@ -431,7 +436,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
-        updateProductRow={};
+        updateProductRow = {};
         return true;
       },
     },
@@ -474,7 +479,7 @@ const Products = () => {
             product: { ...updateProductRow },
           })
         );
-        updateProductRow={};
+        updateProductRow = {};
         return true;
       },
     },
@@ -596,6 +601,12 @@ const Products = () => {
       )}
       {/* Graph Modal */}
       <GraphModal open={openGraph} setOpen={setOpenGraph} title={graphTitle} />
+      {/* Product Modal */}
+      <ProductModal
+        open={openProductModal}
+        setOpen={setOpenProductModal}
+        id={productId}
+      />
     </>
   );
 };

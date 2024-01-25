@@ -74,7 +74,6 @@ html {
   }
 }
 
-
 /* Content Placeholder content CSS */
 .image-skeleton {
   position: relative;
@@ -165,6 +164,18 @@ html {
   .thinScroll::-webkit-scrollbar {
     height: 10px;
   }
+  .embla {
+    --slide-spacing: 2rem;
+    --slide-size: 22rem;
+    --slide-height: 20rem;
+    padding: 2rem;
+    margin-block: 2rem;
+  }
+  .embla__slide__img {
+    border-radius: 0.5rem;
+    background: rgb(36, 36, 36);
+    object-fit: cover;
+  }
 }
 
 /* Custom AG Styling / customization */
@@ -174,18 +185,62 @@ html {
   --ag-header-height: 36px !important;
   --ag-header-foreground-color: white !important;
   --ag-header-background-color: #181818 !important;
-  --ag-header-cell-hover-background-color: #5C85E7 !important;
+  --ag-header-cell-hover-background-color: #5c85e7 !important;
   --ag-header-cell-moving-background-color: #4573dd !important;
-  --ag-odd-row-background-color: #0B0D10  !important;
-  --ag-background-color:#0B0D10  !important;
+  --ag-odd-row-background-color: #0b0d10 !important;
+  --ag-background-color: #0b0d10 !important;
 }
 .ag-header-cell {
   font-size: 14px;
 }
 .ag-row-hover {
-  background-color:#4d71c5  !important;
+  background-color: #4d71c5 !important;
   cursor: pointer;
 }
-.ag-ltr .ag-cell-focus:not(.ag-cell-range-selected):focus-within{
+.ag-ltr .ag-cell-focus:not(.ag-cell-range-selected):focus-within {
   border-color: rgb(255, 255, 255) !important;
+}
+
+/* Embla Carousel */
+.embla {
+  --slide-spacing: 2rem;
+  --slide-size: 40%;
+  --slide-height: 15rem;
+  padding: 0rem;
+  margin-block: 2rem;
+}
+.embla__viewport {
+  overflow: hidden;
+}
+.embla__container {
+  backface-visibility: hidden;
+  display: flex;
+  touch-action: pan-y;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+  position: relative;
+}
+.embla__slide__img {
+  display: block;
+  height: var(--slide-height);
+  width: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Mobile viewport styles */
+@media (max-width: 767px) {
+  .embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    padding-left: var(--slide-spacing);
+    position: relative;
+  }
+  .embla__slide__img {
+    border-radius: 0.5rem;
+  }
 }
