@@ -58,9 +58,9 @@ const Products = () => {
   const [openGraph, setOpenGraph] = useState(false);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
+  const [updateField, setUpdateField] = useState(false);
 
   const deleteProduct = () => {
-    
     dispatch(deleteProductState(productId));
     dispatch(deleteProductAsync(productId));
   };
@@ -80,6 +80,7 @@ const Products = () => {
               data-action="update"
               className="transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-blue-400 bg-[#0B0D10] text-white  text-sm font-medium  rounded-md  "
               onClick={() => {
+                setUpdateField(true);
                 params.api.stopEditing();
               }}
             >
@@ -90,6 +91,7 @@ const Products = () => {
               data-action="cancel"
               className="transition inline-flex items-center justify-center space-x-1.5 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10 shrink-0 saturate-[110%] border-gray-600 focus:ring-green-500 bg-[#0B0D10] text-white text-sm font-medium rounded-md "
               onClick={() => {
+                setUpdateField(false);
                 params.api.stopEditing();
               }}
             >
@@ -195,19 +197,24 @@ const Products = () => {
         //   id: params.data._id,
         //   product: { [params.colDef.field]: params.newValue },
         // });
-        dispatch(
-          updateProductState({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        dispatch(
-          updateProductAsync({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        return true;
+        if (updateField) {
+          dispatch(
+            updateProductState({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          dispatch(
+            updateProductAsync({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          setUpdateField(false);
+          return true;
+        } else {
+          return false;
+        }
       },
     },
     {
@@ -215,19 +222,24 @@ const Products = () => {
       headerTooltip: "Product category",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        dispatch(
-          updateProductState({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        dispatch(
-          updateProductAsync({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        return true;
+        if (updateField) {
+          dispatch(
+            updateProductState({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          dispatch(
+            updateProductAsync({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          setUpdateField(false);
+          return true;
+        } else {
+          return false;
+        }
       },
     },
     {
@@ -235,19 +247,24 @@ const Products = () => {
       headerTooltip: "Product subCategory",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        dispatch(
-          updateProductState({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        dispatch(
-          updateProductAsync({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        return true;
+        if (updateField) {
+          dispatch(
+            updateProductState({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          dispatch(
+            updateProductAsync({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          setUpdateField(false);
+          return true;
+        } else {
+          return false;
+        }
       },
     },
     {
@@ -255,19 +272,24 @@ const Products = () => {
       headerTooltip: "Product brand",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        dispatch(
-          updateProductState({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        dispatch(
-          updateProductAsync({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        return true;
+        if (updateField) {
+          dispatch(
+            updateProductState({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          dispatch(
+            updateProductAsync({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          setUpdateField(false);
+          return true;
+        } else {
+          return false;
+        }
       },
     },
     {
@@ -275,19 +297,24 @@ const Products = () => {
       headerTooltip: "Product price",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        dispatch(
-          updateProductState({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        dispatch(
-          updateProductAsync({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        return true;
+        if (updateField) {
+          dispatch(
+            updateProductState({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          dispatch(
+            updateProductAsync({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          setUpdateField(false);
+          return true;
+        } else {
+          return false;
+        }
       },
     },
     { field: "rating", headerTooltip: "Product rating", editable: false },
@@ -297,19 +324,24 @@ const Products = () => {
       headerTooltip: "Stock",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        dispatch(
-          updateProductState({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        dispatch(
-          updateProductAsync({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        return true;
+        if (updateField) {
+          dispatch(
+            updateProductState({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          dispatch(
+            updateProductAsync({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          setUpdateField(false);
+          return true;
+        } else {
+          return false;
+        }
       },
     },
     {
@@ -317,20 +349,24 @@ const Products = () => {
       headerTooltip: "Product discount",
       valueSetter: (params) => {
         // console.log(params.colDef.field, params.newValue);
-        dispatch(
-          updateProductAsync({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        dispatch(
-          updateProductState({
-            id: params.data._id,
-            product: { [params.colDef.field]: params.newValue },
-          })
-        );
-        
-        return true;
+        if (updateField) {
+          dispatch(
+            updateProductState({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          dispatch(
+            updateProductAsync({
+              id: params.data._id,
+              product: { [params.colDef.field]: params.newValue },
+            })
+          );
+          setUpdateField(false);
+          return true;
+        } else {
+          return false;
+        }
       },
     },
     { field: "viewCount", headerTooltip: "Product views", editable: false },
