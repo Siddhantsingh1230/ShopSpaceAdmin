@@ -25,3 +25,11 @@ export const deleteproduct = async (id) => {
   );
   return data;
 };
+
+export const updateProduct = async (id,product) =>{
+  const {data} = await axios.patch(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/products/update/`+ id,options,
+    {...product}
+  );
+  return data;
+}
