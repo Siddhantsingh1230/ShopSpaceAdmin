@@ -38,6 +38,7 @@ const Products = () => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
   const [productId, setProductId] = useState("");
+  const [graphTitle, setGraphTitle] = useState("");
   const [openGraph, setOpenGraph] = useState(false);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
@@ -105,7 +106,7 @@ const Products = () => {
     );
   };
   const columnContextClick = (params) => {
-    // console.log(params.column.colId);
+    setGraphTitle(params.column.colId);
     setContextMenuVisible(true);
   };
 
@@ -229,7 +230,7 @@ const Products = () => {
         </ContextMenu>
       )}
       {/* Graph Modal */}
-      <GraphModal open={openGraph} setOpen={setOpenGraph} />
+      <GraphModal open={openGraph} setOpen={setOpenGraph} title={graphTitle} />
     </>
   );
 };
