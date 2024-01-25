@@ -20,16 +20,18 @@ export const getMostOrderedProducts = async () => {
   return data;
 };
 export const deleteproduct = async (id) => {
-  const {data}  = await axios.delete(
-    process.env.REACT_APP_SERVER_BASE_URL + `/v1/products/delete/`+ id,options
+  const { data } = await axios.delete(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/products/delete/` + id,
+    options
   );
   return data;
 };
 
-export const updateProduct = async (id,product) =>{
-  const {data} = await axios.patch(
-    process.env.REACT_APP_SERVER_BASE_URL + `/v1/products/update/`+ id,options,
-    {...product}
+export const updateProduct = async (id, product) => {
+  const { data } = await axios.patch(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/products/update/` + id,
+    product ,
+    options
   );
   return data;
-}
+};

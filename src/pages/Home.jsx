@@ -124,7 +124,7 @@ const Home = () => {
                 <ContentPlaceholder />
               ) : (
                 <LineChartComponent
-                  data={products.slice(0, 15)}
+                  data={products?.slice(0, 15)}
                   x="title"
                   line="viewCount"
                   stroke="#5C85E7"
@@ -137,7 +137,7 @@ const Home = () => {
                 <ContentPlaceholder />
               ) : (
                 <LineChartComponent
-                  data={products.slice(0, 15)}
+                  data={products?.slice(0, 15)}
                   x="title"
                   line="rating"
                   stroke="#5C85E7"

@@ -3,7 +3,10 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { deleteProductAsync } from "../slices/productsSlice";
+import {
+  deleteProductAsync,
+  updateProductAsync,
+} from "../slices/productsSlice";
 import DeleteModal from "../components/DeleteModal";
 import MobileSidebar from "../components/MobileSidebar";
 import UserAvatar from "../components/UserAvatar";
@@ -53,7 +56,6 @@ const Products = () => {
   const [openGraph, setOpenGraph] = useState(false);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
-  const [isValueChanged, setIsValueChanged] = useState(false);
 
   const deleteProduct = () => {
     dispatch(deleteProductAsync(productId));
@@ -99,7 +101,6 @@ const Products = () => {
                   rowIndex: params.node.rowIndex,
                   colKey: params.api.getDisplayedCenterColumns()[7].colId,
                 });
-                console.log(editingCells)
               }}
             >
               <i
@@ -129,7 +130,7 @@ const Products = () => {
       </>
     );
   };
-
+  //  To display product images columns
   const DisplayImg = (p) => {
     return (
       <div className="p-2 h-full flex justify-center items-center">
@@ -158,6 +159,7 @@ const Products = () => {
       </>
     );
   };
+  // Contxt menu click
   const columnContextClick = (params) => {
     setGraphTitle(params.column.colId);
     setContextMenuVisible(true);
@@ -169,7 +171,6 @@ const Products = () => {
       rowNodes: [params.node],
       force: true,
     });
-    console.log(params.api.getEditingCells())   
   };
   const onRowEditingStopped = (params) => {
     params.api.refreshCells({
@@ -182,15 +183,110 @@ const Products = () => {
   const columnDefs = [
     { field: "_id", headerTooltip: "Product ID", editable: false },
     // { field: "thumbnail", cellRenderer: DisplayImg }, // removed this due to high client side image network request
-    { field: "title", headerTooltip: "Product title" },
-    { field: "category", headerTooltip: "Product category" },
-    { field: "subCategory", headerTooltip: "Product subCategory" },
-    { field: "brand", headerTooltip: "Product brand" },
-    { field: "price", headerTooltip: "Product price" },
+    {
+      field: "title",
+      headerTooltip: "Product title",
+      valueSetter: (params) => {
+        // console.log({
+        //   id: params.data._id,
+        //   product: { [params.colDef.field]: params.newValue },
+        // });
+        
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
+        return true;
+      },
+    },
+    {
+      field: "category",
+      headerTooltip: "Product category",
+      valueSetter: (params) => {
+        // console.log(params.colDef.field, params.newValue);
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
+        return true;
+      },
+    },
+    {
+      field: "subCategory",
+      headerTooltip: "Product subCategory",
+      valueSetter: (params) => {
+        // console.log(params.colDef.field, params.newValue);
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
+        return true;
+      },
+    },
+    {
+      field: "brand",
+      headerTooltip: "Product brand",
+      valueSetter: (params) => {
+        // console.log(params.colDef.field, params.newValue);
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
+        return true;
+      },
+    },
+    {
+      field: "price",
+      headerTooltip: "Product price",
+      valueSetter: (params) => {
+        // console.log(params.colDef.field, params.newValue);
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
+        return true;
+      },
+    },
     { field: "rating", headerTooltip: "Product rating", editable: false },
     // { field: "sale" }, //No use
-    { field: "stock", headerTooltip: "Stock" },
-    { field: "discountPercentage", headerTooltip: "Product discount" },
+    {
+      field: "stock",
+      headerTooltip: "Stock",
+      valueSetter: (params) => {
+        // console.log(params.colDef.field, params.newValue);
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
+        return true;
+      },
+    },
+    {
+      field: "discountPercentage",
+      headerTooltip: "Product discount",
+      valueSetter: (params) => {
+        // console.log(params.colDef.field, params.newValue);
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { [params.colDef.field]: params.newValue },
+          })
+        );
+        return true;
+      },
+    },
     { field: "viewCount", headerTooltip: "Product views", editable: false },
     {
       field: "createdAt",
