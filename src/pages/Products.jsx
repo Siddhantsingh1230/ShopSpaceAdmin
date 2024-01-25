@@ -84,7 +84,7 @@ const Products = () => {
               <p className="opacity-55 justify-center items-center flex ">
                 Save
               </p>
-              <i className="hover:opacity-100 hover:text-green-500 transition-all ri-corner-down-left-fill"></i>
+              <i className="hover:opacity-100 text-green-500 transition-all ri-corner-down-left-fill"></i>
             </button>
 
             <button
@@ -94,7 +94,7 @@ const Products = () => {
               <p className="opacity-55  justify-center items-center flex ">
                 Cancel
               </p>
-              <p className="hover:opacity-100 hover:text-red-500 transition-all">
+              <p className="hover:opacity-100 text-red-500 transition-all">
                 Esc
               </p>
             </button>
