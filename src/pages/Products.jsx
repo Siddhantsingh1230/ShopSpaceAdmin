@@ -7,11 +7,29 @@ import { deleteProductAsync } from "../slices/productsSlice";
 import DeleteModal from "../components/DeleteModal";
 import MobileSidebar from "../components/MobileSidebar";
 import UserAvatar from "../components/UserAvatar";
+import ContextMenu from "../components/ContextMenu";
+
+// ConTextList
+const ContextList = () => {
+  return (
+    <>
+      <div className="text-gray-500 text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer">
+        Export CSV
+      </div>
+      <hr className="border-t w-full " />
+      <div className="text-gray-500 text-sm hover:bg-blue-500 w-full p-2 rounded-md hover:text-white transition-all cursor-pointer">
+        Show Graph
+      </div>
+    </>
+  );
+};
 
 const Products = () => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
   const [productId, setProductId] = useState("");
+  const [contextMenuVisible, setContextMenuVisible] = useState(false);
+  const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
 
   const deleteProduct = () => {
     dispatch(deleteProductAsync(productId));
@@ -77,6 +95,7 @@ const Products = () => {
   };
   const columnContextClick = (params) => {
     console.log(params.column.colId);
+    setContextMenuVisible(true);
   };
 
   const columnDefs = [
@@ -116,13 +135,13 @@ const Products = () => {
   const toggleUserDropDown = () => {
     setUserDropDown((state) => !state);
   };
-
   return (
     <>
       {/* navbar */}
       <div
         onClick={(e) => {
           e.stopPropagation();
+          setContextMenuVisible(false);
           if (userDropDown) {
             toggleUserDropDown();
           }
@@ -141,6 +160,7 @@ const Products = () => {
       <div
         onClick={(e) => {
           e.stopPropagation();
+          setContextMenuVisible(false);
           if (userDropDown) {
             toggleUserDropDown();
           }
@@ -148,13 +168,24 @@ const Products = () => {
         className="flex flex-col overflow-y-auto max-sm:mt-0  mt-2 mb-7 h-full max-sm:w-full max-sm:px-3"
       >
         {/* product table */}
-        <div className="ag-theme-alpine-dark h-full bg-gray-800 ">
+        <div
+          className="ag-theme-alpine-dark h-full bg-gray-800 "
+          onClick={() => {
+            if (setContextMenuVisible) {
+              setContextMenuVisible(false);
+            }
+          }}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            setMouseLocation({ x: e.clientX, y: e.clientY });
+          }}
+        >
           <AgGridReact
             rowData={productList}
             columnDefs={columnDefs}
             defaultColDef={defaultColDef}
             tooltipShowDelay={2000}
-            onColumnHeaderMouseOver={columnContextClick}
+            onColumnHeaderContextMenu={columnContextClick}
             tooltipInteraction={true}
           />
         </div>
@@ -167,6 +198,10 @@ const Products = () => {
         task="deleteProduct"
         deleteItem={deleteProduct}
       />
+      {/* Context Menu */}
+      {contextMenuVisible && (
+        <ContextMenu location={mouseLocation} Children={ContextList} />
+      )}
     </>
   );
 };
