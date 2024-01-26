@@ -16,6 +16,7 @@ import ContextMenu from "../components/ContextMenu";
 import GraphModal from "../components/GraphModal";
 import { graphRenderConstraints } from "../constants/graphConstants.js";
 import ProductModal from "../components/ProductModal.jsx";
+import AddproductModal from "../components/AddproductModal.jsx";
 
 // ConTextList
 const ContextList = ({ onExportCSV, setOpen, closeOther, graphTitle }) => {
@@ -58,6 +59,7 @@ const Products = () => {
   const [graphTitle, setGraphTitle] = useState("");
   const [openGraph, setOpenGraph] = useState(false);
   const [openProductModal, setOpenProductModal] = useState(false);
+  const [openAddProductModal, setOpenAddProductModal] = useState(false);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
   let updateProductRow = {};
@@ -196,6 +198,34 @@ const Products = () => {
     {
       field: "title",
       headerTooltip: "Product title",
+      valueSetter: (params) => {
+        // console.log({
+        //   id: params.data._id,
+        //   product: { [params.colDef.field]: params.newValue },
+        // });
+        updateProductRow = {
+          ...updateProductRow,
+          [params.colDef.field]: params.newValue,
+        };
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        updateProductRow = {};
+        return true;
+      },
+    },
+    {
+      field: "description",
+      headerTooltip: "Product Description",
       valueSetter: (params) => {
         // console.log({
         //   id: params.data._id,
@@ -533,10 +563,16 @@ const Products = () => {
           <MobileSidebar /> Products
         </div>
         {/* User Avatar */}
-        <UserAvatar
-          userDropDown={userDropDown}
-          toggleUserDropDown={toggleUserDropDown}
-        />
+        <div className="flex  gap-10 justify-end">
+          <button className="text-gray-300 border border-indigo-300 p-2 px-4 text-sm rounded-md hover:bg-indigo-500 hover:font-bold hover:border-indigo-500 hover:text-white"
+          onClick={()=>{setOpenAddProductModal(true)}}>
+            Add New Product
+          </button>
+          <UserAvatar
+            userDropDown={userDropDown}
+            toggleUserDropDown={toggleUserDropDown}
+          />
+        </div>
       </div>
       <div
         onClick={(e) => {
@@ -598,12 +634,20 @@ const Products = () => {
         </ContextMenu>
       )}
       {/* Graph Modal */}
-      <GraphModal open={openGraph} setOpen={setOpenGraph} keyField={graphTitle} />
+      <GraphModal
+        open={openGraph}
+        setOpen={setOpenGraph}
+        keyField={graphTitle}
+      />
       {/* Product Modal */}
       <ProductModal
         open={openProductModal}
         setOpen={setOpenProductModal}
         id={productId}
+      />
+      <AddproductModal
+        open={openAddProductModal}
+        setOpen={setOpenAddProductModal}
       />
     </>
   );
