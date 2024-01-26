@@ -32,7 +32,7 @@ export const graphRenderConstraints = {
   createdAt: {
     disabled: true,
   },
-  Actions: {
+  action: {
     disabled: true,
   },
 };

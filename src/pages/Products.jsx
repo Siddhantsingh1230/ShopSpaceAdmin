@@ -60,9 +60,7 @@ const Products = () => {
   const [openProductModal, setOpenProductModal] = useState(false);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
-  let updateField = false;
   let updateProductRow = {};
-
   const deleteProduct = () => {
     dispatch(deleteProductState(productId));
     dispatch(deleteProductAsync(productId));
@@ -491,12 +489,12 @@ const Products = () => {
       editable: false,
     },
     {
-      field: "Actions",
+      field: "actions",
       headerTooltip: "Actions",
-      headerName: "Actions",
+      headerName: "action",
       cellRenderer: actionCellRenderer,
       editable: false,
-      colId: "Actions",
+      colId: "action",
     },
   ];
 
