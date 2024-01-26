@@ -1,8 +1,8 @@
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { useSelector, useDispatch } from "react-redux";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useSelector, useDispatch} from "react-redux";
+import { useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {
   deleteProductAsync,
   deleteProductState,
@@ -16,7 +16,7 @@ import ContextMenu from "../components/ContextMenu";
 import GraphModal from "../components/GraphModal";
 import { graphRenderConstraints } from "../constants/graphConstants.js";
 import ProductModal from "../components/ProductModal.jsx";
-import AddproductModal from "../components/AddproductModal.jsx";
+import { Link } from "react-router-dom";
 
 // ConTextList
 const ContextList = ({ onExportCSV, setOpen, closeOther, graphTitle }) => {
@@ -59,7 +59,6 @@ const Products = () => {
   const [graphTitle, setGraphTitle] = useState("");
   const [openGraph, setOpenGraph] = useState(false);
   const [openProductModal, setOpenProductModal] = useState(false);
-  const [openAddProductModal, setOpenAddProductModal] = useState(false);
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
   let updateProductRow = {};
@@ -564,10 +563,10 @@ const Products = () => {
         </div>
         {/* User Avatar */}
         <div className="flex  gap-10 justify-end">
-          <button className="text-gray-300 border border-indigo-300 p-2 px-4 text-sm rounded-md hover:bg-indigo-500 hover:font-bold hover:border-indigo-500 hover:text-white"
-          onClick={()=>{setOpenAddProductModal(true)}}>
+          <Link className="text-gray-300 border border-indigo-300 p-2 px-4 text-sm rounded-md hover:bg-indigo-500 hover:font-bold hover:border-indigo-500 hover:text-white"
+          to = "/addProduct">
             Add New Product
-          </button>
+          </Link>
           <UserAvatar
             userDropDown={userDropDown}
             toggleUserDropDown={toggleUserDropDown}
@@ -644,10 +643,6 @@ const Products = () => {
         open={openProductModal}
         setOpen={setOpenProductModal}
         id={productId}
-      />
-      <AddproductModal
-        open={openAddProductModal}
-        setOpen={setOpenAddProductModal}
       />
     </>
   );
