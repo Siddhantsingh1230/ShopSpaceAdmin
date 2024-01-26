@@ -15,7 +15,7 @@ export const getAllProducts = async () => {
 };
 export const getMostOrderedProducts = async () => {
   const { data } = await axios.get(
-    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/mostordered`
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/mostordered`,options
   );
   return data;
 };
