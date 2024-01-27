@@ -2,13 +2,13 @@ import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useSelector } from "react-redux";
 import Carousel from "./Carousel";
+import Monster from "../assets/images/monster.png";
 import Stars from "./Stars";
 
 const ProductModal = ({ open, setOpen, id }) => {
   const cancelButtonRef = useRef(null);
   const products = useSelector((state) => state.product.products);
   let productRating = null;
-  let productTitle = "";
   const getProductImageById = (products, id) => {
     let result = [];
     products.forEach((product) => {
@@ -16,7 +16,6 @@ const ProductModal = ({ open, setOpen, id }) => {
         result.push(product.thumbnail);
         result.push(...product.images);
         productRating = product.rating;
-        productTitle = product.title;
       }
     });
     return result;
@@ -55,19 +54,13 @@ const ProductModal = ({ open, setOpen, id }) => {
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-[#0B0D10] text-left shadow-xl transition-all sm:my-8 h-[40%] w-[50%] max-sm:w-full max-sm:h-full ">
                 {/* Product Detail div */}
-                <div className="flex justify-center py-5 flex-col-reverse w-full rounded-md overflow-hidden h-[50%] items-center">
+                <div className="flex justify-center py-10 flex-col w-full rounded-md overflow-hidden h-[50%] items-center">
+                  <div className="max-sm:text-3xl text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
+                    Gallery <i className="ri-sketching"></i>
+                  </div>
                   <Carousel slides={getProductImageById(products, id)} />
-                  <div className="w-full text-sm text-white px-5">
-                    <div className="flex gap-2">
-                      <i
-                        onClick={() => setOpen(false)}
-                        className="ri-arrow-left-line opacity-55 hover:opacity-100 transition-all cursor-pointer"
-                      ></i>{" "}
-                      <p>{productTitle}</p>
-                    </div>
-                    <div className="px-5">
-                      <Stars star={Math.round(parseInt(productRating))} />
-                    </div>
+                  <div className="w-full mt-5 flex justify-center items-center">
+                    <Stars star={Math.round(parseInt(productRating))} />
                   </div>
                 </div>
               </Dialog.Panel>

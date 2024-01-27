@@ -110,7 +110,7 @@ const AddproductPage = () => {
                       onChange={(e) => {
                         const file = e.target.files[0];
                         if (file) {
-                          setThumbnail(file.name);
+                          setThumbnail(file);
                           setThumbnailUrl(URL.createObjectURL(file));
                           // console.log(URL.createObjectURL(file));
                         }
@@ -240,7 +240,6 @@ const AddproductPage = () => {
                 </div>
                 <div className="flex flex-col gap-2 w-full">
                   <label className=" text-xs text-gray-300">Sub category</label>
-                   
                 </div>
               </div>
               <div className="flex max-sm:flex-col justify-between gap-4 w-full">
