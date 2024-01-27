@@ -56,20 +56,16 @@ const AddproductPage = () => {
       {/* form begins */}
       <form
         noValidate
-        onClick={() => {
-          if (userDropDown) {
-            toggleUserDropDown();
-          }
-        }}
         onSubmit={handleSubmit((data) => {
           if (thumbnail === "") {
             Toasts("error", "Please add Thumbnail Image");
-          } else if (images.length <= 0) {
+          }else if(images.length <= 0) {
             Toasts("error", "Please add Product Images");
-          } else {
-            console.log({ ...data, thumbnail, images });
+          }
+          else {
+            console.log({ ...data, thumbnail ,images});
             setThumbnailUrl("");
-            setImages("");
+            setImages("")
             reset();
           }
         })}
@@ -114,7 +110,7 @@ const AddproductPage = () => {
                       onChange={(e) => {
                         const file = e.target.files[0];
                         if (file) {
-                          setThumbnail(file.name);
+                          setThumbnail(file);
                           setThumbnailUrl(URL.createObjectURL(file));
                           // console.log(URL.createObjectURL(file));
                         }
@@ -137,9 +133,7 @@ const AddproductPage = () => {
                           className="ri-close-line rounded-sm ml-1 hover:bg-gray-700 hover:text-white"
                           onClick={() => {
                             // console.log(idx);
-                            setImages((prev) =>
-                              prev.filter((item, index) => index !== idx)
-                            );
+                            setImages((prev) => prev.filter((item,index)=>index !== idx));
                           }}
                         ></i>
                       </li>
@@ -160,28 +154,27 @@ const AddproductPage = () => {
                       const files = e.target.files;
                       if (files.length > 5) {
                         Toasts("error", "You can select maximum 5 Images");
-                      } else if (files.length > 0) {
-                        if (images.length >= 5) {
-                          Toasts("error", "already selected 5 images");
-                        } else if (images.length >= 4 && files.length > 1) {
-                          Toasts("error", "Cannot select more than 1 image");
-                        } else if (images.length >= 3 && files.length > 2) {
-                          Toasts("error", "Cannot select more than 2 image");
-                        } else if (images.length >= 2 && files.length > 3) {
-                          Toasts("error", "Cannot select more than 3 image");
-                        } else if (images.length >= 1 && files.length > 4) {
-                          Toasts("error", "Cannot select more than 4 image");
-                        } else {
-                          setImages((prev) => [...prev, ...files]);
-                          // console.log([...files]);
+                      } else if(files.length>0){
+                        if(images.length >= 5){
+                          Toasts("error","already selected 5 images")
+                        }else if (images.length >= 4 && files.length > 1){
+                          Toasts("error","Cannot select more than 1 image")
+                        }else if (images.length >= 3 && files.length > 2){
+                          Toasts("error","Cannot select more than 2 image")
+                        }else if (images.length >= 2 && files.length > 3){
+                          Toasts("error","Cannot select more than 3 image")
+                        }else if (images.length >= 1 && files.length > 4){
+                          Toasts("error","Cannot select more than 4 image")
+                        }else{
+                          setImages((prev)=>([...prev,...files]));
+                        // console.log([...files]);
                         }
+                        
                       }
                     }}
                   />
                 </label>
-                <p className="text-xs text-gray-500">
-                  You can select maximum 5 images
-                </p>
+                <p className="text-xs text-gray-500">You can select maximum 5 images</p>
               </div>
             </div>
           </div>
@@ -247,6 +240,35 @@ const AddproductPage = () => {
                 </div>
                 <div className="flex flex-col gap-2 w-full">
                   <label className=" text-xs text-gray-300">Sub category</label>
+                  <select
+                    type="text"
+                    name="subcategory"
+                    {...register("subCategory", {
+                      required: "Select Subcategory",
+                    })}
+                    className="w-full bg-transparent border text-white border-gray-700 p-3 rounded-md text-xs"
+                  >
+                    {selectedCategory ? (
+                      categories
+                        .find((category) => category.label === selectedCategory)
+                        ?.subcategories.map((subcategory, idx) => (
+                          <option
+                            key={idx}
+                            value={subcategory.name}
+                            className="bg-black text-white rounded-md text-xs"
+                          >
+                            {subcategory.name}
+                          </option>
+                        ))
+                    ) : (
+                      <option
+                        value=""
+                        className="bg-black text-white rounded-md text-xs"
+                      >
+                        select Category
+                      </option>
+                    )}
+                  </select>
                 </div>
               </div>
               <div className="flex max-sm:flex-col justify-between gap-4 w-full">
