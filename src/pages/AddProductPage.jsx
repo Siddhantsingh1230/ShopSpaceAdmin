@@ -43,7 +43,7 @@ const AddproductPage = () => {
         className="flex  items-center justify-between mb-3 w-full max-sm:px-3"
       >
         <div className="max-sm:text-3xl text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
-          <MobileSidebar /> Add Product
+          <MobileSidebar /> Add Products
         </div>
         {/* User Avatar */}
 
@@ -56,20 +56,16 @@ const AddproductPage = () => {
       {/* form begins */}
       <form
         noValidate
-        onClick={() => {
-          if (userDropDown) {
-            toggleUserDropDown();
-          }
-        }}
         onSubmit={handleSubmit((data) => {
           if (thumbnail === "") {
             Toasts("error", "Please add Thumbnail Image");
-          } else if (images.length <= 0) {
+          }else if(images.length <= 0) {
             Toasts("error", "Please add Product Images");
-          } else {
-            console.log({ ...data, thumbnail, images });
+          }
+          else {
+            console.log({ ...data, thumbnail ,images});
             setThumbnailUrl("");
-            setImages("");
+            setImages("")
             reset();
           }
         })}
@@ -137,9 +133,7 @@ const AddproductPage = () => {
                           className="ri-close-line rounded-sm ml-1 hover:bg-gray-700 hover:text-white"
                           onClick={() => {
                             // console.log(idx);
-                            setImages((prev) =>
-                              prev.filter((item, index) => index !== idx)
-                            );
+                            setImages((prev) => prev.filter((item,index)=>index !== idx));
                           }}
                         ></i>
                       </li>
@@ -160,28 +154,27 @@ const AddproductPage = () => {
                       const files = e.target.files;
                       if (files.length > 5) {
                         Toasts("error", "You can select maximum 5 Images");
-                      } else if (files.length > 0) {
-                        if (images.length >= 5) {
-                          Toasts("error", "already selected 5 images");
-                        } else if (images.length >= 4 && files.length > 1) {
-                          Toasts("error", "Cannot select more than 1 image");
-                        } else if (images.length >= 3 && files.length > 2) {
-                          Toasts("error", "Cannot select more than 2 image");
-                        } else if (images.length >= 2 && files.length > 3) {
-                          Toasts("error", "Cannot select more than 3 image");
-                        } else if (images.length >= 1 && files.length > 4) {
-                          Toasts("error", "Cannot select more than 4 image");
-                        } else {
-                          setImages((prev) => [...prev, ...files]);
-                          // console.log([...files]);
+                      } else if(files.length>0){
+                        if(images.length >= 5){
+                          Toasts("error","already selected 5 images")
+                        }else if (images.length >= 4 && files.length > 1){
+                          Toasts("error","Cannot select more than 1 image")
+                        }else if (images.length >= 3 && files.length > 2){
+                          Toasts("error","Cannot select more than 2 image")
+                        }else if (images.length >= 2 && files.length > 3){
+                          Toasts("error","Cannot select more than 3 image")
+                        }else if (images.length >= 1 && files.length > 4){
+                          Toasts("error","Cannot select more than 4 image")
+                        }else{
+                          setImages((prev)=>([...prev,...files]));
+                        // console.log([...files]);
                         }
+                        
                       }
                     }}
                   />
                 </label>
-                <p className="text-xs text-gray-500">
-                  You can select maximum 5 images
-                </p>
+                <p className="text-xs text-gray-500">You can select maximum 5 images</p>
               </div>
             </div>
           </div>
@@ -247,6 +240,7 @@ const AddproductPage = () => {
                 </div>
                 <div className="flex flex-col gap-2 w-full">
                   <label className=" text-xs text-gray-300">Sub category</label>
+                   
                 </div>
               </div>
               <div className="flex max-sm:flex-col justify-between gap-4 w-full">
