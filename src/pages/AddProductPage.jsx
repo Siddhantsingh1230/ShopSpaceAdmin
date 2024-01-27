@@ -43,7 +43,7 @@ const AddproductPage = () => {
         className="flex  items-center justify-between mb-3 w-full max-sm:px-3"
       >
         <div className="max-sm:text-3xl text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
-          <MobileSidebar /> Add Products
+          <MobileSidebar /> Add Product
         </div>
         {/* User Avatar */}
 
@@ -247,6 +247,35 @@ const AddproductPage = () => {
                 </div>
                 <div className="flex flex-col gap-2 w-full">
                   <label className=" text-xs text-gray-300">Sub category</label>
+                  <select
+                    type="text"
+                    name="subcategory"
+                    {...register("subCategory", {
+                      required: "Select Subcategory",
+                    })}
+                    className="w-full bg-transparent border text-white border-gray-700 p-3 rounded-md text-xs"
+                  >
+                    {selectedCategory ? (
+                      categories
+                        .find((category) => category.label === selectedCategory)
+                        ?.subcategories.map((subcategory, idx) => (
+                          <option
+                            key={idx}
+                            value={subcategory.name}
+                            className="bg-black text-white rounded-md text-xs"
+                          >
+                            {subcategory.name}
+                          </option>
+                        ))
+                    ) : (
+                      <option
+                        value=""
+                        className="bg-black text-white rounded-md text-xs"
+                      >
+                        select Category
+                      </option>
+                    )}
+                  </select>
                 </div>
               </div>
               <div className="flex max-sm:flex-col justify-between gap-4 w-full">
