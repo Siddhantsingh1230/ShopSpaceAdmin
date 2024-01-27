@@ -43,7 +43,7 @@ const AddproductPage = () => {
         className="flex  items-center justify-between mb-3 w-full max-sm:px-3"
       >
         <div className="max-sm:text-3xl text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
-          <MobileSidebar /> Add Products
+          <MobileSidebar /> Add Product
         </div>
         {/* User Avatar */}
 
