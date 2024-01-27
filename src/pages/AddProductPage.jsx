@@ -150,16 +150,31 @@ const AddproductPage = () => {
                     placeholder="add new image"
                     multiple
                     onChange={(e) => {
+                      // console.log(images)
                       const files = e.target.files;
                       if (files.length > 5) {
                         Toasts("error", "You can select maximum 5 Images");
                       } else if(files.length>0){
-                        setImages([...files]);
-                        console.log([...files]);
+                        if(images.length >= 5){
+                          Toasts("error","already selected 5 images")
+                        }else if (images.length >= 4 && files.length > 1){
+                          Toasts("error","Cannot select more than 1 image")
+                        }else if (images.length >= 3 && files.length > 2){
+                          Toasts("error","Cannot select more than 2 image")
+                        }else if (images.length >= 2 && files.length > 3){
+                          Toasts("error","Cannot select more than 3 image")
+                        }else if (images.length >= 1 && files.length > 4){
+                          Toasts("error","Cannot select more than 4 image")
+                        }else{
+                          setImages((prev)=>([...prev,...files]));
+                        // console.log([...files]);
+                        }
+                        
                       }
                     }}
                   />
                 </label>
+                <p className="text-xs text-gray-500">You can select maximum 5 images</p>
               </div>
             </div>
           </div>
