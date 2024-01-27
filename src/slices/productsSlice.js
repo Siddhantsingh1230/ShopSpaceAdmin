@@ -60,6 +60,7 @@ export const updateProductAsync = createAsyncThunk(
     }
   }
 );
+
 export const productsSlice = createSlice({
   name: "products",
   initialState,
@@ -74,11 +75,18 @@ export const productsSlice = createSlice({
       }
     },
     deleteProductState: (state, action) => {
-      const index = state.products.findIndex((product) => product._id === action.payload);
+      const index = state.products.findIndex(
+        (product) => product._id === action.payload
+      );
       if (index !== -1) {
         // Update the product at the specified index
-        state.products = state.products.filter(product => product._id !== action.payload);
+        state.products = state.products.filter(
+          (product) => product._id !== action.payload
+        );
       }
+    },
+    addProduct: (state, action) => {
+      state.products = [...state.products, action.payload];
     },
   },
   extraReducers: (builder) => {
@@ -125,7 +133,7 @@ export const productsSlice = createSlice({
       .addCase(deleteProductAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.products = action.payload.products;
-        Toasts("success", "Deleted Product Successfully");
+        console.log("success", "Deleted Product Successfully");
       })
       .addCase(deleteProductAsync.rejected, (state, action) => {
         state.status = "idle";
@@ -160,6 +168,7 @@ export const productsSlice = createSlice({
   },
 });
 
-export const { updateProductState,deleteProductState } = productsSlice.actions;
+export const { updateProductState, deleteProductState, addProduct } =
+  productsSlice.actions;
 
 export default productsSlice.reducer;

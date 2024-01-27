@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   deleteProductAsync,
   deleteProductState,
+  getProductsAsync,
   updateProductAsync,
   updateProductState,
 } from "../slices/productsSlice";
@@ -20,6 +21,10 @@ import { Link } from "react-router-dom";
 
 // ConTextList
 const ContextList = ({ onExportCSV, setOpen, closeOther, graphTitle }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductsAsync());
+  }, []);
   return (
     <>
       <div
