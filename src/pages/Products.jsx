@@ -1,8 +1,8 @@
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { useSelector, useDispatch} from "react-redux";
-import { useCallback, useEffect, useMemo, useRef, useState} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   deleteProductAsync,
   deleteProductState,
@@ -562,10 +562,14 @@ const Products = () => {
           <MobileSidebar /> Products
         </div>
         {/* User Avatar */}
-        <div className="flex  gap-10 max-sm:gap-2 justify-end">
-          <Link className="text-gray-300 border border-indigo-300 p-2 px-4 max-sm:text-xs text-sm rounded-md hover:bg-indigo-500 hover:font-bold hover:border-indigo-500 hover:text-white"
-          to = "/addProduct">
-            Add New Product
+        <div className="flex  gap-5 max-sm:gap-2 justify-end">
+          <Link
+            className="text-gray-300 p-[1.5px] max-sm:text-xs text-sm rounded-md hover:bg-indigo-500 hover:font-bold  bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient transition-all "
+            to="/addProduct"
+          >
+            <div className="w-full h-full gap-2 rounded-md bg-[#0B0D10] p-2 px-4 flex justify-center items-center">
+              <i className="ri-add-fill"></i> <p>Product</p>
+            </div>
           </Link>
           <UserAvatar
             userDropDown={userDropDown}
