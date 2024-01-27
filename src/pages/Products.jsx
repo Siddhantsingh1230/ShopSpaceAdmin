@@ -1,8 +1,8 @@
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { useSelector, useDispatch } from "react-redux";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useSelector, useDispatch} from "react-redux";
+import { useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {
   deleteProductAsync,
   deleteProductState,
@@ -16,6 +16,7 @@ import ContextMenu from "../components/ContextMenu";
 import GraphModal from "../components/GraphModal";
 import { graphRenderConstraints } from "../constants/graphConstants.js";
 import ProductModal from "../components/ProductModal.jsx";
+import { Link } from "react-router-dom";
 
 // ConTextList
 const ContextList = ({ onExportCSV, setOpen, closeOther, graphTitle }) => {
@@ -196,6 +197,34 @@ const Products = () => {
     {
       field: "title",
       headerTooltip: "Product title",
+      valueSetter: (params) => {
+        // console.log({
+        //   id: params.data._id,
+        //   product: { [params.colDef.field]: params.newValue },
+        // });
+        updateProductRow = {
+          ...updateProductRow,
+          [params.colDef.field]: params.newValue,
+        };
+        dispatch(
+          updateProductState({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        dispatch(
+          updateProductAsync({
+            id: params.data._id,
+            product: { ...updateProductRow },
+          })
+        );
+        updateProductRow = {};
+        return true;
+      },
+    },
+    {
+      field: "description",
+      headerTooltip: "Product Description",
       valueSetter: (params) => {
         // console.log({
         //   id: params.data._id,
@@ -533,10 +562,16 @@ const Products = () => {
           <MobileSidebar /> Products
         </div>
         {/* User Avatar */}
-        <UserAvatar
-          userDropDown={userDropDown}
-          toggleUserDropDown={toggleUserDropDown}
-        />
+        <div className="flex  gap-10 max-sm:gap-2 justify-end">
+          <Link className="text-gray-300 border border-indigo-300 p-2 px-4 max-sm:text-xs text-sm rounded-md hover:bg-indigo-500 hover:font-bold hover:border-indigo-500 hover:text-white"
+          to = "/addProduct">
+            Add New Product
+          </Link>
+          <UserAvatar
+            userDropDown={userDropDown}
+            toggleUserDropDown={toggleUserDropDown}
+          />
+        </div>
       </div>
       <div
         onClick={(e) => {
@@ -598,7 +633,11 @@ const Products = () => {
         </ContextMenu>
       )}
       {/* Graph Modal */}
-      <GraphModal open={openGraph} setOpen={setOpenGraph} keyField={graphTitle} />
+      <GraphModal
+        open={openGraph}
+        setOpen={setOpenGraph}
+        keyField={graphTitle}
+      />
       {/* Product Modal */}
       <ProductModal
         open={openProductModal}

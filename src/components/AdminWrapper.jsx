@@ -13,6 +13,7 @@ import Orders from "../pages/Orders";
 import Sidebar from "./Sidebar";
 import { navigation } from "../constants/navigation";
 import Offers from "../pages/Offers";
+import AddproductPage from "../pages/AddProductPage";
 
 const AdminWrapper = () => {
   
@@ -60,6 +61,10 @@ const AdminWrapper = () => {
               path="/orders"
               element={<Protected Component={Orders} />}
             />
+            <Route
+            exact
+            path="/addProduct"
+            element={<Protected Component={AddproductPage}/>}/>
             <Route exact path="*" element={<PageNotFound />} />
           </Routes>
         </div>

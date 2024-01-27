@@ -5,6 +5,9 @@ export const graphRenderConstraints = {
   title: {
     disabled: true,
   },
+  description:{
+    disabled : true,
+  },
   category: {
     disabled: true,
   },
