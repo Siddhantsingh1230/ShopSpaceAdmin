@@ -562,8 +562,8 @@ const Products = () => {
           <MobileSidebar /> Products
         </div>
         {/* User Avatar */}
-        <div className="flex  gap-10 justify-end">
-          <Link className="text-gray-300 border border-indigo-300 p-2 px-4 text-sm rounded-md hover:bg-indigo-500 hover:font-bold hover:border-indigo-500 hover:text-white"
+        <div className="flex  gap-10 max-sm:gap-2 justify-end">
+          <Link className="text-gray-300 border border-indigo-300 p-2 px-4 max-sm:text-xs text-sm rounded-md hover:bg-indigo-500 hover:font-bold hover:border-indigo-500 hover:text-white"
           to = "/addProduct">
             Add New Product
           </Link>
