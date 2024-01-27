@@ -8,8 +8,8 @@ const Carousel = ({ slides }) => {
   const imageByIndex = (index) => slides[index % slides.length];
   return (
     <>
-      <div className="embla cursor-grab ">
-        <div className="embla__viewport" ref={emblaRef}>
+      <div className="embla cursor-grab relative left-fog right-fog">
+        <div className="embla__viewport " ref={emblaRef}>
           <div className="embla__container">
             {slides.map((_, index) => (
               <div className="embla__slide" key={index}>
