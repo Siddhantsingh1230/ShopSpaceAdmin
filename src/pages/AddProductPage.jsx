@@ -110,7 +110,7 @@ const AddproductPage = () => {
                       onChange={(e) => {
                         const file = e.target.files[0];
                         if (file) {
-                          setThumbnail(file.name);
+                          setThumbnail(file);
                           setThumbnailUrl(URL.createObjectURL(file));
                           // console.log(URL.createObjectURL(file));
                         }
