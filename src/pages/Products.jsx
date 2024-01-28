@@ -569,7 +569,7 @@ const Products = () => {
         {/* User Avatar */}
         <div className="flex  gap-5 max-sm:gap-2 justify-end">
           <Link
-            className="text-gray-300 p-[1.5px] max-sm:text-xs text-sm rounded-md hover:bg-indigo-500 hover:font-bold  bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient transition-all "
+            className="text-gray-300 p-[1.5px] max-sm:text-xs text-sm rounded-md hover:bg-indigo-500   bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient transition-all "
             to="/addProduct"
           >
             <div className="w-full h-full gap-2 rounded-md bg-[#0B0D10] p-2 px-4 flex justify-center items-center">
