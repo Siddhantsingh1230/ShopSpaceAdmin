@@ -177,28 +177,28 @@ html {
     object-fit: cover;
   }
   /* Left and right fogs */
-.left-fog:before {
-  content: "";
-  top: 0;
-  background: linear-gradient(90deg, #0B0D10 0%, rgba(0, 0, 0, 0) 25%);
-  position: absolute;
-  left: 0;
-  z-index: 30;
-  height: 100%;
-  width: 100%;
-  pointer-events: none;
-}
-.right-fog:after {
-  pointer-events: none;
-  content: "";
-  top: 0;
-  background: linear-gradient(270deg, #0B0D10 0%, rgba(0, 0, 0, 0) 25%);
-  position: absolute;
-  right: 0;
-  z-index: 30;
-  height: 100%;
-  width: 100%;
-}
+  .left-fog:before {
+    content: "";
+    top: 0;
+    background: linear-gradient(90deg, #0b0d10 0%, rgba(0, 0, 0, 0) 25%);
+    position: absolute;
+    left: 0;
+    z-index: 30;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+  }
+  .right-fog:after {
+    pointer-events: none;
+    content: "";
+    top: 0;
+    background: linear-gradient(270deg, #0b0d10 0%, rgba(0, 0, 0, 0) 25%);
+    position: absolute;
+    right: 0;
+    z-index: 30;
+    height: 100%;
+    width: 100%;
+  }
 }
 
 /* Custom AG Styling / customization */
@@ -222,6 +222,11 @@ html {
 }
 .ag-ltr .ag-cell-focus:not(.ag-cell-range-selected):focus-within {
   border-color: rgb(255, 255, 255) !important;
+}
+.ag-unselectable {
+  -moz-user-select: auto !important;
+  -webkit-user-select: auto !important;
+  user-select: auto !important;
 }
 
 /* Embla Carousel */
@@ -273,4 +278,3 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
-

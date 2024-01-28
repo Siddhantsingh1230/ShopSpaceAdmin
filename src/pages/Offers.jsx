@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import UserAvatar from "../components/UserAvatar";
-import { Link } from "react-router-dom";
 import MobileSidebar from "../components/MobileSidebar";
 import Carousel from "../components/Carousel";
 import { useDispatch, useSelector } from "react-redux";
-import { getOffersAsync } from "../slices/offersSlice";
+import { deleteOfferState, getOffersAsync } from "../slices/offersSlice";
 import ContentPlaceholder from "../components/ContentPlaceholder";
-import OffersModel from "../components/OffersModel";
+
+import OffersModal from "../components/OffersModal";
+import AddOfferModal from "../components/AddOfferModal";
+import { deleteOffer } from "../api/offers";
 
 const Offers = () => {
   const [userDropDown, setUserDropDown] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [openAddOfferModal, setOpenAddOfferModal] = useState(false);
   const [offer, setOffer] = useState({});
   const toggleUserDropDown = () => {
     setUserDropDown((state) => !state);
@@ -29,6 +32,11 @@ const Offers = () => {
     setOfferImages(offers?.map((item) => item.posterImageURL));
   }, [offers]);
 
+  const delete_offer = (id) => {
+    dispatch(deleteOfferState(id));
+    deleteOffer(id);
+  };
+
   return (
     <>
       {/* navbar */}
@@ -46,14 +54,14 @@ const Offers = () => {
         </div>
         {/* User Avatar */}
         <div className="flex  gap-5 max-sm:gap-2 justify-end">
-          <Link
-            className="text-gray-300 p-[1.5px] max-sm:text-xs text-sm rounded-md hover:bg-indigo-500   bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient transition-all "
-            to="/addOffer"
+          <div
+            className="text-gray-300 p-[1.5px] flex justify-center items-center max-sm:text-xs text-sm rounded-md hover:bg-indigo-500   bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient transition-all max-sm:mb-1"
+            onClick={() => setOpenAddOfferModal(true)}
           >
-            <div className="w-full h-full gap-2 rounded-md bg-[#0B0D10] p-2 px-4 flex justify-center items-center">
+            <div className="w-full h-full gap-2 rounded-md bg-[#0B0D10] p-2 px-4 flex justify-center items-center cursor-pointer">
               <i className="ri-add-fill"></i> <p>Offer</p>
             </div>
-          </Link>
+          </div>
           <UserAvatar
             userDropDown={userDropDown}
             toggleUserDropDown={toggleUserDropDown}
@@ -89,7 +97,13 @@ const Offers = () => {
                   <span className="max-sm:max-w-[5rem] overflow-ellipsis text-nowrap overflow-hidden">
                     {item.posterImageName}
                   </span>
-                  <i className="ml-3 text-lg text-white opacity-55 hover:opacity-100 transition-all ri-close-line"></i>
+                  <i
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      delete_offer(item._id);
+                    }}
+                    className="ml-3 text-lg text-white opacity-55 hover:opacity-100 transition-all ri-close-line"
+                  ></i>
                 </div>
               ))}
             </div>
@@ -108,7 +122,13 @@ const Offers = () => {
         )}
       </div>
       {/* Offers Model */}
-      <OffersModel open={openModal} setOpen={setOpenModal} offer={offer} />
+      <OffersModal open={openModal} setOpen={setOpenModal} offer={offer} />
+      {/* Add Offers Model */}
+      <AddOfferModal
+        open={openAddOfferModal}
+        setOpen={setOpenAddOfferModal}
+        offer={offer}
+      />
     </>
   );
 };

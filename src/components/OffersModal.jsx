@@ -1,7 +1,7 @@
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-const OffersModel = ({ open, setOpen, offer }) => {
+const OffersModal = ({ open, setOpen, offer }) => {
   const cancelButtonRef = useRef(null);
 
   return (
@@ -77,4 +77,4 @@ const OffersModel = ({ open, setOpen, offer }) => {
   );
 };
 
-export default OffersModel;
+export default OffersModal;

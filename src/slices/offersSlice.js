@@ -26,7 +26,16 @@ export const offersSlice = createSlice({
   name: "offers",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
-  reducers: {},
+  reducers: {
+    deleteOfferState: (state, action) => {
+      const id = action.payload;
+      const index = state.offers.findIndex((offer) => offer._id === id);
+      if (index !== -1) {
+        // Update the product at the specified index
+        state.offers.splice(index, 1);
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getOffersAsync.pending, (state) => {
@@ -50,6 +59,6 @@ export const offersSlice = createSlice({
   },
 });
 
-export const {} = offersSlice.actions;
+export const {deleteOfferState} = offersSlice.actions;
 
 export default offersSlice.reducer;
