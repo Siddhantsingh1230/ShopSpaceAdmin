@@ -59,7 +59,7 @@ const Offers = () => {
             onClick={() => setOpenAddOfferModal(true)}
           >
             <div className="w-full h-full gap-2 rounded-md bg-[#0B0D10] p-2 px-4 flex justify-center items-center cursor-pointer">
-              <i className="ri-add-fill"></i> <p>Offer</p>
+              <i className="ri-add-fill"></i> <p>Poster</p>
             </div>
           </div>
           <UserAvatar
@@ -81,7 +81,7 @@ const Offers = () => {
           <>
             <Carousel slides={offerImages} />
             <div className="mb-5 w-full">
-              <h1 className="text-white font-bold text-xl ">Details</h1>
+              <h1 className="text-white font-bold text-xl ">Posters</h1>
             </div>
             <div className="flex gap-3 flex-wrap">
               {offers.map((item, key) => (

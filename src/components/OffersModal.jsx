@@ -38,7 +38,7 @@ const OffersModal = ({ open, setOpen, offer }) => {
               <Dialog.Panel className="relative py-5 transform overflow-hidden rounded-lg bg-[#0B0D10] text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-lg">
                 {/* Main div */}
                 <div className="px-7 flex justify-between text-white pb-3">
-                  <p>Offer</p>
+                  <p>Poster</p>
                   {" "}
                   <i
                     onClick={() => setOpen(false)}
