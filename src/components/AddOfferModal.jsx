@@ -5,6 +5,8 @@ import { useDropzone } from "react-dropzone";
 import { addNewOffer } from "../api/offers";
 import Toasts from "../app/Toasts";
 import Spinner from "./Spinner";
+import { useDispatch } from "react-redux";
+import { getOffersAsync } from "../slices/offersSlice";
 
 const AddOfferModal = ({ open, setOpen }) => {
   const cancelButtonRef = useRef(null);
@@ -12,6 +14,7 @@ const AddOfferModal = ({ open, setOpen }) => {
   const [imageURL, setImageURL] = useState("");
   const [productId, setProductId] = useState("");
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const reset = () => {
     setImageSelected(null);
     setImageURL("");
@@ -42,7 +45,9 @@ const AddOfferModal = ({ open, setOpen }) => {
         const data = await addNewOffer(formData);
         // console.log(data);
         setLoading(false);
+        dispatch(getOffersAsync());
         Toasts("success", `${data.message}`);
+        reset();
       }
     } catch (error) {
       setLoading(false);
