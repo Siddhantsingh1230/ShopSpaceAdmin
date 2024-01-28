@@ -98,6 +98,7 @@ const Offers = () => {
                     {item.posterImageName}
                   </span>
                   <i
+                    title="Delete"
                     onClick={(e) => {
                       e.stopPropagation();
                       delete_offer(item._id);
