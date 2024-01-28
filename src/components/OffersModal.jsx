@@ -38,16 +38,18 @@ const OffersModal = ({ open, setOpen, offer }) => {
               <Dialog.Panel className="relative py-5 transform overflow-hidden rounded-lg bg-[#0B0D10] text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-lg">
                 {/* Main div */}
                 <div className="px-7 flex justify-between text-white pb-3">
-                  <p>Poster</p>
-                  {" "}
+                  <p>Poster</p>{" "}
                   <i
                     onClick={() => setOpen(false)}
                     className="ri-close-line opacity-55 hover:opacity-100 transition-all cursor-pointer"
                   ></i>
                 </div>
-                <div className="w-full h-auto flex flex-col justify-center  px-7">
-                  <h1 className="text-white">
-                    <span className="text-blue-600">Published</span> :{" "}
+                <div className="w-full flex justify-center items-center rounded-md overflow-hidden px-7 my-2">
+                  <img className="w-full h-full contain rounded-md" src={offer.posterImageURL} alt="" />
+                </div>
+                <div className="w-full h-auto 0 text-xs flex flex-col justify-center mt-5 px-7">
+                  <h1 className="text-gray-400">
+                    <span className="text-blue-600 opacity-100">Published</span> {" "}
                     {String(
                       `${String(new Date(offer.createdAt).getDate()).padStart(
                         2,
@@ -59,12 +61,12 @@ const OffersModal = ({ open, setOpen, offer }) => {
                       ).getFullYear()}`
                     )}
                   </h1>
-                  <h1 className="text-white">
-                    <span className="text-blue-600">ProductId</span> :{" "}
+                  <h1 className="text-gray-400">
+                    <span className="text-blue-600 opacity-100">ProductId</span> {" "}
                     {offer.productId}
                   </h1>
-                  <h1 className="text-white">
-                    <span className="text-blue-600">Image</span> :{" "}
+                  <h1 className="text-gray-400">
+                    <span className="text-blue-600 opacity-100">Image</span> {" "}
                     {offer.posterImageName}
                   </h1>
                 </div>
