@@ -14,3 +14,12 @@ export const getAllOrders = async () => {
   );
   return data;
 };
+
+export const updateOrder = async(id,order)=>{
+  const {data} = await axios.patch(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/updateByAdmin/` +id,
+    order,
+    options
+  );
+  return data
+}

@@ -39,3 +39,39 @@ export const graphRenderConstraints = {
     disabled: true,
   },
 };
+
+export const graphRenderConstraintsOrders = {
+  _id: {
+    disabled: true,
+  },
+  checkoutEmail: {
+    disabled: true,
+  },
+  billingAddress:{
+    disabled : true,
+  },
+  billingState: {
+    disabled: false,
+  },
+  billingZip: {
+    disabled: true,
+  },
+  paymentMethod: {
+    disabled: false,
+  },
+  placedOn: {
+    disabled: true,
+  },
+  deliveredOn: {
+    disabled: true,
+  },
+  totalAmount: {
+    disabled: false,
+  },
+  status: {
+    disabled: false,
+  },
+  userId: {
+    disabled: true,
+  },
+};
