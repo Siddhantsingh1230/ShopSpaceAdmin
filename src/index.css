@@ -278,3 +278,63 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+
+/* Calender Sytyles */
+.rbc-toolbar .rbc-btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rbc-toolbar button {
+  color: white !important;
+}
+.rbc-toolbar .rbc-toolbar-label {
+  color: #4d71c5;
+  margin-bottom: 1rem;
+}
+.rbc-toolbar .rbc-btn-group > button {
+  margin-bottom: 1rem;
+  border-color: #4d71c5 !important;
+  transition: all ease 0.2s;
+}
+/* btn active */
+.rbc-toolbar button:active,
+.rbc-toolbar button.rbc-active {
+  background-color: #4d71c5 !important;
+}
+/* Btn hover */
+.rbc-toolbar button:hover,
+.rbc-toolbar button:active:focus,
+.rbc-toolbar button.rbc-active:hover,
+.rbc-toolbar button.rbc-active:focus {
+  background-color: #4d71c5 !important;
+}
+.rbc-header {
+  border-bottom: 1px solid #4d71c5 !important;
+}
+.rbc-header + .rbc-header {
+  border-left: 1px solid #4d71c5 !important;
+}
+.rbc-day-bg + .rbc-day-bg {
+  border-left: 1px solid #4d71c5 !important;
+}
+.rbc-off-range {
+  color: #ffffff !important;
+}
+.rbc-header span {
+  color: #fefefe !important;
+  font-weight: normal;
+}
+.rbc-button-link {
+  color: white !important;
+}
+
+.rbc-off-range-bg {
+  background: #4d71c5 !important;
+}
+.rbc-month-view {
+  border: 1px solid #4d71c5 !important;
+}
+.rbc-month-row + .rbc-month-row {
+  border-top: 1px solid #4d71c5 !important;
+}
