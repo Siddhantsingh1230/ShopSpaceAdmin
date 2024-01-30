@@ -5,6 +5,7 @@ import Tabs from "../components/Tabs";
 import DealOfTheDay from "../components/DealOfTheDay";
 import Calender from "../components/Calender";
 import TodoCards from "../components/TodoCards";
+import Users from "../components/Users";
 
 const Extras = () => {
   const [userDropDown, setUserDropDown] = useState(false);
@@ -26,6 +27,10 @@ const Extras = () => {
       name: "Calender",
       icon:"ri-calendar-schedule-line",
       Component: Calender,
+    },{
+      name: "Users",
+      icon:"ri-user-line",
+      Component: Users,
     },
   ];
   return (
