@@ -2,6 +2,9 @@ import { useState } from "react";
 
 const Tabs = ({ headerComponent }) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+  const [selectedComponent, setSelectedComponent] = useState(
+    headerComponent[selectedTabIndex]
+  );
   return (
     <>
       <div className="w-full h-full flex flex-col">
@@ -14,7 +17,10 @@ const Tabs = ({ headerComponent }) => {
                   ? "text-blue-400 bg-[#131313] "
                   : "text-gray-400"
               } text-sm flex gap-1 px-4 select-none py-2 rounded-t-lg  transition-all cursor-pointer hover:text-blue-400`}
-              onClick={()=>setSelectedTabIndex(key)}
+              onClick={() => {
+                setSelectedTabIndex(key);
+                setSelectedComponent(headerComponent[selectedTabIndex]);
+              }}
             >
               <i className={item.icon}></i>
               <span className="max-sm:hidden">{item.name}</span>
@@ -22,7 +28,9 @@ const Tabs = ({ headerComponent }) => {
           ))}
         </div>
         {/* Body */}
-        <div className="tabBody w-full h-full bg-[#131313] rounded-b-lg"></div>
+        <div className="tabBody w-full h-full bg-[#131313] rounded-b-lg">
+          <selectedComponent.Component />
+        </div>
       </div>
     </>
   );
