@@ -287,6 +287,7 @@ input::-webkit-inner-spin-button {
 }
 .rbc-toolbar button {
   color: white !important;
+  border: 1px solid #4d71c5;
 }
 .rbc-toolbar .rbc-toolbar-label {
   color: #4d71c5;
@@ -298,6 +299,9 @@ input::-webkit-inner-spin-button {
   transition: all ease 0.2s;
 }
 /* btn active */
+.rbc-toolbar button{
+  background: transparent !important;
+}
 .rbc-toolbar button:active,
 .rbc-toolbar button.rbc-active {
   background-color: #4d71c5 !important;
