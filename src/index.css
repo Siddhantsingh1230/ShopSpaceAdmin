@@ -330,11 +330,58 @@ input::-webkit-inner-spin-button {
 }
 
 .rbc-off-range-bg {
-  background: #4d71c5 !important;
+  background: #0cf1a8 !important;
+}
+.rbc-date-cell.rbc-off-range .rbc-button-link {
+  color: #000000 !important;
+  font-weight: bold;
 }
 .rbc-month-view {
   border: 1px solid #4d71c5 !important;
 }
 .rbc-month-row + .rbc-month-row {
   border-top: 1px solid #4d71c5 !important;
+}
+.rbc-event {
+  background-color: rgb(242, 121, 8) !important;
+}
+.rbc-today {
+  background-color: #5b85e6 !important;
+}
+.rbc-time-view {
+  border: 1px solid #4d71c5 !important;
+}
+.rbc-time-header-content {
+  border-left: 1px solid #4d71c5 !important;
+}
+.rbc-timeslot-group {
+  border-bottom: 1px solid #4d71c5 !important;
+}
+.rbc-time-slot {
+  color: #4d71c5;
+}
+.rbc-time-content {
+  border-top: 1px solid #4d71c5 !important;
+}
+.rbc-time-content > * + * > * {
+  border-left: 1px solid #4d71c5 !important;
+}
+.rbc-day-slot .rbc-time-slot {
+  border-top: 1px solid #4d71c5 !important;
+}
+.rbc-agenda-view table.rbc-agenda-table {
+  border: 1px solid #4d71c5 !important;
+}
+
+.rbc-header,
+.rbc-agenda-view table.rbc-agenda-table tbody > tr > td {
+  color: #4d71c5;
+}
+
+.rbc-agenda-view table.rbc-agenda-table tbody > tr + tr {
+  border-top: 1px solid #4d71c5 !important;
+}
+
+.rbc-agenda-view table.rbc-agenda-table tbody > tr > td + td {
+  border-left: 1px solid #4d71c5 !important;
 }
