@@ -1,18 +1,25 @@
-import { Fragment, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import BarChartComponent from "./charts/BarChartComponent";
-import { useSelector } from "react-redux";
 
-const GraphModal = ({ open, setOpen, keyField }) => {
+const GraphModal = ({ open, setOpen, data, keyField, categorical }) => {
   const cancelButtonRef = useRef(null);
-  const products = useSelector((state) => state.product.products);
-  const extractTitleAndKey = (products, keyField) => {
-    return products.map((product) => {
+  const extractTitleAndKey = (data, keyField) => {
+    return data.map((item) => {
       return {
-        title: product.title,
-        [keyField]: product[keyField],
+        title: item.title,
+        [keyField]: item[keyField],
       };
     });
+  };
+  const extractCategoricalData = (data, keyField) => {
+    return Object.entries(
+      data.reduce((counts, item) => {
+        const value = item[keyField];
+        counts[value] = (counts[value] || 0) + 1;
+        return counts;
+      }, {})
+    ).map(([value, count]) => ({ title: value, count }));
   };
 
   return (
@@ -50,8 +57,12 @@ const GraphModal = ({ open, setOpen, keyField }) => {
                 {/* Graph div */}
                 <div className="w-full h-96 flex justify-center items-center p-7">
                   <BarChartComponent
-                    keyField={keyField}
-                    data={extractTitleAndKey(products, keyField)}
+                    keyField={!categorical ? keyField : "count"}
+                    data={
+                      !categorical
+                        ? extractTitleAndKey(data, keyField)
+                        : extractCategoricalData(data, keyField)
+                    }
                   />
                 </div>
               </Dialog.Panel>

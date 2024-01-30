@@ -1,5 +1,5 @@
 import FileSaver from "file-saver";
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import {
   BarChart,
   Bar,

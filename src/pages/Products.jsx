@@ -36,7 +36,10 @@ const ContextList = ({ onExportCSV, setOpen, closeOther, graphTitle }) => {
       <hr className="border-t w-full " />
       <div
         onClick={() => {
-          if (!graphRenderConstraints[graphTitle].disabled) {
+          if (
+            graphRenderConstraints[graphTitle].disabled === false ||
+            graphRenderConstraints[graphTitle].categorical === true
+          ) {
             setOpen(true);
             closeOther();
           }
@@ -645,7 +648,9 @@ const Products = () => {
       <GraphModal
         open={openGraph}
         setOpen={setOpenGraph}
+        data={products}
         keyField={graphTitle}
+        categorical = {graphRenderConstraints[graphTitle]?.categorical}
       />
       {/* Product Modal */}
       <ProductModal

@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import MobileSidebar from "../components/MobileSidebar";
 import UserAvatar from "../components/UserAvatar";
-import { useState, useEffect, useMemo,useRef,useCallback } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { AgGridReact } from "ag-grid-react";
 import {
   getAllOrdersAsync,
@@ -41,9 +41,13 @@ const ContextList = ({ onExportCSV, setOpen, closeOther, graphTitle }) => {
             ? " text-gray-300 "
             : " text-gray-500 "
         }  select-none text-sm hover:${
-          graphRenderConstraintsOrders[graphTitle].disabled ? " " : "bg-blue-500"
+          graphRenderConstraintsOrders[graphTitle].disabled
+            ? " "
+            : "bg-blue-500"
         } w-full p-2 rounded-md ${
-          graphRenderConstraintsOrders[graphTitle].disabled ? "" : "hover:text-white"
+          graphRenderConstraintsOrders[graphTitle].disabled
+            ? ""
+            : "hover:text-white"
         } transition-all cursor-pointer`}
       >
         <i className="ri-bar-chart-2-fill"></i> Show Graph
@@ -337,6 +341,7 @@ const Orders = () => {
           onColumnHeaderContextMenu={columnContextClick}
           onRowEditingStopped={onRowEditingStopped}
           onRowEditingStarted={onRowEditingStarted}
+          ref={gridRef}
         />
       </div>
       {/* Context Menu */}
@@ -356,7 +361,9 @@ const Orders = () => {
       <GraphModal
         open={openGraph}
         setOpen={setOpenGraph}
+        data={orders}
         keyField={graphTitle}
+        categorical = {graphRenderConstraintsOrders[graphTitle]?.categorical}
       />
     </>
   );
