@@ -11,6 +11,5 @@ export const getAllUsers = async () => {
     process.env.REACT_APP_SERVER_BASE_URL + "/v1/showusers",
     options
   );
-  console.log(data)
   return data;
 };
