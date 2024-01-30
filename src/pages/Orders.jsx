@@ -215,6 +215,7 @@ const Orders = () => {
       field: "deliveredOn",
       headerTooltip: "Delivery Date",
       editable: true,
+      cellEditor: 'agDateStringCellEditor',
       cellRenderer: (p) => {
         return (
           <>
@@ -237,11 +238,35 @@ const Orders = () => {
           </>
         );
       },
+      valueSetter: (params) => {
+        updateOrderRow = {
+          ...updateOrderRow,
+          [params.colDef.field]: params.newValue,
+        };
+        dispatch(
+          updateOrderState({
+            id: params.data._id,
+            order: { ...updateOrderRow },
+          })
+        );
+        dispatch(
+          updateOrderAsync({
+            id: params.data._id,
+            order: { ...updateOrderRow },
+          })
+        );
+        updateOrderRow = {};
+        return true;
+      },
     },
     {
       field: "status",
       headerTooltip: "Order Status",
       editable: true,
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {
+        values: ['shipped','pending'],
+    },
       valueSetter: (params) => {
         updateOrderRow = {
           ...updateOrderRow,

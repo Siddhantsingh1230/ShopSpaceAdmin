@@ -31,7 +31,7 @@ const Extras = () => {
       name: "Users",
       icon:"ri-user-line",
       Component: Users,
-    },
+    }
   ];
   return (
     <>
