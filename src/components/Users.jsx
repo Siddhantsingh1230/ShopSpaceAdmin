@@ -1,13 +1,19 @@
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect,useState } from "react";
 import { getAllUsersAsync } from "../slices/userSlice";
+import DeleteModal from "./DeleteModal";
 
 const Users = () => {
   const users = useSelector((state) => state.user.users);
+  const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
+  // block user function
+  const blockUser = () => {
+    console.log("Block User")
+  };
   const columnDefs = [
     { field: "_id", headerTooltip: "User ID", editable: false },
     { field: "email", headerTooltip: "Email ID", editable: false },
@@ -40,6 +46,24 @@ const Users = () => {
       field: "actions",
       headerTooltip: "Actions",
       editable: false,
+      cellRenderer: (p) => {
+        return (
+          <>
+            {p.data.role === "astro" ? (
+              <div className="flex gap-3 justify-center items-center text-sm h-full">
+                <p
+                  className="border border-gray-400 p-1 px-4 rounded-md hover:bg-red-500 hover:border-red-500"
+                  onClick={() => {
+                    setOpenModal(true);
+                  }}
+                >
+                  <i className="ri-user-forbid-line pr-2"></i>Block User
+                </p>
+              </div>
+            ) : null}
+          </>
+        );
+      },
     },
   ];
   useEffect(() => {
@@ -96,6 +120,13 @@ const Users = () => {
         keyField={graphTitle}
         categorical = {graphRenderConstraintsOrders[graphTitle]?.categorical}
       /> */}
+      {/* Block Modal */}
+      <DeleteModal
+        open={openModal}
+        setOpen={setOpenModal}
+        task="blockUser"
+        deleteItem={blockUser}
+      />
     </>
   );
 };
