@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { getCurrentDeal } from "../api/dealOfTheDay.js";
+import { getAllDeals, getCurrentDeal } from "../api/dealOfTheDay.js";
 import CountDownTimer from "../components/CountDownTimer.jsx";
 import Stars from "../components/Stars.jsx";
 
 const DealOfTheDay = () => {
   const [currentDeal, setCurrentDeal] = useState({});
+  const [allDeals, setAllDeals] = useState({});
   const [offerDuration, setOfferDuration] = useState();
   const fetchCurrentDeal = async () => {
     try {
@@ -16,9 +17,19 @@ const DealOfTheDay = () => {
       console.log(error);
     }
   };
+  const fetchAllDeals = async () => {
+    try {
+      const { deals } = await getAllDeals();
+      setAllDeals(deals);
+      console.log(deals);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     fetchCurrentDeal();
+    fetchAllDeals();
   }, []);
   return (
     <>
@@ -47,7 +58,7 @@ const DealOfTheDay = () => {
           <div className="w-full px-20 max-sm:px-5 mb-10 max-sm:mb-5 ">
             <CountDownTimer seconds={offerDuration || ""} />
           </div>
-          
+
           <hr className="border-t border-gray-800 mb-5" />
           {/* Product details */}
           <div className="flex  justify-center items-center gap-5 max-sm:mb-5 mb-10">
@@ -76,10 +87,32 @@ const DealOfTheDay = () => {
               </span>
             </div>
           </div>
-          
-          
-          
-          
+          {/* DEAL HiStory */}
+          <h1 className="text-gray-500 text-center">History</h1>
+          <div className="max-sm:h-14 w-full overflow-y-auto">
+            {allDeals.length > 0
+              ? allDeals.map((item, key) => (
+                  <div
+                    key={key}
+                    className="border-b py-1 max-sm:px-3 px-6 text-sm border-gray-900 flex md:gap-20 max-sm:justify-between"
+                  >
+                    <span>{item?.productId?.title}</span>
+                    <span>
+                    ₹{" "}<span className="text-blue-500">
+                        {item?.productId?.price}
+                      </span>
+                      
+                    </span>
+                    <span>
+                      <span className="text-blue-500">
+                        {item?.productId?.discountPercentage}
+                      </span>{" "}
+                      %
+                    </span>
+                  </div>
+                ))
+              : null}
+          </div>
         </div>
       </div>
     </>
