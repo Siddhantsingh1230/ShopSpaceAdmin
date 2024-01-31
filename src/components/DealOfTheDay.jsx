@@ -12,7 +12,7 @@ const DealOfTheDay = () => {
     try {
       const { deal } = await getCurrentDeal();
       setCurrentDeal(deal);
-     
+
       setOfferDuration((new Date(deal?.offerDuration) - new Date()) / 1000);
     } catch (error) {
       console.log(error);
@@ -22,7 +22,6 @@ const DealOfTheDay = () => {
     try {
       const { deals } = await getAllDeals();
       setAllDeals(deals);
-      
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +33,7 @@ const DealOfTheDay = () => {
   }, []);
   return (
     <>
-      {(allDeals.length>0 && currentDeal) ? (
+      {allDeals.length > 0 && currentDeal ? (
         <div className="w-full h-full py-5 md:p-5 text-white max-sm:justify-center max-sm:flex-col max-sm:items-center flex max-sm:gap-5 gap-5 rounded-md overflow-hidden">
           {/* img */}
           <div className="w-1/2 h-full max-sm:w-[90%] rounded-lg  p-2 border-2 border-[#4d71c5]">
@@ -96,9 +95,15 @@ const DealOfTheDay = () => {
                 ? allDeals.map((item, key) => (
                     <div
                       key={key}
-                      className="border-b py-1 max-sm:px-3 px-6 text-sm border-gray-900 flex md:gap-20 max-sm:justify-between"
+                      className="border-b py-1 text-gray-500 hover:text-white transition-all cursor-pointer max-sm:px-3 px-6 text-sm border-gray-900 flex md:gap-20 max-sm:justify-between"
                     >
-                      <span>{item?.productId?.title}</span>
+                      <span className="flex gap-2">
+                        {" "}
+                        <span className="text-blue-500">
+                          <i className="ri-history-fill"></i>
+                        </span>
+                        {item?.productId?.title}
+                      </span>
                       <span>
                         ₹{" "}
                         <span className="text-blue-500">
