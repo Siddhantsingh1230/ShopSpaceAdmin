@@ -12,7 +12,7 @@ const DealOfTheDay = () => {
     try {
       const { deal } = await getCurrentDeal();
       setCurrentDeal(deal);
-      console.log(deal);
+     
       setOfferDuration((new Date(deal?.offerDuration) - new Date()) / 1000);
     } catch (error) {
       console.log(error);
@@ -22,7 +22,7 @@ const DealOfTheDay = () => {
     try {
       const { deals } = await getAllDeals();
       setAllDeals(deals);
-      console.log(deals);
+      
     } catch (error) {
       console.log(error);
     }
