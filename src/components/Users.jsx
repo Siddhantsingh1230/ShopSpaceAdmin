@@ -2,7 +2,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllUsersAsync } from "../slices/userSlice";
 import DeleteModal from "./DeleteModal";
 
@@ -12,7 +12,7 @@ const Users = () => {
   const dispatch = useDispatch();
   // block user function
   const blockUser = () => {
-    console.log("Block User")
+    console.log("Block User");
   };
   const columnDefs = [
     { field: "_id", headerTooltip: "User ID", editable: false },
@@ -52,15 +52,25 @@ const Users = () => {
             {p.data.role === "astro" ? (
               <div className="flex gap-3 justify-center items-center text-sm h-full">
                 <p
-                  className="border border-gray-400 p-1 px-4 rounded-md hover:bg-red-500 hover:border-red-500"
+                  className="border border-gray-600  bg-[#0B0D10] text-gray-400  text-xs font-medium p-2 px-4 rounded-md  "
                   onClick={() => {
                     setOpenModal(true);
                   }}
                 >
-                  <i className="ri-user-forbid-line pr-2"></i>Block User
+                  <i className="text-red-500 ri-user-forbid-line pr-2"></i>Block
+                  User
                 </p>
               </div>
-            ) : null}
+            ) : (
+              <div className="flex gap-3 justify-center items-center text-sm h-full">
+                <p
+                  className="border border-gray-600  bg-[#0B0D10] text-gray-400  text-xs font-medium p-2 px-4 rounded-md  "
+                >
+                  <i className="text-green-500 ri-admin-line pr-2"></i>Admin{" "}<span className="invisible ">Use</span>
+                  
+                </p>
+              </div>
+            )}
           </>
         );
       },
