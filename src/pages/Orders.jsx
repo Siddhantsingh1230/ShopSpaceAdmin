@@ -13,6 +13,7 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { graphRenderConstraintsOrders } from "../constants/graphConstants.js";
 import GraphModal from "../components/GraphModal";
+import OrdersModal from "../components/OrdersModal.jsx";
 
 // ConTextList
 const ContextList = ({ onExportCSV, setOpen, closeOther, graphTitle }) => {
@@ -57,6 +58,8 @@ const ContextList = ({ onExportCSV, setOpen, closeOther, graphTitle }) => {
 };
 
 const Orders = () => {
+  const [openOrdersModal, setOpenOrdersModal] = useState(false);
+  const [ordersId,setOrdersId] = useState(null);
   const [userDropDown, setUserDropDown] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
@@ -125,8 +128,9 @@ const Orders = () => {
               data-action="view"
               className="flex-1 pr-2  disabled:opacity-50  hover:opacity-100 transition-all hover:text-green-500 inline-flex items-center justify-center border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10  saturate-[110%] border-gray-600 focus:ring-green-500 bg-[#0B0D10] text-white text-sm font-medium rounded-md "
               onClick={() => {
-                // setProductId(params.data._id);
-                // setOpenProductModal(true);
+                setOrdersId(params.data._id);
+                console.log(params.data._id)
+                setOpenOrdersModal(true);
               }}
             >
               <i className="p-1 px-2 h-full opacity-55 ri-eye-line"></i>
@@ -215,7 +219,7 @@ const Orders = () => {
       field: "deliveredOn",
       headerTooltip: "Delivery Date",
       editable: true,
-      cellEditor: 'agDateStringCellEditor',
+      cellEditor: "agDateStringCellEditor",
       cellRenderer: (p) => {
         return (
           <>
@@ -263,10 +267,10 @@ const Orders = () => {
       field: "status",
       headerTooltip: "Order Status",
       editable: true,
-      cellEditor: 'agSelectCellEditor',
+      cellEditor: "agSelectCellEditor",
       cellEditorParams: {
-        values: ['shipped','pending'],
-    },
+        values: ["shipped", "pending"],
+      },
       valueSetter: (params) => {
         updateOrderRow = {
           ...updateOrderRow,
@@ -388,7 +392,13 @@ const Orders = () => {
         setOpen={setOpenGraph}
         data={orders}
         keyField={graphTitle}
-        categorical = {graphRenderConstraintsOrders[graphTitle]?.categorical}
+        categorical={graphRenderConstraintsOrders[graphTitle]?.categorical}
+      />
+      {/* order Modal */}
+      <OrdersModal
+        open={openOrdersModal}
+        setOpen={setOpenOrdersModal}
+        id={ordersId}
       />
     </>
   );

@@ -49,7 +49,7 @@ const DeleteModal = ({ open, setOpen, task, deleteItem}) => {
                         as="h3"
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
-                        {task === "deleteUser"?"Delete account":"Delete Product"}
+                        {task === "deleteUser"?"Delete account":task === "deleteProduct" ? "Delete Product" : "Block User"}
                       </Dialog.Title>
                       <div className="mt-2">
                         {task === "deleteUser" ? 
@@ -57,10 +57,13 @@ const DeleteModal = ({ open, setOpen, task, deleteItem}) => {
                         Are you sure you want to delete your account? All of
                         your data will be permanently removed. This action
                         cannot be undone.
-                      </p> : <p className="text-sm text-gray-500">
+                      </p> :task === "deleteProduct" ?  <p className="text-sm text-gray-500">
                           Are you sure you want to delete this product?
                           This action cannot be undone.
-                        </p> }
+                        </p> : <p className="text-sm text-gray-500">
+                          Are you sure you want to block this user?
+                          This action cannot be undone.
+                        </p>}
                         
                       </div>
                     </div>
@@ -77,7 +80,7 @@ const DeleteModal = ({ open, setOpen, task, deleteItem}) => {
                     }}
 
                   >
-                    Delete
+                    {task === "blockUser" ? <p>Block</p> : <p>Delete</p>}
                   </button>
                   <button
                     type="button"
