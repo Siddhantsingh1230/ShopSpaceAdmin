@@ -1,13 +1,19 @@
-import { Fragment, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
+import Toasts from "../app/Toasts";
+import { addNewDeal } from "../api/dealOfTheDay";
+import Spinner from "../components/Spinner";
 
 const DODModal = ({ open, setOpen }) => {
   const cancelButtonRef = useRef(null);
+  const timerRef = useRef(null);
   const [searchList, setSearchList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const products = useSelector((state) => state.product.products);
+
   const filterObjectsByIdAndTitle = (inputString) => {
     return products.filter((obj) => {
       // Check if the string is present in either 'title' or 'id' key
@@ -16,6 +22,22 @@ const DODModal = ({ open, setOpen }) => {
         obj._id.includes(inputString)
       );
     });
+  };
+  const handleSave = async () => {
+    const offerDuration = timerRef.current.calculateTotalSeconds();
+    const productId = selectedProduct._id;
+    if (offerDuration !== 0) {
+      try {
+        setLoading(true);
+        const newTime = new Date(new Date().getTime() + offerDuration * 1000);
+        const data = await addNewDeal({ productId, offerDuration: newTime });
+        Toasts("success", data.message);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    }
   };
 
   return (
@@ -58,12 +80,12 @@ const DODModal = ({ open, setOpen }) => {
                 <AnimatePresence mode="wait">
                   {!selectedProduct ? (
                     <motion.div
-                      initial={{ x: 0, y: 0 }}
+                      initial={{ x: "100%" }}
                       animate={{ x: 0, y: 0 }}
                       key={1}
                       exit={{ x: "-100%" }}
                       transition={{
-                        duration: .25,
+                        duration: 0.25,
                         ease: "easeInOut",
                       }}
                       className="w-full h-96 flex flex-col "
@@ -97,17 +119,17 @@ const DODModal = ({ open, setOpen }) => {
                               setSelectedProduct(item);
                             }}
                           >
-                            <div className="w-7 h-7 overflow-hidden rounded-full border border-white">
+                            <div className="w-7  h-7 overflow-hidden rounded-full border border-white">
                               <img
                                 src={item.thumbnail}
                                 className="w-full h-full object-cover"
                                 alt=""
                               />
                             </div>
-                            <p className="text-sm text-gray-400 group-hover:text-white p-2 w-50 text-ellipsis overflow-hidden text-nowrap">
+                            <p className="text-sm text-gray-400 group-hover:text-white p-2 max-sm:w-64 w-50 text-ellipsis overflow-hidden text-nowrap">
                               {item.title}
                             </p>
-                            <p className=" text-gray-400 group-hover:text-white p-2 w-30 text-xs text-ellipsis overflow-hidden text-nowrap">
+                            <p className=" text-gray-400 group-hover:text-white p-2 max-sm:hidden w-28 text-xs text-ellipsis overflow-hidden text-nowrap">
                               {item._id}
                             </p>
                           </div>
@@ -136,17 +158,43 @@ const DODModal = ({ open, setOpen }) => {
                   ) : (
                     <motion.div
                       key={2}
-                      initial={{ x: 0, y: 0 }}
+                      initial={{ x: "100%" }}
                       animate={{ x: 0, y: 0 }}
                       exit={{ x: "-100%" }}
-                      transition={{ duration: .25, ease: "easeInOut" }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
                       className="w-full h-96 flex flex-col "
                     >
-                        {/* Header */}
-                        <div className="w-full flex gap-2 p-2  items-center">
-                        <i className="ri-arrow-left-line text-lg cursor-pointer text-gray-500 hover:text-white transition-all"></i>
-                        <p className="text-white text-sm">{selectedProduct.title}</p>
-                        </div>
+                      {/* Header */}
+                      {!loading ? (
+                        <>
+                          <div className="w-full flex gap-5 p-2  items-center">
+                            <i
+                              onClick={() => {
+                                setSelectedProduct(null);
+                                setSearchList([]);
+                              }}
+                              className="ri-arrow-left-line text-lg   cursor-pointer text-gray-500 hover:text-white transition-all"
+                            ></i>
+                            <p className="text-white text-sm max-w-56 text-ellipsis overflow-hidden text-nowrap">
+                              {selectedProduct.title}
+                            </p>
+                          </div>
+                          <hr className="w-full border-t border-gray-600" />
+                          <div className="w-full  h-full p-2 flex gap-5 flex-col">
+                            <div className="w-full h-full">
+                              <TimeComponent ref={timerRef} />
+                            </div>
+                          </div>
+                          <div
+                            onClick={handleSave}
+                            className="w-full bg-blue-600 hover:bg-blue-700 transition-all py-2 text-center select-none text-white cursor-pointer"
+                          >
+                            Save
+                          </div>
+                        </>
+                      ) : (
+                        <Spinner />
+                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -158,5 +206,75 @@ const DODModal = ({ open, setOpen }) => {
     </Transition.Root>
   );
 };
+
+const TimeComponent = React.forwardRef((_, ref) => {
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  const calculateTotalSeconds = () => {
+    const timeInSecond =
+      parseInt(days | 0) * 24 * 60 * 60 +
+      parseInt(hours | 0) * 60 * 60 +
+      parseInt(minutes | 0) * 60 +
+      parseInt(seconds | 0);
+    return timeInSecond;
+  };
+  // Forward the ref to the div element and expose the childFunction
+  React.useImperativeHandle(ref, () => ({
+    calculateTotalSeconds,
+  }));
+
+  return (
+    <>
+      <div className="flex space-x-4 w-full h-full justify-center items-center">
+        <div className="flex flex-col items-center">
+          <input
+            type="number"
+            value={days}
+            onChange={(e) => setDays(e.target.value)}
+            className="w-20 h-20 max-sm:w-14 max-sm:h-14 text-center border rounded"
+          />
+          <span className="text-sm max-sm:text-xs mt-5 text-white">Days</span>
+        </div>
+
+        <div className="flex flex-col items-center">
+          <input
+            type="number"
+            value={hours}
+            onChange={(e) => setHours(e.target.value)}
+            className="w-20 h-20 max-sm:w-14 max-sm:h-14 text-center border rounded"
+          />
+          <span className="text-sm max-sm:text-xs mt-5 text-white">Hours</span>
+        </div>
+
+        <div className="flex flex-col items-center">
+          <input
+            type="number"
+            value={minutes}
+            onChange={(e) => setMinutes(e.target.value)}
+            className="w-20 h-20 max-sm:w-14 max-sm:h-14 text-center border rounded"
+          />
+          <span className="text-sm max-sm:text-xs mt-5 text-white">
+            Minutes
+          </span>
+        </div>
+
+        <div className="flex flex-col items-center">
+          <input
+            type="number"
+            value={seconds}
+            onChange={(e) => setSeconds(e.target.value)}
+            className="w-20 h-20 max-sm:w-14 max-sm:h-14 text-center border rounded"
+          />
+          <span className="text-sm max-sm:text-xs mt-5 text-white">
+            Seconds
+          </span>
+        </div>
+      </div>
+    </>
+  );
+});
 
 export default DODModal;

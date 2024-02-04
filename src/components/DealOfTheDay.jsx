@@ -36,20 +36,24 @@ const DealOfTheDay = () => {
   return (
     <>
       {allDeals.length > 0 && currentDeal ? (
-        <div className="w-full h-full py-5 md:p-5 text-white max-sm:justify-center max-sm:flex-col max-sm:items-center flex max-sm:gap-5 gap-5 rounded-md overflow-hidden">
+        <div className="w-full h-full py-2 md:p-5 text-white max-sm:justify-center max-sm:flex-col max-sm:items-center flex max-sm:gap-5 gap-5 rounded-md overflow-hidden">
           {/* img */}
-          <div className="w-1/2 h-full max-sm:w-[90%] flex-col rounded-lg flex justify-center items-center p-2 gap-2 max-sm:flex-col-reverse">
+          <div className="w-1/2 h-full max-sm:w-[90%] flex-col rounded-lg flex justify-center items-center  max-sm:px-0 gap-2 max-sm:gap-1 max-sm:flex-col-reverse ">
             <img
-              className="w-full flex-1 rounded-md object-cover"
+              className="w-full max-h-[28rem]  max-sm:max-h-48 rounded-md object-cover"
               src={currentDeal?.productId?.thumbnail}
               alt=""
             />
-            <div onClick={()=>setOpenModal(true)} className="w-full bg-blue-500 transition-all py-2 cursor-pointer  text-center rounded-md mb-2 select-none">Add Deal</div>
+            <div
+              onClick={() => setOpenModal(true)}
+              className="w-full  bg-blue-500 transition-all py-2 cursor-pointer  text-center rounded-md mb-2 select-none"
+            >
+              Add Deal
+            </div>
           </div>
           {/* Details */}
           <div className="w-1/2 h-full flex max-sm:w-full flex-col ">
-            
-            <div className="w-full flex gap-10 justify-center items-center mb-5"> 
+            <div className="w-full flex gap-10 justify-center items-center mb-5">
               {/* Product title */}
               <h1 className="text-xl text-white text-center max-w-60 text-nowrap overflow-hidden text-ellipsis ">
                 {currentDeal?.productId?.title}
@@ -93,30 +97,32 @@ const DealOfTheDay = () => {
                 </span>
               </div>
             </div>
-            
+
             {/* DEAL HiStory */}
             <h1 className="text-gray-500 text-center">History</h1>
-            <div className="max-sm:h-14 w-full overflow-y-auto">
+            <div className="max-sm:h-14 max-h-56 w-full overflow-y-auto">
               {allDeals.length > 0
                 ? allDeals.map((item, key) => (
                     <div
                       key={key}
-                      className="border-b py-1 text-gray-500 hover:text-white transition-all cursor-pointer max-sm:px-3 px-6 text-sm border-gray-900 flex md:gap-20 max-sm:justify-between"
+                      className="border-b py-1 text-gray-500 hover:text-white transition-all cursor-pointer max-sm:px-3 px-6 text-sm border-gray-900 flex md:gap-20 max-sm:justify-between  gap-3 "
                     >
-                      <span className="flex gap-2">
+                      <span className="flex gap-2 flex-1">
                         {" "}
                         <span className="text-blue-500">
                           <i className="ri-history-fill"></i>
                         </span>
-                        {item?.productId?.title}
+                        <p className="max-w-36 text-ellipsis overflow-hidden text-nowrap">
+                          {item?.productId?.title}
+                        </p>
                       </span>
-                      <span>
+                      <span className="flex-1">
                         ₹{" "}
                         <span className="text-blue-500">
                           {item?.productId?.price}
                         </span>
                       </span>
-                      <span>
+                      <span className="flex-1">
                         <span className="text-blue-500">
                           {item?.productId?.discountPercentage}
                         </span>{" "}
@@ -135,7 +141,7 @@ const DealOfTheDay = () => {
       )}
 
       {/* Add Deal Modal */}
-      <DODModal setOpen={setOpenModal} open={openModal}/>
+      <DODModal setOpen={setOpenModal} open={openModal} />
     </>
   );
 };

@@ -21,3 +21,11 @@ export const getAllDeals = async () => {
   );
   return data;
 };
+export const addNewDeal = async (dealobj) => {
+  const { data } = await axios.post(
+    process.env.REACT_APP_SERVER_BASE_URL + "/v1/dod/addnewdeal",
+    { ...dealobj },
+    options
+  );
+  return data;
+};
