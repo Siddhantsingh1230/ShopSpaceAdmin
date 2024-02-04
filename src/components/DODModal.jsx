@@ -233,7 +233,11 @@ const TimeComponent = React.forwardRef((_, ref) => {
           <input
             type="number"
             value={days}
-            onChange={(e) => setDays(e.target.value)}
+            onChange={(e) => {
+              if (parseInt(e.target.value) <= 15) {
+                setDays(e.target.value);
+              }
+            }}
             className="w-20 h-20 max-sm:w-14 max-sm:h-14 text-center border rounded"
           />
           <span className="text-sm max-sm:text-xs mt-5 text-white">Days</span>
@@ -243,7 +247,11 @@ const TimeComponent = React.forwardRef((_, ref) => {
           <input
             type="number"
             value={hours}
-            onChange={(e) => setHours(e.target.value)}
+            onChange={(e) => {
+              if (parseInt(e.target.value) <= 24) {
+                setHours(e.target.value);
+              }
+            }}
             className="w-20 h-20 max-sm:w-14 max-sm:h-14 text-center border rounded"
           />
           <span className="text-sm max-sm:text-xs mt-5 text-white">Hours</span>
@@ -253,7 +261,11 @@ const TimeComponent = React.forwardRef((_, ref) => {
           <input
             type="number"
             value={minutes}
-            onChange={(e) => setMinutes(e.target.value)}
+            onChange={(e) => {
+              if (parseInt(e.target.value) <= 9999) {
+                setMinutes(e.target.value)
+              }
+            }}
             className="w-20 h-20 max-sm:w-14 max-sm:h-14 text-center border rounded"
           />
           <span className="text-sm max-sm:text-xs mt-5 text-white">
@@ -265,7 +277,11 @@ const TimeComponent = React.forwardRef((_, ref) => {
           <input
             type="number"
             value={seconds}
-            onChange={(e) => setSeconds(e.target.value)}
+            onChange={(e) => {
+              if (parseInt(e.target.value) <= 999) {
+                setSeconds(e.target.value)
+              }
+            }}
             className="w-20 h-20 max-sm:w-14 max-sm:h-14 text-center border rounded"
           />
           <span className="text-sm max-sm:text-xs mt-5 text-white">

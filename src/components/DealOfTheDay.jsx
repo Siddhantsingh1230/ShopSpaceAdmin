@@ -105,24 +105,24 @@ const DealOfTheDay = () => {
                 ? allDeals.map((item, key) => (
                     <div
                       key={key}
-                      className="border-b py-1 text-gray-500 hover:text-white transition-all cursor-pointer max-sm:px-3 px-6 text-sm border-gray-900 flex md:gap-20 max-sm:justify-between  gap-3 "
+                      className="border-b py-1 text-gray-500 hover:text-white transition-all cursor-pointer max-sm:px-3 px-6 text-sm border-gray-900 grid grid-cols-4 md:gap-20 max-sm:justify-between  gap-3 "
                     >
-                      <span className="flex gap-2 flex-1">
+                      <span className="flex gap-2 col-span-2">
                         {" "}
                         <span className="text-blue-500">
                           <i className="ri-history-fill"></i>
                         </span>
-                        <p className="max-w-36 text-ellipsis overflow-hidden text-nowrap">
+                        <p className="max-w-36  text-ellipsis overflow-hidden text-nowrap">
                           {item?.productId?.title}
                         </p>
                       </span>
-                      <span className="flex-1">
+                      <span className="col-span-1">
                         ₹{" "}
                         <span className="text-blue-500">
                           {item?.productId?.price}
                         </span>
                       </span>
-                      <span className="flex-1">
+                      <span className="col-span-1">
                         <span className="text-blue-500">
                           {item?.productId?.discountPercentage}
                         </span>{" "}
