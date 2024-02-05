@@ -122,7 +122,7 @@ const Home = () => {
         <div>
           <div className="flex justify-between text-white font-bold text-xl mt-6">
             <p>My Cards</p>
-            <i className="ri-add-line cursor-pointer opacity-55 transition-all hover:opacity-100"></i>
+            <i onClick={() => navigate("/extras")} className="ri-add-line cursor-pointer opacity-55 transition-all hover:opacity-100"></i>
           </div>
           {/* cards */}
           <div className="thinScroll flex mt-6 w-full gap-6 overflow-x-auto py-2">
