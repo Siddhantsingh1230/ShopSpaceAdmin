@@ -15,11 +15,51 @@ export const getAllOrders = async () => {
   return data;
 };
 
-export const updateOrder = async(id,order)=>{
-  const {data} = await axios.patch(
-    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/updateByAdmin/` +id,
+export const updateOrder = async (id, order) => {
+  const { data } = await axios.patch(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/updateByAdmin/` + id,
     order,
     options
   );
-  return data
-}
+  return data;
+};
+
+export const mostCommonLocation = async () => {
+  const { data } = await axios.get(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/mostcommonlocation`,
+    options
+  );
+  return data;
+};
+
+export const mostUsedPaymentMode = async () => {
+  const { data } = await axios.get(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/mostusedpaymentmode`,
+    options
+  );
+  return data;
+};
+
+export const mostCommonCategory = async () => {
+  const { data } = await axios.get(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/commoncategory`,
+    options
+  );
+  return data;
+};
+
+export const bonusMonth = async () => {
+  const { data } = await axios.get(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/bonusmonth`,
+    options
+  );
+  return data;
+};
+
+export const deliveryCounts = async () => {
+  const { data } = await axios.get(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/deliverycounts`,
+    options
+  );
+  return data;
+};
