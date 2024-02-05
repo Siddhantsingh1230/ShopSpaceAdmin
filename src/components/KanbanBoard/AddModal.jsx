@@ -5,6 +5,7 @@ const AddModal = ({ open, setOpen, id, addItem }) => {
   const cancelButtonRef = useRef(null);
   const [title, setTitle] = useState("");
 
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -65,7 +66,7 @@ const AddModal = ({ open, setOpen, id, addItem }) => {
                       <textarea
                         onChange={(e) => setTitle(e.target.value.trim())}
                         className="w-full h-full outline-none border-none bg-transparent resize-none"
-                        defaultValue={"Type here.."}
+                        placeholder="Type here.."
                       ></textarea>
                     </div>
                   </div>

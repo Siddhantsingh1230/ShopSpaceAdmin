@@ -1,78 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import Column from "./Column";
+import { useSelector } from "react-redux";
+import {
+  addNote,
+  deleteNote,
+  getAllNotes,
+  updateNoteCategory,
+} from "../../api/notes";
 
 export default function KanbanBoard() {
-  const data = [
-    {
-      id: 8,
-      title: "quo adipisci enim quam ut ab",
-      category: "task",
-    },
-
-    {
-      id: 10,
-      title: "illo est ratione doloremque quia maiores aut",
-      category: "report",
-    },
-
-    {
-      id: 11,
-      title: "vero rerum temporibus dolor",
-      category: "report",
-    },
-
-    {
-      id: 12,
-      title: "ipsa repellendus fugit nisi",
-      category: "task",
-    },
-
-    {
-      id: 14,
-      title: "repellendus sunt dolores architecto voluptatum",
-      category: "backlog",
-    },
-    ,
-    {
-      id: 15,
-      title: "ab voluptatum amet voluptas",
-      category: "report",
-    },
-
-    {
-      id: 16,
-      title: "accusamus eos facilis sint et aut voluptatem",
-      category: "task",
-    },
-
-    {
-      id: 17,
-      title: "quo laboriosam deleniti aut qui",
-      category: "backlog",
-    },
-
-    {
-      id: 19,
-      title: "molestiae ipsa aut voluptatibus pariatur dolor nihil",
-      category: "backlog",
-    },
-
-    {
-      id: 20,
-      title: "ullam nobis libero sapiente ad optio sint",
-      category: "task",
-    },
-  ];
+  const user = useSelector((state) => state.auth.user);
+  const [data, setData] = useState([]);
+  const getNotes = async (userId) => {
+    try {
+      const { notes } = await getAllNotes(userId);
+      setData(notes);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getNotes(user?._id);
+  }, []);
 
   const [tasks, setTasks] = useState([]);
   const [reports, setReports] = useState([]);
   const [backlogs, setBacklogs] = useState([]);
+
   useEffect(() => {
     setTasks(data.filter((item) => item.category === "task"));
     setReports(data.filter((item) => item.category === "report"));
     setBacklogs(data.filter((item) => item.category === "backlog"));
-  }, []);
+  }, [data]);
 
   const handleDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -137,61 +97,93 @@ export default function KanbanBoard() {
       const tempArray = tasks;
       tempArray.splice(dstIndex, 0, { ...taskItem, category: "tasks" });
       setTasks(tempArray);
+      updateNote(taskItem._id, "task");
     } else if (destination.droppableId === "2") {
       const tempArray = reports;
       tempArray.splice(dstIndex, 0, { ...taskItem, category: "tasks" });
       setReports(tempArray);
+      updateNote(taskItem._id, "report");
     } else if (destination.droppableId === "3") {
       const tempArray = backlogs;
       tempArray.splice(dstIndex, 0, { ...taskItem, category: "tasks" });
       setBacklogs(tempArray);
+      updateNote(taskItem._id, "backlog");
     }
   };
 
   const findItemById = (id, array) => {
-    return array.find((item) => item.id == id);
+    return array.find((item) => item.createdAt == id);
   };
 
   const removeItemById = (id, array) => {
-    return array.filter((item) => item.id != id);
+    return array.filter((item) => item.createdAt != id);
   };
 
-  const deleteItem = (columnId, id) => {
+  const deleteItem = (columnId, id, taskId) => {
     // console.log(columnId, "-", id);
     let temp;
     switch (columnId) {
       case "1":
         temp = tasks;
-        temp = temp.filter((item) => item.id != id);
+        temp = temp.filter((item) => item.createdAt != id);
         setTasks(temp);
+        deleteFromDB(taskId);
         break;
       case "2":
         temp = reports;
-        temp = temp.filter((item) => item.id != id);
+        temp = temp.filter((item) => item.createdAt != id);
         setReports(temp);
+        deleteFromDB(taskId);
         break;
       case "3":
         temp = backlogs;
-        temp = temp.filter((item) => item.id != id);
+        temp = temp.filter((item) => item.createdAt != id);
         setBacklogs(temp);
+        deleteFromDB(taskId);
         break;
     }
   };
   const addItem = (columnId, title) => {
     // console.log(columnId, "-", id);
+    let createdAt;
     switch (columnId) {
       case "1":
-        setTasks([...tasks, { category: "task", title, id: Date.now() }]);
+        createdAt = Date.now();
+        addToDB(createdAt, "task", title);
+        setTasks([...tasks, { category: "task", title, createdAt }]);
         break;
       case "2":
-        setReports([...reports, { category: "report", title, id: Date.now() }]);
+        createdAt = Date.now();
+        addToDB(createdAt, "report", title);
+        setReports([...reports, { category: "report", title, createdAt }]);
         break;
       case "3":
-        setBacklogs([
-          ...backlogs,
-          { category: "backlog", title, id: Date.now() },
-        ]);
+        createdAt = Date.now();
+        addToDB(createdAt, "backlog", title);
+        setBacklogs([...backlogs, { category: "backlog", title, createdAt }]);
         break;
+    }
+  };
+  // DB methods
+  const addToDB = async (createdAt, category, title) => {
+    try {
+      await addNote(title, user._id, category, createdAt);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const deleteFromDB = async (id) => {
+    try {
+      await deleteNote(id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const updateNote = async (id, category) => {
+    try {
+      await updateNoteCategory(id, category);
+    } catch (error) {
+      console.log(error);
     }
   };
 

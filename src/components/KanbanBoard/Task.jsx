@@ -2,7 +2,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 export default function Task({ task, index, columnID, deleteItem }) {
   return (
-    <Draggable draggableId={`${task.id}`} key={task.id} index={index}>
+    <Draggable draggableId={`${task.createdAt}`} key={task.createdAt} index={index}>
       {(provided, snapshot) => (
         <div
           {...provided.draggableProps}
@@ -24,7 +24,7 @@ export default function Task({ task, index, columnID, deleteItem }) {
             {task.title}
           </div>
           <div
-            onClick={() => deleteItem(columnID, task.id)}
+            onClick={() => deleteItem(columnID, task.createdAt,task._id)}
             title="delete"
             className="md:col-span-1 text-xl cursor-pointer max-sm:self-end max-sm:pr-1"
           >
