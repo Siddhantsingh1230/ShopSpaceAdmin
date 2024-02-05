@@ -55,6 +55,7 @@ export default function Column({ title, tasks, id, deleteItem, addItem }) {
                   deleteItem={deleteItem}
                 />
               ))}
+              {provided.placeholder} 
             </div>
           )}
         </Droppable>

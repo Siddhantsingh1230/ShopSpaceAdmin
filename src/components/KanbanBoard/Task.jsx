@@ -30,6 +30,7 @@ export default function Task({ task, index, columnID, deleteItem }) {
           >
             <i className="ri-close-fill"></i>
           </div>
+          {provided.placeholder}
         </div>
       )}
     </Draggable>
