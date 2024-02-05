@@ -3,6 +3,7 @@ import Task from "./Task";
 import { Droppable } from "react-beautiful-dnd";
 import "./scroll.css";
 import AddModal from "./AddModal";
+import { AnimatePresence } from "framer-motion";
 
 export default function Column({ title, tasks, id, deleteItem, addItem }) {
   const [openModal, setOpenModal] = useState(false);
@@ -46,15 +47,17 @@ export default function Column({ title, tasks, id, deleteItem, addItem }) {
               {...provided.droppableProps}
               isdraggingover={snapshot.isDraggingOver.toString()}
             >
-              {tasks.map((task, index) => (
-                <Task
-                  key={index}
-                  index={index}
-                  task={task}
-                  columnID={id}
-                  deleteItem={deleteItem}
-                />
-              ))}
+              <AnimatePresence >
+                {tasks.map((task, index) => (
+                  <Task
+                    key={index}
+                    index={index}
+                    task={task}
+                    columnID={id}
+                    deleteItem={deleteItem}
+                  />
+                ))}
+              </AnimatePresence>
             </div>
           )}
         </Droppable>

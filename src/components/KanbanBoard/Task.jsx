@@ -1,10 +1,15 @@
 import { Draggable } from "react-beautiful-dnd";
+import { motion } from "framer-motion";
 
 export default function Task({ task, index, columnID, deleteItem }) {
   return (
     <Draggable draggableId={`${task.id}`} key={task.id} index={index}>
       {(provided, snapshot) => (
-        <div
+        <motion.div
+          initial={{ x: 0, Y: 0 }}
+          motion={{ x: 0, Y: 0 }}
+          exit={{ x: "-100vw", backgroundColor: "lightblue" }}
+          transition={{ duration: 1, easings: "ease" }}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
@@ -30,7 +35,7 @@ export default function Task({ task, index, columnID, deleteItem }) {
           >
             <i className="ri-close-fill"></i>
           </div>
-        </div>
+        </motion.div>
       )}
     </Draggable>
   );

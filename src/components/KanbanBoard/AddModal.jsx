@@ -71,8 +71,11 @@ const AddModal = ({ open, setOpen, id, addItem }) => {
                   </div>
                   <div
                     onClick={() => {
-                      addItem(id, title);
-                      setOpen(false);
+                      if (title) {
+                        addItem(id, title);
+                        setOpen(false);
+                        setTitle("");
+                      }
                     }}
                     className={`${
                       id == "1"
