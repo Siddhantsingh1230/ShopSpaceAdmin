@@ -15,10 +15,10 @@ export default function Task({ task, index, columnID }) {
               : columnID == "2"
               ? "bg-[#e49771] "
               : "bg-[#fa51e3] "
-          } rounded-md mb-5 grid grid-cols-11 px-2 py-3 `}
+          } rounded-md mb-5 md:grid md:grid-cols-11 px-2 py-3 max-sm:px-0 max-sm:flex  `}
         >
           <div className="col-span-1 pl-2"><i className="ri-draggable text-black"></i></div>
-          <div className="col-span-9 text-sm ">{task.title}</div>
+          <div className="col-span-9 text-sm max-sm:text-xs">{task.title}</div>
           <div title="delete" className="col-span-1 text-xl cursor-pointer "><i className="ri-close-fill"></i></div>
         </div>
       )}
