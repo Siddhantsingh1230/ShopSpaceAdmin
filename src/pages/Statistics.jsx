@@ -1,10 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UserAvatar from "../components/UserAvatar";
 import MobileSidebar from "../components/MobileSidebar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ContentPlaceholder from "../components/ContentPlaceholder";
 import LineChartComponent from "../components/charts/LineChartComponent";
 import AreaChartComponent from "../components/charts/AreaChartComponent";
+import {
+  mostCommonCategoryAsync,
+  mostCommonLocationAsync,
+  deliveryCountsAsync,
+  bonusMonthAsync,
+} from "../slices/ordersSlice";
+import PinBarCharts from "../components/charts/PinBarCharts";
+import SimplePieChart from "../components/charts/SimplePieChart";
+import LinedBarGraph from "../components/charts/LinedBarGraph";
+import SimpleRadarCharts from "../components/charts/SimpleRadarCharts";
 
 const Statistics = () => {
   const products = useSelector((state) => state.product.products);
@@ -12,10 +22,25 @@ const Statistics = () => {
   const mostOrderedProducts = useSelector(
     (state) => state.product.mostOrderedProducts
   );
+  const mostCommonLocations = useSelector(
+    (state) => state.order.mostCommonLocations
+  );
+  const bonusMonths = useSelector((state) => state.order.bonusMonths);
+  const deliveryCount = useSelector((state) => state.order.deliveryCount);
+  const commonCategories = useSelector((state) => state.order.commonCategory);
+  const dispatch = useDispatch();
   const toggleUserDropDown = () => {
     setUserDropDown((state) => !state);
   };
   const productsStatus = useSelector((state) => state.product.status);
+  const orderStatus = useSelector((state) => state.order.status);
+
+  useEffect(() => {
+    dispatch(mostCommonLocationAsync());
+    dispatch(mostCommonCategoryAsync());
+    dispatch(deliveryCountsAsync());
+    dispatch(bonusMonthAsync());
+  }, []);
   return (
     <>
       {/* navbar */}
@@ -47,8 +72,8 @@ const Statistics = () => {
         }}
         className="flex flex-col gap-6 overflow-y-auto max-sm:mt-0  mt-2 mb-7 text-white  max-sm:w-full max-sm:px-3 h-full"
       >
-        <div className="flex h-1/2 gap-6 pr-10">
-          <div className="flex bg-gradient-to-tr from-[#49349e]  via-[#2c206f] to-[#1E1B33] h-full w-4/6 border border-gray-700 rounded-lg ">
+        <div className="grid grid-cols-3 gap-6 pr-10">
+          <div className="grid col-span-2 bg-gradient-to-tr from-[#271e52]  via-[#201c3f] to-[#131217] h-[325px]  rounded-lg ">
             {/* graph 1 */}
             <div className="w-full h-full max-sm:w-80  overflow-hidden rounded-lg p-2 pt-10 pr-10 select-none">
               {productsStatus === "loading" ? (
@@ -63,16 +88,16 @@ const Statistics = () => {
               )}
             </div>
           </div>
-          <div className="flex h-full w-1/3 bg-[#1a1733] border border-gray-700 rounded-lg">
+          <div className="grid col-span-1 h-[325px] bg-[#18161f] rounded-lg">
             {/* graph 2 */}
             <div className="w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-10 pr-6 select-none">
               {productsStatus === "loading" ? (
                 <ContentPlaceholder />
               ) : (
-                <LineChartComponent
-                  data={products?.slice(0, 15)}
-                  x="title"
-                  line="rating"
+                <SimpleRadarCharts
+                  data={bonusMonths}
+                  title="month"
+                  value="totalOrders"
                   stroke="#5C85E7"
                   fill={"#436fbc"}
                 />
@@ -80,10 +105,38 @@ const Statistics = () => {
             </div>
           </div>
         </div>
-        <div className="flex h-2/5 gap-6 pr-10 ">
-          <div className="flex h-full w-2/6 bg-[#1a1733] border border-gray-700 rounded-lg">
+        <div className="grid grid-cols-3 gap-6 pr-10 ">
+          <div className="grid h-[250px] bg-[#18161f] rounded-lg">
             {/* graph 3 */}
+            <div className="w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-4 px-2 select-none">
+              {orderStatus === "loading" ? (
+                <ContentPlaceholder />
+              ) : (
+                <SimplePieChart
+                  data={commonCategories}
+                  title="category"
+                  value="totalOrders"
+                />
+              )}
+            </div>
+          </div>
+          <div className="grid  h-[250px] bg-[#18161f] rounded-lg">
+            {/* graph 4 */}
             <div className="w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-10 pr-6 select-none">
+              {orderStatus === "loading" ? (
+                <ContentPlaceholder />
+              ) : (
+                <PinBarCharts
+                  data={mostCommonLocations}
+                  title="location"
+                  value="totalOrders"
+                />
+              )}
+            </div>
+          </div>
+          <div className="grid  h-[250px] bg-[#18161f] rounded-lg">
+            {/* graph 5 */}
+            <div className="w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-10 pr-8 select-none">
               {productsStatus === "loading" ? (
                 <ContentPlaceholder />
               ) : (
@@ -97,8 +150,39 @@ const Statistics = () => {
               )}
             </div>
           </div>
-          <div className="flex h-full w-2/6 bg-[#1a1733] border border-gray-700 rounded-lg"></div>
-          <div className="flex h-full w-2/6 bg-[#1a1733] border border-gray-700 rounded-lg"></div>
+        </div>
+        <div className="grid grid-cols-3 gap-6 pr-10 ">
+          <div className="grid h-[250px] bg-[#18161f] rounded-lg">
+            {/* graph 2 */}
+            <div className="w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-10 px-4 select-none">
+              {productsStatus === "loading" ? (
+                <ContentPlaceholder />
+              ) : (
+                <LineChartComponent
+                  data={products?.slice(0, 15)}
+                  x="title"
+                  line="rating"
+                  stroke="#5C85E7"
+                  fill={"#436fbc"}
+                />
+              )}
+            </div>
+          </div>
+          <div className="grid  h-[250px] bg-[#18161f] rounded-lg">
+            {/* graph 4 */}
+            <div className="w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-10 pr-6 select-none">
+              {orderStatus === "loading" ? (
+                <ContentPlaceholder />
+              ) : (
+                <LinedBarGraph
+                  data={deliveryCount}
+                  title="location"
+                  value="deliveries"
+                />
+              )}
+            </div>
+          </div>
+          {/* <div className="grid  h-[250px] bg-[#18161f] rounded-lg"></div> */}
         </div>
       </div>
     </>
