@@ -9,7 +9,7 @@ export default function Column({ title, tasks, id, deleteItem, addItem }) {
   return (
     <>
       <div
-        className={`column bg-[#181818] flex-1 h-[95%] overflow-y-auto w-full`}
+        className={`columnKBoard bg-[#181818] flex-1 h-[95%] overflow-y-auto w-full`}
       >
         <div
           className={`p-3 w-full flex items-center justify-between bg-[#262626] sticky top-0 rounded-b-md ${

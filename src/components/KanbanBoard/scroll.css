@@ -1,9 +1,9 @@
-.column {
+.columnKBoard {
     -ms-overflow-style: none;
     scrollbar-width: none;
     overflow-y: scroll;
 }
 
-.column::-webkit-scrollbar {
+.columnKBoard::-webkit-scrollbar {
     display: none;
 }
