@@ -168,7 +168,7 @@ export default function KanbanBoard() {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="flex gap-5 w-full h-full overflow-y-auto ">
+      <div className="flex gap-5 w-full h-full overflow-y-auto max-sm:gap-2">
         <Column title={"TASKS"} tasks={tasks} id={"1"} />
         <Column title={"REPORTS"} tasks={reports} id={"2"} />
         <Column title={"BACKLOGS"} tasks={backlogs} id={"3"} />
