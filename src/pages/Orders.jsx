@@ -59,7 +59,7 @@ const ContextList = ({ onExportCSV, setOpen, closeOther, graphTitle }) => {
 
 const Orders = () => {
   const [openOrdersModal, setOpenOrdersModal] = useState(false);
-  const [ordersId,setOrdersId] = useState(null);
+  const [ordersId, setOrdersId] = useState(null);
   const [userDropDown, setUserDropDown] = useState(false);
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
   const [contextMenuVisible, setContextMenuVisible] = useState(false);
@@ -129,7 +129,7 @@ const Orders = () => {
               className="flex-1 pr-2  disabled:opacity-50  hover:opacity-100 transition-all hover:text-green-500 inline-flex items-center justify-center border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:z-10  saturate-[110%] border-gray-600 focus:ring-green-500 bg-[#0B0D10] text-white text-sm font-medium rounded-md "
               onClick={() => {
                 setOrdersId(params.data._id);
-                console.log(params.data._id)
+                console.log(params.data._id);
                 setOpenOrdersModal(true);
               }}
             >
@@ -349,9 +349,13 @@ const Orders = () => {
       {/* orders table */}
       <div
         className="ag-theme-alpine-dark h-full bg-gray-800 "
-        onClick={() => {
+        onClick={(e) => {
           if (setContextMenuVisible) {
             setContextMenuVisible(false);
+          }
+          e.stopPropagation();
+          if (userDropDown) {
+            toggleUserDropDown();
           }
         }}
         onContextMenu={(e) => {
