@@ -166,7 +166,7 @@ const Home = () => {
                               : item.category == "report"
                               ? "ri-triangle-line"
                               : "ri-focus-2-line "
-                          }`}
+                          } text-gray-300`}
                         ></i>{" "}
                         {item.title}
                       </div>
