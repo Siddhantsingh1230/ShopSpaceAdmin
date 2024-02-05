@@ -15,7 +15,7 @@ export default function Task({ task, index, columnID }) {
               : columnID == "2"
               ? "bg-[#e49771] "
               : "bg-[#fa51e3] "
-          } rounded-md mb-5 grid grid-cols-11 px-2 py-5 `}
+          } rounded-md mb-5 grid grid-cols-11 px-2 py-3 `}
         >
           <div className="col-span-1 pl-2"><i className="ri-draggable text-black"></i></div>
           <div className="col-span-9 text-sm ">{task.title}</div>
