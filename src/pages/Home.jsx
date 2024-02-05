@@ -13,6 +13,23 @@ import { motion } from "framer-motion";
 const Home = () => {
   const [userDropDown, setUserDropDown] = useState(false);
   const [notificationDropDown, setNotificationDropDown] = useState(false);
+  // Mobile screen or not
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      // Check if the width is less than a certain threshold (e.g., 768 for typical mobile devices)
+      setIsMobile(window.innerWidth < 768);
+    };
+    // Initial check on component mount
+    handleResize();
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const navigate = useNavigate();
   const [cards, setCards] = useState([]);
   const toggleUserDropDown = () => {
@@ -118,7 +135,7 @@ const Home = () => {
                   .slice(0, 4)
                   .map((item, key) => (
                     <motion.div
-                      drag
+                      drag={!isMobile}
                       dragConstraints={{ top: 0, right: 0, left: 0, bottom: 0 }}
                       onClick={() => navigate("/extras")}
                       key={key}
