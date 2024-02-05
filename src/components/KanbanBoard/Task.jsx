@@ -8,7 +8,7 @@ export default function Task({ task, index, columnID, deleteItem }) {
         <motion.div
           initial={{ x: 0, Y: 0 }}
           motion={{ x: 0, Y: 0 }}
-          exit={{ x: "-100vw", backgroundColor: "lightblue" }}
+          exit={{ x: "-100vw", backgroundColor: "#fff" }}
           transition={{ duration: 1, easings: "ease" }}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
