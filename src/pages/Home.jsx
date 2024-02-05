@@ -1,16 +1,19 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import ContentPlaceholder from "../components/ContentPlaceholder";
 import LineChartComponent from "../components/charts/LineChartComponent.jsx";
 import AreaChartComponent from "../components/charts/AreaChartComponent.jsx";
 import UserAvatar from "../components/UserAvatar.jsx";
 import Notifications from "../components/Notifications.jsx";
 import MobileSidebar from "../components/MobileSidebar.jsx";
+import { getAllNotes } from "../api/notes.js";
 
 const Home = () => {
   const [userDropDown, setUserDropDown] = useState(false);
   const [notificationDropDown, setNotificationDropDown] = useState(false);
+  const navigate = useNavigate();
+  const [cards, setCards] = useState([]);
   const toggleUserDropDown = () => {
     setUserDropDown((state) => !state);
   };
@@ -18,10 +21,19 @@ const Home = () => {
     setNotificationDropDown((state) => !state);
   };
   const products = useSelector((state) => state.product.products);
+  const user = useSelector((state) => state.auth.user);
   const mostOrderedProducts = useSelector(
     (state) => state.product.mostOrderedProducts
   );
   const productsStatus = useSelector((state) => state.product.status);
+
+  const getCards = async () => {
+    const { notes } = await getAllNotes(user._id);
+    setCards(notes);
+  };
+  useEffect(() => {
+    getCards();
+  }, []);
 
   return (
     <>
@@ -39,7 +51,7 @@ const Home = () => {
         className="flex  max-sm:flex-col max-sm:gap-4 justify-between items-center mb-3 w-full  max-sm:px-3"
       >
         <div className="max-sm:text-3xl max-sm:w-full text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 animate-gradient select-none">
-        <MobileSidebar/> Dashboard
+          <MobileSidebar /> Dashboard
         </div>
         <div className="flex gap-4  justify-center max-sm:justify-between items-center max-sm:w-full">
           {/* Search Bar */}
@@ -97,7 +109,69 @@ const Home = () => {
           {/* cards */}
           <div className="thinScroll flex mt-6 w-full gap-6 overflow-x-auto py-2">
             {/* If cards are not loaded */}
-            {!false &&
+            {cards.length > 0 ? (
+              <>
+                {/* get Random cards */}
+                {cards
+                  .sort(() => 0.5 - Math.random())
+                  .slice(0, 4)
+                  .map((item, key) => (
+                    <div
+                      onClick={() => navigate("/extras")}
+                      key={key}
+                      className={`flex-1 border ${
+                        item.category == "task"
+                          ? "border-[#7e3ff4] "
+                          : item.category == "report"
+                          ? "border-[#eb7f48] "
+                          : "border-[#ee3fd7] "
+                      } cursor-pointer   max-sm:min-w-full min-w-60 w-60 h-40 rounded-lg overflow-hidden flex flex-col`}
+                    >
+                      <div className={`flex justify-between items-center ${
+                        item.category == "task"
+                          ? "bg-[#7e3ff4] "
+                          : item.category == "report"
+                          ? "bg-[#eb7f48] "
+                          : "bg-[#ee3fd7] "
+                      }`}>
+                        <h1 className="text-xl text-ellipsis text-nowrap overflow-hidden  px-5 py-2 select-none text-gray-900 font-bold font-mono">
+                          <i
+                            className={`${
+                              item.category == "task"
+                                ? " ri-magic-line "
+                                : item.category == "report"
+                                ? "ri-triangle-line"
+                                : "ri-focus-2-line "
+                            }  font-normal`}
+                          ></i>{" "}
+                          {item.category.toUpperCase()}
+                        </h1>
+                        <p className="text-xs px-5 flex items-center">
+                          {String(
+                            `${String(
+                              new Date(item.createdAt).getDate()
+                            ).padStart(2, "0")}/${String(
+                              new Date(item.createdAt).getMonth() + 1
+                            ).padStart(2, "0")}/${new Date(
+                              item.createdAt
+                            ).getFullYear()}`
+                          )}
+                          <i className="pl-2 ri-time-line"></i>
+                        </p>
+                      </div>
+                      <div className={`w-full overflow-hidden ${
+                        item.category == "task"
+                          ? "text-[#7e3ff4] "
+                          : item.category == "report"
+                          ? "text-[#eb7f48] "
+                          : "text-[#ee3fd7] "
+                      }  select-none h-full p-2  whitespace-break-spaces`}>
+                        {item.title}
+                      </div>
+                    </div>
+                  ))}
+              </>
+            ) : (
               new Array(4).fill(0).map((_, idx) => (
                 <div
                   key={idx}
@@ -105,7 +179,8 @@ const Home = () => {
                 >
                   <ContentPlaceholder />
                 </div>
-              ))}
+              ))
+            )}
           </div>
         </div>
         {/* analysis */}
