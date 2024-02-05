@@ -121,13 +121,15 @@ const Home = () => {
                       key={key}
                       className={`flex-1  bg-[#181818] cursor-pointer   max-sm:min-w-full min-w-60 w-60 h-40 rounded-lg overflow-hidden flex flex-col`}
                     >
-                      <div className={`flex justify-between items-center ${
-                        item.category == "task"
-                          ? "bg-[#7e3ff4] "
-                          : item.category == "report"
-                          ? "bg-[#eb7f48] "
-                          : "bg-[#ee3fd7] "
-                      } `}>
+                      <div
+                        className={`flex justify-between items-center ${
+                          item.category == "task"
+                            ? "bg-[#7e3ff4] "
+                            : item.category == "report"
+                            ? "bg-[#eb7f48] "
+                            : "bg-[#ee3fd7] "
+                        } `}
+                      >
                         <h1 className="text-xl text-ellipsis text-nowrap overflow-hidden  px-5 py-2 select-none text-gray-900 font-bold font-mono">
                           <i
                             className={`${
@@ -153,14 +155,16 @@ const Home = () => {
                           <i className="pl-2 ri-time-line"></i>
                         </p>
                       </div>
-                      <div className={`w-full overflow-hidden ${
-                        item.category == "task"
-                          ? "text-[#7e3ff4] "
-                          : item.category == "report"
-                          ? "text-[#eb7f48] "
-                          : "text-[#ee3fd7] "
-                      }  select-none h-full p-5 whitespace-break-spaces`}>
-                        {item.title}
+                      <div
+                        className={`w-full overflow-hidden ${
+                          item.category == "task"
+                            ? "text-[#7e3ff4] "
+                            : item.category == "report"
+                            ? "text-[#eb7f48] "
+                            : "text-[#ee3fd7] "
+                        }  select-none h-full p-5 whitespace-break-spaces`}
+                      >
+                        <i className="ri-quill-pen-line"></i> {item.title}
                       </div>
                     </div>
                   ))}
