@@ -119,13 +119,7 @@ const Home = () => {
                     <div
                       onClick={() => navigate("/extras")}
                       key={key}
-                      className={`flex-1 border ${
-                        item.category == "task"
-                          ? "border-[#7e3ff4] "
-                          : item.category == "report"
-                          ? "border-[#eb7f48] "
-                          : "border-[#ee3fd7] "
-                      } cursor-pointer   max-sm:min-w-full min-w-60 w-60 h-40 rounded-lg overflow-hidden flex flex-col`}
+                      className={`flex-1  bg-[#181818] cursor-pointer   max-sm:min-w-full min-w-60 w-60 h-40 rounded-lg overflow-hidden flex flex-col`}
                     >
                       <div className={`flex justify-between items-center ${
                         item.category == "task"
@@ -133,7 +127,7 @@ const Home = () => {
                           : item.category == "report"
                           ? "bg-[#eb7f48] "
                           : "bg-[#ee3fd7] "
-                      }`}>
+                      } `}>
                         <h1 className="text-xl text-ellipsis text-nowrap overflow-hidden  px-5 py-2 select-none text-gray-900 font-bold font-mono">
                           <i
                             className={`${
@@ -165,7 +159,7 @@ const Home = () => {
                           : item.category == "report"
                           ? "text-[#eb7f48] "
                           : "text-[#ee3fd7] "
-                      }  select-none h-full p-2  whitespace-break-spaces`}>
+                      }  select-none h-full p-5 whitespace-break-spaces`}>
                         {item.title}
                       </div>
                     </div>
