@@ -27,7 +27,7 @@ export default function Column({ title, tasks, id }) {
       <Droppable droppableId={id}>
         {(provided, snapshot) => (
           <div
-            className={`flex flex-col py-5 px-2`}
+            className={`flex flex-col py-5 px-2 max-sm:px-0`}
             ref={provided.innerRef}
             {...provided.droppableProps}
             isdraggingover={snapshot.isDraggingOver.toString()}
