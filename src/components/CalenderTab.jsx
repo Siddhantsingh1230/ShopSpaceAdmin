@@ -27,7 +27,7 @@ const CalenderTab = () => {
   };
   return (
     <>
-      <div className="h-full w-ful">
+      <div className="h-full w-full">
         <DnDCalendar
           localizer={localizer}
           defaultDate={new Date()}

@@ -1,7 +1,11 @@
+import KanbanBoard from "./KanbanBoard/KanbanBoard";
+
 const TodoCards = () => {
   return (
     <>
-      <div className="h-full w-full text-white">CARDS</div>
+      <div className="w-full h-full overflow-hidden">
+        <KanbanBoard />
+      </div>
     </>
   );
 };
