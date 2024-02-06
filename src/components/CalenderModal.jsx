@@ -42,12 +42,34 @@ const CalenderModal = ({ open, setOpen }) => {
                     onClick={() => setOpen(false)}
                     className="w-full py-2 px-4 text-gray-400 border-b border-gray-700 "
                   >
-                    <i className="opacity-55 hover:opacity-100 transition-all text-lg  cursor-pointer ri-arrow-left-line mr-2"></i>Create Event
+                    <i className="opacity-55 hover:opacity-100 transition-all text-lg  cursor-pointer ri-arrow-left-line mr-2"></i>
+                    Create Event
                   </div>
                   <div className="w-full h-full p-3">
-                    <textarea placeholder="Type here.." className="w-full h-1/3 outline-none bg-transparent resize-none overflow-y-auto text-gray-300"></textarea>
+                    <textarea
+                      placeholder="Type here.."
+                      className="w-full h-1/3 outline-none bg-transparent resize-none overflow-y-auto text-gray-300"
+                    ></textarea>
+                    <div className="w-full flex flex-col gap-2 md:gap-5">
+                      <div className="w-full flex justify-center flex-col">
+                        <h1 className=" text-white mb-2">From :</h1>
+                        <input
+                          type="datetime-local"
+                          className="bg-green-500  px-2 py-1 rounded-md outline-1    datetimepicker"
+                        />
+                      </div>
+                      <div className="w-full flex justify-center  flex-col mb-2">
+                        <h1 className=" text-white">To :</h1>
+                        <input
+                          type="datetime-local"
+                          className="bg-orange-500  px-2 py-1 rounded-md outline-1    datetimepicker"
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div className="w-full py-1 text-center cursor-pointer hover:bg-blue-600 transition-all bg-blue-500  text-white">Save</div>
+                  <div className="w-full py-1 text-center cursor-pointer hover:bg-blue-600 transition-all bg-blue-500  text-white">
+                    Save
+                  </div>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

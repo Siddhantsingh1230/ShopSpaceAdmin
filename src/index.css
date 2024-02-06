@@ -290,7 +290,7 @@ input::-webkit-inner-spin-button {
   border: 1px solid #4d71c5;
 }
 .rbc-toolbar .rbc-toolbar-label {
-  color: #3B82F6;
+  color: #3b82f6;
   margin-bottom: 1rem;
 }
 .rbc-toolbar .rbc-btn-group > button {
@@ -304,7 +304,7 @@ input::-webkit-inner-spin-button {
 }
 .rbc-toolbar button:active,
 .rbc-toolbar button.rbc-active {
-  background-color: #3B82F6 !important;
+  background-color: #3b82f6 !important;
 }
 /* Btn hover */
 /* #3B82F6 - bg-blue-500 */
@@ -397,7 +397,7 @@ input::-webkit-inner-spin-button {
 
 .rbc-overlay {
   background-color: #191919 !important;
-  border-color: #3B82F6 !important;
+  border-color: #3b82f6 !important;
   border-radius: 0.5rem;
 }
 .rbc-overlay-header {
@@ -418,7 +418,8 @@ input::-webkit-inner-spin-button {
 .rbc-overlay > * + * {
   margin-block: 0.35rem !important;
 }
-.rbc-agenda-empty{
-  color:white;
+.rbc-agenda-empty {
+  color: white;
   padding: 1rem;
 }
+
