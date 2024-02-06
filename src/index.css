@@ -299,7 +299,7 @@ input::-webkit-inner-spin-button {
   transition: all ease 0.2s;
 }
 /* btn active */
-.rbc-toolbar button{
+.rbc-toolbar button {
   background: transparent !important;
 }
 .rbc-toolbar button:active,
@@ -307,11 +307,12 @@ input::-webkit-inner-spin-button {
   background-color: #4d71c5 !important;
 }
 /* Btn hover */
+/* #3B82F6 - bg-blue-500 */
 .rbc-toolbar button:hover,
 .rbc-toolbar button:active:focus,
 .rbc-toolbar button.rbc-active:hover,
 .rbc-toolbar button.rbc-active:focus {
-  background-color: #4d71c5 !important;
+  background-color: #3b82f6 !important;
 }
 .rbc-header {
   border-bottom: 1px solid #4d71c5 !important;
@@ -347,7 +348,8 @@ input::-webkit-inner-spin-button {
   border-top: 1px solid #4d71c5 !important;
 }
 .rbc-event {
-  background-color: rgb(242, 121, 8) !important;
+  background-color: #3b82f6 !important;
+  border: 1px solid black !important;
 }
 .rbc-today {
   background-color: #5b85e6 !important;
@@ -388,4 +390,31 @@ input::-webkit-inner-spin-button {
 
 .rbc-agenda-view table.rbc-agenda-table tbody > tr > td + td {
   border-left: 1px solid #4d71c5 !important;
+}
+.rbc-agenda-time-cell {
+  border-left: 1px solid #4d71c5 !important;
+}
+
+.rbc-overlay {
+  background-color: #191919 !important;
+  border-color: #3B82F6 !important;
+  border-radius: 0.5rem;
+}
+.rbc-overlay-header {
+  color: #3b82f6 !important;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #454545 !important;
+}
+.rbc-show-more {
+  background: transparent !important;
+  font-size: 70% !important;
+}
+
+.rbc-event-continues-after {
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  margin-bottom: 0.5rem;
+}
+.rbc-overlay > * + * {
+  margin-block: 0.35rem !important;
 }
