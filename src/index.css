@@ -418,3 +418,7 @@ input::-webkit-inner-spin-button {
 .rbc-overlay > * + * {
   margin-block: 0.35rem !important;
 }
+.rbc-agenda-empty{
+  color:white;
+  padding: 1rem;
+}

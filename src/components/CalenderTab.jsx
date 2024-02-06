@@ -6,6 +6,8 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState } from "react";
 import { useCallback } from "react";
 import { useMemo } from "react";
+import CalenderModal from "./CalenderModal";
+import { motion } from "framer-motion";
 
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
@@ -15,7 +17,7 @@ const CalenderTab = () => {
     {
       id: 0,
       title: "All Day Event very long title",
-      allDay: true,
+
       start: new Date(2024, 1, 0),
       end: new Date(2024, 1, 1),
     },
@@ -24,7 +26,6 @@ const CalenderTab = () => {
       title: "Long Event",
       start: new Date(2024, 1, 7),
       end: new Date(2024, 1, 10),
-      allDay: false,
     },
 
     {
@@ -32,7 +33,6 @@ const CalenderTab = () => {
       title: "DTS STARTS",
       start: new Date(2024, 1, 13, 0, 0, 0),
       end: new Date(2024, 1, 20, 0, 0, 0),
-      allDay: false,
     },
 
     {
@@ -40,7 +40,6 @@ const CalenderTab = () => {
       title: "DTS ENDS",
       start: new Date(2024, 12, 6, 0, 0, 0),
       end: new Date(2024, 12, 13, 0, 0, 0),
-      allDay: false,
     },
 
     {
@@ -48,7 +47,6 @@ const CalenderTab = () => {
       title: "Some Event",
       start: new Date(2024, 1, 9, 0, 0, 0),
       end: new Date(2024, 1, 10, 0, 0, 0),
-      allDay: false,
     },
     {
       id: 5,
@@ -56,7 +54,6 @@ const CalenderTab = () => {
       start: new Date(2024, 1, 11),
       end: new Date(2024, 1, 13),
       desc: "Big conference for important people",
-      allDay: false,
     },
     {
       id: 6,
@@ -64,7 +61,6 @@ const CalenderTab = () => {
       start: new Date(2024, 1, 12, 10, 30, 0, 0),
       end: new Date(2024, 1, 12, 12, 30, 0, 0),
       desc: "Pre-meeting meeting, to prepare for the meeting",
-      allDay: false,
     },
     {
       id: 7,
@@ -72,14 +68,12 @@ const CalenderTab = () => {
       start: new Date(2024, 1, 12, 12, 0, 0, 0),
       end: new Date(2024, 1, 12, 13, 0, 0, 0),
       desc: "Power lunch",
-      allDay: false,
     },
     {
       id: 8,
       title: "Meeting",
       start: new Date(2024, 1, 12, 14, 0, 0, 0),
       end: new Date(2024, 1, 12, 15, 0, 0, 0),
-      allDay: false,
     },
     {
       id: 9,
@@ -87,24 +81,22 @@ const CalenderTab = () => {
       start: new Date(2024, 1, 12, 17, 0, 0, 0),
       end: new Date(2024, 1, 12, 17, 30, 0, 0),
       desc: "Most important meal of the day",
-      allDay: false,
     },
     {
       id: 10,
       title: "Dinner",
       start: new Date(2024, 1, 12, 20, 0, 0, 0),
       end: new Date(2024, 1, 12, 21, 0, 0, 0),
-      allDay: false,
     },
     {
       id: 11,
       title: "Planning Meeting with Paige",
       start: new Date(2024, 1, 13, 8, 0, 0),
       end: new Date(2024, 1, 13, 10, 30, 0),
-      allDay: false,
     },
   ];
   const [myEvents, setMyEvents] = useState(events);
+  const [open, setOpen] = useState(false);
 
   const moveEvent = useCallback(
     ({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
@@ -135,7 +127,7 @@ const CalenderTab = () => {
   const defaultDate = useMemo(() => new Date(2024, 1, 12), []);
   return (
     <>
-      <div className="h-full w-full">
+      <div className="h-full w-full relative">
         <DnDCalendar
           defaultDate={defaultDate}
           defaultView={Views.MONTH}
@@ -150,7 +142,25 @@ const CalenderTab = () => {
           resizable
           style={{ height: "100%", w: "100%" }}
         />
+        <motion.button
+          initial={{ x: 0, y: 0 }}
+          animate={{ y: [5, -5], x: [2, -5] }}
+          whileHover={{ rotateZ: 360 }}
+          transition={{
+            duration: 2,
+            ease: "easeIn",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          title="Add event"
+          onClick={() => setOpen(true)}
+          className="absolute text-lg top-3 hover:bg-blue-500 transition-all left-[35%] rounded-full bg-green-300 font-bold   max-sm:top-10 max-sm:left-5 cursor-pointer w-7 h-7 "
+        >
+          <i className="ri-add-line"></i>
+        </motion.button>
       </div>
+      {/* calander modal */}
+      <CalenderModal open={open} setOpen={setOpen} />
     </>
   );
 };
