@@ -290,7 +290,7 @@ input::-webkit-inner-spin-button {
   border: 1px solid #4d71c5;
 }
 .rbc-toolbar .rbc-toolbar-label {
-  color: #4d71c5;
+  color: #3B82F6;
   margin-bottom: 1rem;
 }
 .rbc-toolbar .rbc-btn-group > button {
@@ -304,7 +304,7 @@ input::-webkit-inner-spin-button {
 }
 .rbc-toolbar button:active,
 .rbc-toolbar button.rbc-active {
-  background-color: #4d71c5 !important;
+  background-color: #3B82F6 !important;
 }
 /* Btn hover */
 /* #3B82F6 - bg-blue-500 */

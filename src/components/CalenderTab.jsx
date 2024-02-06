@@ -24,6 +24,7 @@ const CalenderTab = () => {
       title: "Long Event",
       start: new Date(2015, 3, 7),
       end: new Date(2015, 3, 10),
+      allDay: false,
     },
 
     {
@@ -31,6 +32,7 @@ const CalenderTab = () => {
       title: "DTS STARTS",
       start: new Date(2016, 2, 13, 0, 0, 0),
       end: new Date(2016, 2, 20, 0, 0, 0),
+      allDay: false,
     },
 
     {
@@ -38,6 +40,7 @@ const CalenderTab = () => {
       title: "DTS ENDS",
       start: new Date(2016, 10, 6, 0, 0, 0),
       end: new Date(2016, 10, 13, 0, 0, 0),
+      allDay: false,
     },
 
     {
@@ -45,6 +48,7 @@ const CalenderTab = () => {
       title: "Some Event",
       start: new Date(2015, 3, 9, 0, 0, 0),
       end: new Date(2015, 3, 10, 0, 0, 0),
+      allDay: false,
     },
     {
       id: 5,
@@ -52,6 +56,7 @@ const CalenderTab = () => {
       start: new Date(2015, 3, 11),
       end: new Date(2015, 3, 13),
       desc: "Big conference for important people",
+      allDay: false,
     },
     {
       id: 6,
@@ -59,6 +64,7 @@ const CalenderTab = () => {
       start: new Date(2015, 3, 12, 10, 30, 0, 0),
       end: new Date(2015, 3, 12, 12, 30, 0, 0),
       desc: "Pre-meeting meeting, to prepare for the meeting",
+      allDay: false,
     },
     {
       id: 7,
@@ -66,12 +72,14 @@ const CalenderTab = () => {
       start: new Date(2015, 3, 12, 12, 0, 0, 0),
       end: new Date(2015, 3, 12, 13, 0, 0, 0),
       desc: "Power lunch",
+      allDay: false,
     },
     {
       id: 8,
       title: "Meeting",
       start: new Date(2015, 3, 12, 14, 0, 0, 0),
       end: new Date(2015, 3, 12, 15, 0, 0, 0),
+      allDay: false,
     },
     {
       id: 9,
@@ -79,18 +87,21 @@ const CalenderTab = () => {
       start: new Date(2015, 3, 12, 17, 0, 0, 0),
       end: new Date(2015, 3, 12, 17, 30, 0, 0),
       desc: "Most important meal of the day",
+      allDay: false,
     },
     {
       id: 10,
       title: "Dinner",
       start: new Date(2015, 3, 12, 20, 0, 0, 0),
       end: new Date(2015, 3, 12, 21, 0, 0, 0),
+      allDay: false,
     },
     {
       id: 11,
       title: "Planning Meeting with Paige",
       start: new Date(2015, 3, 13, 8, 0, 0),
       end: new Date(2015, 3, 13, 10, 30, 0),
+      allDay: false,
     },
   ];
   const [myEvents, setMyEvents] = useState(events);
@@ -131,6 +142,9 @@ const CalenderTab = () => {
           events={myEvents}
           localizer={localizer}
           onEventDrop={moveEvent}
+          handleDragStart={() => {
+            return;
+          }}
           onEventResize={resizeEvent}
           popup
           resizable
