@@ -20,7 +20,7 @@ export default function Task({ task, index, columnID, deleteItem }) {
           <div className="md:col-span-1 pl-2 max-sm:hidden">
             <i className="ri-draggable text-black"></i>
           </div>
-          <div className="md:col-span-9 text-sm max-sm:text-xs max-sm:px-2 ">
+          <div className="md:col-span-9 text-sm max-sm:text-xs max-sm:px-2 overflow-hidden">
             {task.title}
           </div>
           <div

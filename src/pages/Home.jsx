@@ -122,7 +122,10 @@ const Home = () => {
         <div>
           <div className="flex justify-between text-white font-bold text-xl mt-6">
             <p>My Cards</p>
-            <i onClick={() => navigate("/extras")} className="ri-add-line cursor-pointer opacity-55 transition-all hover:opacity-100"></i>
+            <i
+              onClick={() => navigate("/extras")}
+              className="ri-add-line cursor-pointer opacity-55 transition-all hover:opacity-100"
+            ></i>
           </div>
           {/* cards */}
           <div className="thinScroll flex mt-6 w-full gap-6 overflow-x-auto py-2">
@@ -150,7 +153,7 @@ const Home = () => {
                             : "bg-[#ee3fd7] "
                         } `}
                       >
-                        <h1 className="text-xl text-ellipsis text-nowrap overflow-hidden  px-5 py-2 select-none text-gray-900 font-bold font-mono">
+                        <h1 className="text-lg text-ellipsis text-nowrap overflow-hidden  px-5 py-1 select-none text-gray-900 font-bold font-mono">
                           <i className={`ri-draggable  font-normal`}></i>{" "}
                           {item.category.toUpperCase()}
                         </h1>
@@ -174,7 +177,7 @@ const Home = () => {
                             : item.category == "report"
                             ? "text-[#eb7f48] "
                             : "text-[#ee3fd7] "
-                        }  select-none h-full p-5 whitespace-break-spaces`}
+                        }  select-none h-full p-5 max-sm:text-sm whitespace-break-spaces `}
                       >
                         <i
                           className={`${
@@ -185,7 +188,7 @@ const Home = () => {
                               : "ri-focus-2-line "
                           } text-gray-300`}
                         ></i>{" "}
-                        {item.title}
+                       {item.title}
                       </div>
                       <div
                         className={`w-full  ${
