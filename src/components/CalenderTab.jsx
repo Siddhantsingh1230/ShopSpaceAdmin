@@ -69,7 +69,7 @@ const CalenderTab = () => {
     },
     [setMyEvents]
   );
-  const defaultDate = useMemo(() => new Date(2024, 1, 12), []);
+  const defaultDate = useMemo(() => new Date(), []);
   return (
     <>
       <div className="h-full w-full relative">
