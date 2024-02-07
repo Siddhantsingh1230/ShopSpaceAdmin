@@ -1,11 +1,14 @@
 import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { addEvent } from "../api/calender";
+import { useSelector } from "react-redux";
 
 const CalenderModal = ({ open, setOpen, setEvents }) => {
   const cancelButtonRef = useRef(null);
   const [title, setTitle] = useState("");
   const [sDate, setSDate] = useState(null);
   const [eDate, setEDate] = useState(null);
+  const user = useSelector((state) => state.auth.user);
 
   const getDateObj = (date) => {
     let dateTime = new Date(date);
@@ -26,28 +29,28 @@ const CalenderModal = ({ open, setOpen, setEvents }) => {
     ) {
       const sDateTime = getDateObj(sDate);
       const eDateTime = getDateObj(eDate);
-      console.log(title, eDateTime, sDateTime);
-      setEvents((prev) => [
-        ...prev,
-        {
-          id: new Date(),
-          title,
-          start: new Date(
-            sDateTime.year,
-            sDateTime.month,
-            sDateTime.day,
-            sDateTime.hour,
-            sDateTime.minute
-          ),
-          end: new Date(
-            eDateTime.year,
-            eDateTime.month,
-            eDateTime.day,
-            eDateTime.hour,
-            eDateTime.minute
-          ),
-        },
-      ]);
+      // console.log(title, eDateTime, sDateTime);
+      const eventObj = {
+        userId: user._id,
+        title,
+        start: new Date(
+          sDateTime.year,
+          sDateTime.month,
+          sDateTime.day,
+          sDateTime.hour,
+          sDateTime.minute
+        ),
+        end: new Date(
+          eDateTime.year,
+          eDateTime.month,
+          eDateTime.day,
+          eDateTime.hour,
+          eDateTime.minute
+        ),
+        createdAt: Date.now(),
+      };
+      setEvents((prev) => [...prev, { ...eventObj }]);
+      addEvent(eventObj);
       setOpen(false);
     }
   };

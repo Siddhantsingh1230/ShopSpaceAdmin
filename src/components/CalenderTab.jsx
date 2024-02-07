@@ -3,100 +3,40 @@ import moment from "moment";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCallback } from "react";
 import { useMemo } from "react";
 import CalenderModal from "./CalenderModal";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { getCalender, updateEvent } from "../api/calender";
 
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
 
 const CalenderTab = () => {
-  const events = [
-    {
-      id: 0,
-      title: "All Day Event very long title",
-
-      start: new Date(2024, 1, 0),
-      end: new Date(2024, 1, 1),
-    },
-    {
-      id: 1,
-      title: "Long Event",
-      start: new Date(2024, 1, 7),
-      end: new Date(2024, 1, 10),
-    },
-
-    {
-      id: 2,
-      title: "DTS STARTS",
-      start: new Date(2024, 1, 13, 0, 0, 0),
-      end: new Date(2024, 1, 20, 0, 0, 0),
-    },
-
-    {
-      id: 3,
-      title: "DTS ENDS",
-      start: new Date(2024, 12, 6, 0, 0, 0),
-      end: new Date(2024, 12, 13, 0, 0, 0),
-    },
-
-    {
-      id: 4,
-      title: "Some Event",
-      start: new Date(2024, 1, 9, 0, 0, 0),
-      end: new Date(2024, 1, 10, 0, 0, 0),
-    },
-    {
-      id: 5,
-      title: "Conference",
-      start: new Date(2024, 1, 11),
-      end: new Date(2024, 1, 13),
-      desc: "Big conference for important people",
-    },
-    {
-      id: 6,
-      title: "Meeting",
-      start: new Date(2024, 1, 12, 10, 30, 0, 0),
-      end: new Date(2024, 1, 12, 12, 30, 0, 0),
-      desc: "Pre-meeting meeting, to prepare for the meeting",
-    },
-    {
-      id: 7,
-      title: "Lunch",
-      start: new Date(2024, 1, 12, 12, 0, 0, 0),
-      end: new Date(2024, 1, 12, 13, 0, 0, 0),
-      desc: "Power lunch",
-    },
-    {
-      id: 8,
-      title: "Meeting",
-      start: new Date(2024, 1, 12, 14, 0, 0, 0),
-      end: new Date(2024, 1, 12, 15, 0, 0, 0),
-    },
-    {
-      id: 9,
-      title: "Happy Hour",
-      start: new Date(2024, 1, 12, 17, 0, 0, 0),
-      end: new Date(2024, 1, 12, 17, 30, 0, 0),
-      desc: "Most important meal of the day",
-    },
-    {
-      id: 10,
-      title: "Dinner",
-      start: new Date(2024, 1, 12, 20, 0, 0, 0),
-      end: new Date(2024, 1, 12, 21, 0, 0, 0),
-    },
-    {
-      id: 11,
-      title: "Planning Meeting with Paige",
-      start: new Date(2024, 1, 13, 8, 0, 0),
-      end: new Date(2024, 1, 13, 10, 30, 0),
-    },
-  ];
-  const [myEvents, setMyEvents] = useState(events);
+  const [myEvents, setMyEvents] = useState([]);
   const [open, setOpen] = useState(false);
+  const user = useSelector((state) => state.auth.user);
+
+  // Fetch Calender
+  const fetchCalender = async () => {
+    try {
+      let { calender } = await getCalender(user._id);
+      calender = calender.map((item, key) => ({
+        ...item,
+        start: new Date(item.start),
+        end: new Date(item.end),
+      }));
+      setMyEvents(calender);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCalender();
+  }, []);
 
   const moveEvent = useCallback(
     ({ event, start, end, isAllDay: droppedOnAllDaySlot = false }) => {
@@ -106,8 +46,11 @@ const CalenderTab = () => {
       }
 
       setMyEvents((prev) => {
-        const existing = prev.find((ev) => ev.id === event.id) ?? {};
-        const filtered = prev.filter((ev) => ev.id !== event.id);
+        const existing =
+          prev.find((ev) => ev.createdAt === event.createdAt) ?? {};
+        const filtered = prev.filter((ev) => ev.createdAt !== event.createdAt);
+        // updateEvent
+        updateEvent(existing._id, { start, end });
         return [...filtered, { ...existing, start, end, allDay }];
       });
     },
@@ -117,8 +60,10 @@ const CalenderTab = () => {
   const resizeEvent = useCallback(
     ({ event, start, end }) => {
       setMyEvents((prev) => {
-        const existing = prev.find((ev) => ev.id === event.id) ?? {};
-        const filtered = prev.filter((ev) => ev.id !== event.id);
+        const existing =
+          prev.find((ev) => ev.createdAt === event.createdAt) ?? {};
+        const filtered = prev.filter((ev) => ev.createdAt !== event.createdAt);
+        updateEvent(existing._id, { start, end });
         return [...filtered, { ...existing, start, end }];
       });
     },
