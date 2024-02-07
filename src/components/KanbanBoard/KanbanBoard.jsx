@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import Column from "./Column";
 import { useSelector } from "react-redux";
+import Spinner from "../../components/Spinner";
 import {
   addNote,
   deleteNote,
@@ -12,12 +13,16 @@ import {
 export default function KanbanBoard() {
   const user = useSelector((state) => state.auth.user);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const getNotes = async (userId) => {
     try {
+      setLoading(true);
       const { notes } = await getAllNotes(userId);
       setData(notes);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -189,31 +194,35 @@ export default function KanbanBoard() {
 
   return (
     <>
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="flex gap-5 w-full h-full overflow-y-auto max-sm:gap-2">
-          <Column
-            title={"TASKS"}
-            tasks={tasks}
-            id={"1"}
-            deleteItem={deleteItem}
-            addItem={addItem}
-          />
-          <Column
-            title={"REPORTS"}
-            tasks={reports}
-            id={"2"}
-            deleteItem={deleteItem}
-            addItem={addItem}
-          />
-          <Column
-            title={"BACKLOGS"}
-            tasks={backlogs}
-            id={"3"}
-            deleteItem={deleteItem}
-            addItem={addItem}
-          />
-        </div>
-      </DragDropContext>
+      {!loading ? (
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <div className="flex gap-5 w-full h-full overflow-y-auto max-sm:gap-2">
+            <Column
+              title={"TASKS"}
+              tasks={tasks}
+              id={"1"}
+              deleteItem={deleteItem}
+              addItem={addItem}
+            />
+            <Column
+              title={"REPORTS"}
+              tasks={reports}
+              id={"2"}
+              deleteItem={deleteItem}
+              addItem={addItem}
+            />
+            <Column
+              title={"BACKLOGS"}
+              tasks={backlogs}
+              id={"3"}
+              deleteItem={deleteItem}
+              addItem={addItem}
+            />
+          </div>
+        </DragDropContext>
+      ) : (
+        <Spinner />
+      )}
     </>
   );
 }

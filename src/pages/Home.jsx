@@ -8,7 +8,7 @@ import UserAvatar from "../components/UserAvatar.jsx";
 import Notifications from "../components/Notifications.jsx";
 import MobileSidebar from "../components/MobileSidebar.jsx";
 import { getAllNotes } from "../api/notes.js";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Home = () => {
   const [userDropDown, setUserDropDown] = useState(false);
@@ -132,75 +132,85 @@ const Home = () => {
             {/* If cards are not loaded */}
             {cards.length > 0 ? (
               <>
-                {/* get Random cards */}
-                {cards
-                  .sort(() => 0.5 - Math.random())
-                  .slice(0, 4)
-                  .map((item, key) => (
-                    <motion.div
-                      drag={!isMobile}
-                      dragConstraints={{ top: 0, right: 0, left: 0, bottom: 0 }}
-                      onClick={() => navigate("/extras")}
-                      key={key}
-                      className={`flex-1  bg-[#181818] cursor-pointer   max-sm:min-w-full min-w-60 w-60 h-40 rounded-lg overflow-hidden flex flex-col`}
-                    >
-                      <div
-                        className={`flex justify-between items-center ${
-                          item.category == "task"
-                            ? "bg-[#7e3ff4] "
-                            : item.category == "report"
-                            ? "bg-[#eb7f48] "
-                            : "bg-[#ee3fd7] "
-                        } `}
+                <AnimatePresence>
+                  {/* get Random cards */}
+                  {cards
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 4)
+                    .map((item, key) => (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, ease: "easeIn" }}
+                        drag={!isMobile}
+                        dragConstraints={{
+                          top: 0,
+                          right: 0,
+                          left: 0,
+                          bottom: 0,
+                        }}
+                        onClick={() => navigate("/extras")}
+                        key={key}
+                        className={`flex-1  bg-[#181818] cursor-pointer   max-sm:min-w-full min-w-60 w-60 h-40 rounded-lg overflow-hidden flex flex-col`}
                       >
-                        <h1 className="text-lg text-ellipsis text-nowrap overflow-hidden  px-5 py-1 select-none text-gray-900 font-bold font-mono">
-                          <i className={`ri-draggable  font-normal`}></i>{" "}
-                          {item.category.toUpperCase()}
-                        </h1>
-                        <p className="text-xs px-5 flex items-center">
-                          {String(
-                            `${String(
-                              new Date(item.createdAt).getDate()
-                            ).padStart(2, "0")}/${String(
-                              new Date(item.createdAt).getMonth() + 1
-                            ).padStart(2, "0")}/${new Date(
-                              item.createdAt
-                            ).getFullYear()}`
-                          )}
-                          <i className="pl-2 ri-time-line"></i>
-                        </p>
-                      </div>
-                      <div
-                        className={`w-full overflow-hidden ${
-                          item.category == "task"
-                            ? "text-[#7e3ff4] "
-                            : item.category == "report"
-                            ? "text-[#eb7f48] "
-                            : "text-[#ee3fd7] "
-                        }  select-none h-full p-5 max-sm:text-sm whitespace-break-spaces `}
-                      >
-                        <i
-                          className={`${
+                        <div
+                          className={`flex justify-between items-center ${
                             item.category == "task"
-                              ? " ri-magic-line "
+                              ? "bg-[#7e3ff4] "
                               : item.category == "report"
-                              ? "ri-triangle-line"
-                              : "ri-focus-2-line "
-                          } text-gray-300`}
-                        ></i>{" "}
-                       {item.title}
-                      </div>
-                      <div
-                        className={`w-full  ${
-                          item.category == "task"
-                            ? "bg-[#7e3ff4] "
-                            : item.category == "report"
-                            ? "bg-[#eb7f48] "
-                            : "bg-[#ee3fd7] "
-                        } py-[2px]`}
-                      ></div>
-                    </motion.div>
-                  ))}
+                              ? "bg-[#eb7f48] "
+                              : "bg-[#ee3fd7] "
+                          } `}
+                        >
+                          <h1 className="text-lg text-ellipsis text-nowrap overflow-hidden  px-5 py-1 select-none text-gray-900 font-bold font-mono">
+                            <i className={`ri-draggable  font-normal`}></i>{" "}
+                            {item.category.toUpperCase()}
+                          </h1>
+                          <p className="text-xs px-5 flex items-center">
+                            {String(
+                              `${String(
+                                new Date(item.createdAt).getDate()
+                              ).padStart(2, "0")}/${String(
+                                new Date(item.createdAt).getMonth() + 1
+                              ).padStart(2, "0")}/${new Date(
+                                item.createdAt
+                              ).getFullYear()}`
+                            )}
+                            <i className="pl-2 ri-time-line"></i>
+                          </p>
+                        </div>
+                        <div
+                          className={`w-full overflow-hidden ${
+                            item.category == "task"
+                              ? "text-[#7e3ff4] "
+                              : item.category == "report"
+                              ? "text-[#eb7f48] "
+                              : "text-[#ee3fd7] "
+                          }  select-none h-full p-5 max-sm:text-sm whitespace-break-spaces `}
+                        >
+                          <i
+                            className={`${
+                              item.category == "task"
+                                ? " ri-magic-line "
+                                : item.category == "report"
+                                ? "ri-triangle-line"
+                                : "ri-focus-2-line "
+                            } text-gray-300`}
+                          ></i>{" "}
+                          {item.title}
+                        </div>
+                        <div
+                          className={`w-full  ${
+                            item.category == "task"
+                              ? "bg-[#7e3ff4] "
+                              : item.category == "report"
+                              ? "bg-[#eb7f48] "
+                              : "bg-[#ee3fd7] "
+                          } py-[2px]`}
+                        ></div>
+                      </motion.div>
+                    ))}
+                </AnimatePresence>
               </>
             ) : (
               new Array(4).fill(0).map((_, idx) => (
