@@ -160,7 +160,7 @@ const CalenderTab = () => {
         </motion.button>
       </div>
       {/* calander modal */}
-      <CalenderModal open={open} setOpen={setOpen} />
+      <CalenderModal open={open} setOpen={setOpen} setEvents={setMyEvents} />
     </>
   );
 };

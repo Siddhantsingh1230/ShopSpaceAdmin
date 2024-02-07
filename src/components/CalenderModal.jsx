@@ -1,8 +1,56 @@
 import React, { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-const CalenderModal = ({ open, setOpen }) => {
+const CalenderModal = ({ open, setOpen, setEvents }) => {
   const cancelButtonRef = useRef(null);
+  const [title, setTitle] = useState("");
+  const [sDate, setSDate] = useState(null);
+  const [eDate, setEDate] = useState(null);
+
+  const getDateObj = (date) => {
+    let dateTime = new Date(date);
+    const year = dateTime.getFullYear();
+    const month = dateTime.getMonth(); // Adding 1 since getMonth() returns zero-based index (0-11)
+    const day = dateTime.getDate();
+    const hour = dateTime.getHours();
+    let minute = dateTime.getMinutes();
+
+    return (dateTime = { year, month, day, hour, minute });
+  };
+  const handleSave = () => {
+    if (
+      title.trim().length > 0 &&
+      sDate != null &&
+      eDate != null &&
+      sDate !== eDate
+    ) {
+      const sDateTime = getDateObj(sDate);
+      const eDateTime = getDateObj(eDate);
+      console.log(title, eDateTime, sDateTime);
+      setEvents((prev) => [
+        ...prev,
+        {
+          id: new Date(),
+          title,
+          start: new Date(
+            sDateTime.year,
+            sDateTime.month,
+            sDateTime.day,
+            sDateTime.hour,
+            sDateTime.minute
+          ),
+          end: new Date(
+            eDateTime.year,
+            eDateTime.month,
+            eDateTime.day,
+            eDateTime.hour,
+            eDateTime.minute
+          ),
+        },
+      ]);
+      setOpen(false);
+    }
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -47,6 +95,7 @@ const CalenderModal = ({ open, setOpen }) => {
                   </div>
                   <div className="w-full h-full p-3">
                     <textarea
+                      onChange={(e) => setTitle(e.target.value)}
                       placeholder="Type here.."
                       className="w-full h-1/3 outline-none bg-transparent resize-none overflow-y-auto text-gray-300"
                     ></textarea>
@@ -54,6 +103,7 @@ const CalenderModal = ({ open, setOpen }) => {
                       <div className="w-full flex justify-center flex-col">
                         <h1 className=" text-white mb-2">From :</h1>
                         <input
+                          onChange={(e) => setSDate(e.target.value)}
                           type="datetime-local"
                           className="bg-green-500  px-2 py-1 rounded-md outline-1    datetimepicker"
                         />
@@ -61,13 +111,17 @@ const CalenderModal = ({ open, setOpen }) => {
                       <div className="w-full flex justify-center  flex-col mb-2">
                         <h1 className=" text-white">To :</h1>
                         <input
+                          onChange={(e) => setEDate(e.target.value)}
                           type="datetime-local"
                           className="bg-orange-500  px-2 py-1 rounded-md outline-1    datetimepicker"
                         />
                       </div>
                     </div>
                   </div>
-                  <div className="w-full py-1 text-center cursor-pointer hover:bg-blue-600 transition-all bg-blue-500  text-white">
+                  <div
+                    onClick={handleSave}
+                    className="w-full py-1 text-center cursor-pointer hover:bg-blue-600 transition-all bg-blue-500  text-white"
+                  >
                     Save
                   </div>
                 </div>

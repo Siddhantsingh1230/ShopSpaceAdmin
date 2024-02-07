@@ -423,3 +423,6 @@ input::-webkit-inner-spin-button {
   padding: 1rem;
 }
 
+.rbc-day-slot.rbc-time-column.rbc-now.rbc-today{
+  background: transparent !important;
+}
