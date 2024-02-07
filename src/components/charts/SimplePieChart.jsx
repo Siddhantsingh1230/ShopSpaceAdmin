@@ -1,4 +1,11 @@
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+  Legend,
+} from "recharts";
 
 const SimplePieChart = ({ data, value }) => {
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#FF7B92"];
@@ -28,7 +35,6 @@ const SimplePieChart = ({ data, value }) => {
             ))}
           </Pie>
           <Tooltip />
-          <Legend/>
         </PieChart>
       </ResponsiveContainer>
     </div>

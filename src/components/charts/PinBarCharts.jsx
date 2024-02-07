@@ -39,7 +39,6 @@ const PinBarCharts = ({ data, title, value }) => {
             <XAxis dataKey={title} />
             <YAxis />
             <Tooltip />
-            <Legend />
             <Bar
               dataKey={value}
               fill="#5C85E7"
