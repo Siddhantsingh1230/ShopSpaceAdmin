@@ -12,6 +12,7 @@ import {
 } from "recharts";
 
 const LinedBarGraph = ({ data, title, value }) => {
+  console.log()
   return (
     <>
       <div className="relative w-full h-full">
@@ -21,9 +22,8 @@ const LinedBarGraph = ({ data, title, value }) => {
             <XAxis dataKey={title} scale="band" className="text-sm" />
             <YAxis />
             <Tooltip />
-            <Legend />
             <Bar dataKey={value} barSize={20} fill="#413ea0" />
-            <Line type="monotone" dataKey={value} stroke="#ff7300" />
+            <Line type="monotone" dataKey={title} stroke="#ff7300" />
           </ComposedChart>
         </ResponsiveContainer>
       </div>
