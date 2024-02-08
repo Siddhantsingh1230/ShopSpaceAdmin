@@ -18,6 +18,7 @@ import {
 import { getTotalViewsAsync } from "../slices/productsSlice.js";
 import { getTotalUsersAsync } from "../slices/userSlice.js";
 import { getTotalViews } from "../api/products.js";
+import graphIcon from "../assets/images/graphIcon.png";
 
 const Home = () => {
   const [userDropDown, setUserDropDown] = useState(false);
@@ -172,22 +173,48 @@ const Home = () => {
                         }}
                         onClick={() => navigate("/extras")}
                         key={key}
-                        className={`flex-1  bg-[#181818] cursor-pointer   max-sm:min-w-full min-w-60 w-60 h-40 rounded-lg overflow-hidden flex flex-col`}
+                        className={`flex-1  bg-[#181818] cursor-pointer relative  max-sm:min-w-full min-w-60 w-60 h-28 rounded-lg overflow-hidden grid grid-cols-3 ${
+                          item.category == "task"
+                            ? "bg-[#7e3ff4] "
+                            : item.category == "report"
+                            ? "bg-[#eb7f48] "
+                            : "bg-[#ee3fd7] "
+                        }`}
                       >
                         <div
-                          className={`flex justify-between items-center ${
+                          className={`flex col-span-1 justify-between items-center ${
                             item.category == "task"
-                              ? "bg-[#7e3ff4] "
+                              ? "bg-[#6f2aee] "
                               : item.category == "report"
-                              ? "bg-[#eb7f48] "
-                              : "bg-[#ee3fd7] "
+                              ? "bg-[#f1702f] "
+                              : "bg-[#ee2dd4] "
                           } `}
                         >
-                          <h1 className="text-lg text-ellipsis text-nowrap overflow-hidden  px-5 py-1 select-none text-gray-900 font-bold font-mono">
-                            <i className={`ri-draggable  font-normal`}></i>{" "}
+                          <h1 className="flex flex-col justify-center items-center text-md  px-5 py-1 select-none font-bold font-mono text-white">
+                            <i
+                              className={`${
+                                item.category == "task"
+                                  ? "ri-todo-line"
+                                  : item.category == "report"
+                                  ? "ri-file-chart-line"
+                                  : "ri-file-list-3-line"
+                              } font-normal text-center`}
+                            ></i>{" "}
                             {item.category.toUpperCase()}
                           </h1>
-                          <p className="text-xs px-5 flex items-center">
+                        </div>
+                        <div
+                          className={`w-full overflow-hidden col-span-2 text-white text-sm
+                          ${
+                            item.category == "task"
+                              ? "text-[#7e3ff4] "
+                              : item.category == "report"
+                              ? "text-[#eb7f48] "
+                              : "text-[#ee3fd7] "
+                          }  
+                          select-none h-full p-3 max-sm:text-sm whitespace-break-spaces `}
+                        >
+                          <p className="text-xs flex items-center absolute top-3 right-3">
                             {String(
                               `${String(
                                 new Date(item.createdAt).getDate()
@@ -197,30 +224,23 @@ const Home = () => {
                                 item.createdAt
                               ).getFullYear()}`
                             )}
+
                             <i className="pl-2 ri-time-line"></i>
                           </p>
+                          <div className="flex mt-7 gap-2">
+                            <i
+                              className={`${
+                                item.category == "task"
+                                  ? " ri-magic-line "
+                                  : item.category == "report"
+                                  ? "ri-triangle-line"
+                                  : "ri-focus-2-line "
+                              } text-gray-300`}
+                            ></i>{" "}
+                            {item.title}
+                          </div>
                         </div>
-                        <div
-                          className={`w-full overflow-hidden ${
-                            item.category == "task"
-                              ? "text-[#7e3ff4] "
-                              : item.category == "report"
-                              ? "text-[#eb7f48] "
-                              : "text-[#ee3fd7] "
-                          }  select-none h-full p-5 max-sm:text-sm whitespace-break-spaces `}
-                        >
-                          <i
-                            className={`${
-                              item.category == "task"
-                                ? " ri-magic-line "
-                                : item.category == "report"
-                                ? "ri-triangle-line"
-                                : "ri-focus-2-line "
-                            } text-gray-300`}
-                          ></i>{" "}
-                          {item.title}
-                        </div>
-                        <div
+                        {/* <div
                           className={`w-full  ${
                             item.category == "task"
                               ? "bg-[#7e3ff4] "
@@ -228,7 +248,7 @@ const Home = () => {
                               ? "bg-[#eb7f48] "
                               : "bg-[#ee3fd7] "
                           } py-[2px]`}
-                        ></div>
+                        ></div> */}
                       </motion.div>
                     ))}
                 </AnimatePresence>
@@ -237,7 +257,7 @@ const Home = () => {
               new Array(4).fill(0).map((_, idx) => (
                 <div
                   key={idx}
-                  className="flex-1 max-sm:min-w-full min-w-60 w-60 h-40 rounded-lg overflow-hidden"
+                  className="flex-1 max-sm:min-w-full min-w-60 w-60 h-28 rounded-lg overflow-hidden"
                 >
                   <ContentPlaceholder />
                 </div>
@@ -301,30 +321,75 @@ const Home = () => {
         {/* analysis cards */}
         <div>
           <div className="mt-8 flex max-sm:w-full overflow-x-auto overflow-y-hidden max-sm:h-auto  gap-5 text-gray-500">
-            <div className="flex relative max-sm:min-w-full flex-col gap-2 p-4 w-48 h-32 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <p>Views</p>
-
-              <p className="text-white">{totalViews}</p>
+            <div className="flex-1 relative max-sm:min-w-full flex-col p-4 w-48 h-36 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <div className="bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
+                <i className="ri-eye-fill text-2xl text-white"></i>
+              </div>
+              <div className="flex mt-3">
+                <div className="flex flex-col line">
+                  <p className="text-white text-2xl text-center">
+                    {totalViews}
+                  </p>
+                  <p className="mt-0 pt-0 text-sm">Views</p>
+                </div>
+                <i className="ri-pulse-line absolute bottom-4 right-4 text-6xl text-[#fe5950]"></i>
+              </div>
             </div>
-            <div className="flex max-sm:min-w-full flex-col gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <p>Orders</p>
-              <p className="text-white">{totalOrders}</p>
-              <p className=" text-green-600 text-xs">+5%</p>
+            <div className="flex-1 relative max-sm:min-w-full flex-col p-4 w-48 h-36 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <div className="bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#4772d5]">
+                <i className="ri-shopping-bag-line text-2xl text-white"></i>
+              </div>
+              <div className="flex mt-3">
+                <div className="flex flex-col line">
+                  <p className="text-white text-2xl text-center">
+                    {totalOrders}
+                  </p>
+                  <p className="mt-0 pt-0 text-sm">Orders</p>
+                </div>
+                <i className="ri-bar-chart-grouped-fill absolute bottom-4 right-4 text-6xl text-[#3261D2]"></i>
+              </div>
             </div>
-            <div className="flex max-sm:min-w-full flex-col gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <p>Users</p>
-              <p className="text-white">{totalUsers}</p>
-              <p className=" text-green-600 text-xs">+12%</p>
+            <div className="flex-1 relative max-sm:min-w-full flex-col p-4 w-48 h-36 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <div className="bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
+                <i className="ri-user-3-line text-2xl text-white"></i>
+              </div>
+              <div className="flex mt-3">
+                <div className="flex flex-col line">
+                  <p className="text-white text-2xl text-center">
+                    {totalUsers}
+                  </p>
+                  <p className="mt-0 pt-0 text-sm">Users</p>
+                </div>
+                <i className="ri-team-fill absolute bottom-4 right-4 text-5xl text-[#37a55e]"></i>
+              </div>
             </div>
-            <div className="flex max-sm:min-w-full flex-col  gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <p>Items in Cart</p>
-              <p className="text-white">{totalCartItems}</p>
-              <p className=" text-green-600 text-xs">+5%</p>
+            <div className="flex-1 relative max-sm:min-w-full flex-col p-4 w-48 h-36 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <div className="bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
+                <i className="ri-shopping-cart-line text-2xl text-white"></i>
+              </div>
+              <div className="flex mt-3">
+                <div className="flex flex-col line">
+                  <p className="text-white text-2xl text-center">
+                    {totalCartItems}
+                  </p>
+                  <p className="mt-0 pt-0 text-sm">Carts</p>
+                </div>
+                <i className="ri-bar-chart-fill  absolute bottom-4 right-4 text-6xl text-[#5e309f]"></i>
+              </div>
             </div>
-            <div className="flex max-sm:min-w-full flex-col gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <p>Earnings</p>
-              <p className="text-white">{totalEarnings}</p>
-              <p className=" text-green-600 text-xs">+12%</p>
+            <div className="flex-1 relative max-sm:min-w-full flex-col p-4 w-48 h-36 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <div className="bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
+                <i className="ri-cash-line text-2xl text-white"></i>
+              </div>
+              <div className="flex mt-3">
+                <div className="flex flex-col line">
+                  <p className="text-white text-2xl text-center">
+                    ₹{totalEarnings}
+                  </p>
+                  <p className="mt-0 pt-0 text-sm">Earnings</p>
+                </div>
+                <i className="ri-exchange-funds-fill absolute bottom-4 right-4 text-5xl text-[#f2f24b]"></i>
+              </div>
             </div>
           </div>
         </div>
