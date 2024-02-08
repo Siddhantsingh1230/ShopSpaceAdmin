@@ -123,7 +123,7 @@ const Statistics = () => {
                 <ContentPlaceholder />
               </div>
             ) : (
-              <div className=" flex flex-col gap-2 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-5 px-3 select-none opacity-75">
+              <div className=" flex flex-col gap-2 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-5 px-2 select-none opacity-75">
                 <p className="px-2 text-[#5C85E7] ">Orders per category </p>
                 <SimplePieChart
                   data={commonCategories}

@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ContentPlaceholder from "../components/ContentPlaceholder";
@@ -9,6 +9,15 @@ import Notifications from "../components/Notifications.jsx";
 import MobileSidebar from "../components/MobileSidebar.jsx";
 import { getAllNotes } from "../api/notes.js";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  getTotalEarningsAsync,
+  getAllOrdersAsync,
+  getTotalCartItemsAsync,
+  getTotalOrdersAsync,
+} from "../slices/ordersSlice.js";
+import { getTotalViewsAsync } from "../slices/productsSlice.js";
+import { getTotalUsersAsync } from "../slices/userSlice.js";
+import { getTotalViews } from "../api/products.js";
 
 const Home = () => {
   const [userDropDown, setUserDropDown] = useState(false);
@@ -49,8 +58,20 @@ const Home = () => {
     const { notes } = await getAllNotes(user._id);
     setCards(notes);
   };
+  const totalOrders = useSelector((state) => state.order.totalOrders);
+  const totalCartItems = useSelector((state) => state.order.totalCartItems);
+  const totalEarnings = useSelector((state) => state.order.totalEarnings);
+  const totalUsers = useSelector((state) => state.user.totalUsers);
+  const totalViews = useSelector((state) => state.product.totalViews);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     getCards();
+    dispatch(getTotalEarningsAsync());
+    dispatch(getTotalViewsAsync());
+    dispatch(getTotalOrdersAsync());
+    dispatch(getTotalCartItemsAsync());
+    dispatch(getTotalUsersAsync());
   }, []);
 
   return (
@@ -280,31 +301,29 @@ const Home = () => {
         {/* analysis cards */}
         <div>
           <div className="mt-8 flex max-sm:w-full overflow-x-auto overflow-y-hidden max-sm:h-auto  gap-5 text-gray-500">
-            <div className="flex max-sm:min-w-full flex-col gap-2 p-4 w-48 h-32 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <div className="flex justify-between ">
-                <p>Total Bonus</p>
-                <p>+3%</p>
-              </div>
-              <p className="text-white">$762</p>
+            <div className="flex relative max-sm:min-w-full flex-col gap-2 p-4 w-48 h-32 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <p>Views</p>
+
+              <p className="text-white">{totalViews}</p>
             </div>
-            <div className="flex max-sm:min-w-full flex-col  justify-center gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <p>Income</p>
-              <p className="text-white">$762</p>
+            <div className="flex max-sm:min-w-full flex-col gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <p>Orders</p>
+              <p className="text-white">{totalOrders}</p>
               <p className=" text-green-600 text-xs">+5%</p>
             </div>
-            <div className="flex max-sm:min-w-full flex-col justify-center gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <p>Deposit</p>
-              <p className="text-white">$1,131</p>
+            <div className="flex max-sm:min-w-full flex-col gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <p>Users</p>
+              <p className="text-white">{totalUsers}</p>
               <p className=" text-green-600 text-xs">+12%</p>
             </div>
-            <div className="flex max-sm:min-w-full flex-col  justify-center gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <p>Income</p>
-              <p className="text-white">$762</p>
+            <div className="flex max-sm:min-w-full flex-col  gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <p>Items in Cart</p>
+              <p className="text-white">{totalCartItems}</p>
               <p className=" text-green-600 text-xs">+5%</p>
             </div>
-            <div className="flex max-sm:min-w-full flex-col justify-center gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <p>Deposit</p>
-              <p className="text-white">$1,131</p>
+            <div className="flex max-sm:min-w-full flex-col gap-2 w-48 h-32 bg-[#181818] p-4 rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
+              <p>Earnings</p>
+              <p className="text-white">{totalEarnings}</p>
               <p className=" text-green-600 text-xs">+12%</p>
             </div>
           </div>

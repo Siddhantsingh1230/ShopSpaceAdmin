@@ -13,3 +13,11 @@ export const getAllUsers = async () => {
   );
   return data;
 };
+
+export const getTotalUsers = async () => {
+  const { data } = await axios.get(
+    process.env.REACT_APP_SERVER_BASE_URL + "/v1/getTotalUsers",
+    options
+  );
+  return data;
+};

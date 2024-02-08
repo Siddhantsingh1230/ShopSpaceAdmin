@@ -63,3 +63,19 @@ export const deliveryCounts = async () => {
   );
   return data;
 };
+
+export const getTotalEarnings = async () => {
+  const { data } = await axios.get(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/getTotalEarnings`,
+    options
+  );
+  return data;
+};
+
+export const getTotalOrders = async () => {
+  const { data } = await axios.get(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/getTotalOrders`,
+    options
+  );
+  return data;
+};
