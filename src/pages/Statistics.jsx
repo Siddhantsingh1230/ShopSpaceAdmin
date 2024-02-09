@@ -16,6 +16,7 @@ import SimplePieChart from "../components/charts/SimplePieChart";
 import LinedBarGraph from "../components/charts/LinedBarGraph";
 import SimpleRadarCharts from "../components/charts/SimpleRadarCharts";
 import DotBg from "../components/DotBg";
+import { motion } from "framer-motion";
 
 const Statistics = () => {
   const products = useSelector((state) => state.product.products);
@@ -82,7 +83,7 @@ const Statistics = () => {
                 <ContentPlaceholder />
               </div>
             ) : (
-              <div className=" relative w-full h-full  overflow-hidden rounded-lg p-2 pt-10 pr-10 select-none">
+              <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{ease:"easeIn",duration:0.75}} className=" relative w-full h-full  overflow-hidden rounded-lg p-2 pt-10 pr-10 select-none">
                 <p className="px-2 text-[#5C85E7] absolute top-4 right-6 ">
                   Views per product{" "}
                 </p>
@@ -93,18 +94,18 @@ const Statistics = () => {
                   stroke="#5C85E7"
                   className="pt-4"
                 />
-              </div>
+              </motion.div>
             )}
             <DotBg />
           </div>
-          <div className="sm:grid sm:col-span-1 h-[325px] bg-[#0e1011] rounded-lg">
+          <div transition={{ease:"easeIn"}} className="sm:grid sm:col-span-1 h-[325px] bg-[#0e1011] rounded-lg">
             {/* graph 2 */}
             {orderStatus === "loading" ? (
               <div className="w-full h-full rounded-lg overflow-hidden">
                 <ContentPlaceholder />
               </div>
             ) : (
-              <div className=" flex flex-col gap-4 w-full h-full sm:w-full overflow-hidden rounded-lg pb-2 pt-5 px-3 select-none opacity-75">
+              <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{ease:"easeIn",duration:0.75}} className=" flex flex-col gap-4 w-full h-full sm:w-full overflow-hidden rounded-lg pb-2 pt-5 px-3 select-none opacity-75">
                 <p className="px-2 text-[#5C85E7] ">Orders per month </p>
                 <SimpleRadarCharts
                   data={bonusMonths}
@@ -113,26 +114,26 @@ const Statistics = () => {
                   stroke="#5C85E7"
                   fill={"#436fbc"}
                 />
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
         <div className="grid sm:grid-cols-3 gap-6 sm:pr-10 ">
-          <div className="grid h-[250px] bg-[#0e1011] rounded-lg">
+          <div initial={{opacity:0}} animate={{opacity:1}} transition={{ease:"easeIn"}} className="grid h-[250px] bg-[#0e1011] rounded-lg">
             {/* graph 3 */}
             {orderStatus === "loading" ? (
               <div className="w-full h-full rounded-lg overflow-hidden">
                 <ContentPlaceholder />
               </div>
             ) : (
-              <div className=" flex flex-col gap-2 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-5 px-2 select-none opacity-75">
+              <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{ease:"easeIn",duration:0.75}} className=" flex flex-col gap-2 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-5 px-2 select-none opacity-75">
                 <p className="px-2 text-[#5C85E7] ">Orders per category </p>
                 <SimplePieChart
                   data={commonCategories}
                   title="category"
                   value="totalOrders"
                 />
-              </div>
+              </motion.div>
             )}
           </div>
           <div className="grid  h-[250px] bg-[#0e1011] rounded-lg">
@@ -142,14 +143,14 @@ const Statistics = () => {
                 <ContentPlaceholder />
               </div>
             ) : (
-              <div className="  flex flex-col gap-4 pt-4 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pr-6 select-none opacity-75">
+              <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{ease:"easeIn",duration:0.75}} className="  flex flex-col gap-4 pt-4 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pr-6 select-none opacity-75">
                 <p className="px-4 text-[#5C85E7] ">Orders per State </p>
                 <PinBarCharts
                   data={mostCommonLocations}
                   title="location"
                   value="totalOrders"
                 />
-              </div>
+              </motion.div>
             )}
           </div>
           <div className="grid  h-[250px] bg-[#0e1011] rounded-lg">
@@ -159,7 +160,7 @@ const Statistics = () => {
                 <ContentPlaceholder />
               </div>
             ) : (
-              <div className="  flex flex-col gap-4 pt-4 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pr-8 select-none opacity-75">
+              <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{ease:"easeIn",duration:0.75}} className="  flex flex-col gap-4 pt-4 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pr-8 select-none opacity-75">
                 <p className="px-4 text-[#5C85E7] ">Most Ordered Products </p>
                 <AreaChartComponent
                   data={mostOrderedProducts}
@@ -168,7 +169,7 @@ const Statistics = () => {
                   stroke="#5C85E7"
                   fill={"#436fbc"}
                 />
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
@@ -180,7 +181,7 @@ const Statistics = () => {
                 <ContentPlaceholder />
               </div>
             ) : (
-              <div className=" flex flex-col gap-4 pt-4 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 px-2 select-none opacity-75">
+              <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{ease:"easeIn",duration:0.75}} className=" flex flex-col gap-4 pt-4 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 px-2 select-none opacity-75">
                 <p className="px-2 text-[#5C85E7] ">Product ratings </p>
                 <LineChartComponent
                   data={products}
@@ -188,7 +189,7 @@ const Statistics = () => {
                   line="rating"
                   stroke="#5C85E7"
                 />
-              </div>
+              </motion.div>
             )}
           </div>
           <div className="grid  h-[250px] bg-[#0e1011] rounded-lg">
@@ -198,7 +199,7 @@ const Statistics = () => {
                 <ContentPlaceholder />
               </div>
             ) : (
-              <div className=" flex flex-col gap-4 pt-4 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pr-6 select-none opacity-75">
+              <motion.div initial={{opacity:0}}  animate={{opacity:1}} transition={{ease:"easeIn",duration:0.75}} className=" flex flex-col gap-4 pt-4 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pr-6 select-none opacity-75">
                 <p className="px-4 text-[#5C85E7] ">
                   Total deliveries per Location{" "}
                 </p>
@@ -207,7 +208,7 @@ const Statistics = () => {
                   title="location"
                   value="deliveries"
                 />
-              </div>
+              </motion.div>
             )}
           </div>
           {/* <div className="grid  h-[250px] bg-[#161517] rounded-lg"></div> */}
