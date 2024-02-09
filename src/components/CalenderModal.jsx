@@ -104,19 +104,19 @@ const CalenderModal = ({ open, setOpen, setEvents }) => {
                     ></textarea>
                     <div className="w-full flex flex-col gap-2 md:gap-5">
                       <div className="w-full flex justify-center flex-col">
-                        <h1 className=" text-white mb-2">From :</h1>
+                        <h1 className=" text-gray-400 mb-2">From :</h1>
                         <input
                           onChange={(e) => setSDate(e.target.value)}
                           type="datetime-local"
-                          className="bg-green-500  px-2 py-1 rounded-md outline-1    datetimepicker"
+                          className="bg-gray-500  px-2 py-1 rounded-md outline-1    datetimepicker"
                         />
                       </div>
                       <div className="w-full flex justify-center  flex-col mb-2">
-                        <h1 className=" text-white">To :</h1>
+                        <h1 className=" text-gray-400">To :</h1>
                         <input
                           onChange={(e) => setEDate(e.target.value)}
                           type="datetime-local"
-                          className="bg-orange-500  px-2 py-1 rounded-md outline-1    datetimepicker"
+                          className="bg-gray-500  px-2 py-1 rounded-md outline-1    datetimepicker"
                         />
                       </div>
                     </div>

@@ -24,6 +24,7 @@ const CalenderTab = () => {
   // Fetch Calender
   const fetchCalender = async () => {
     try {
+      setLoading(true);
       let { calender } = await getCalender(user._id);
       calender = calender.map((item, key) => ({
         ...item,
@@ -31,8 +32,10 @@ const CalenderTab = () => {
         end: new Date(item.end),
       }));
       setMyEvents(calender);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
