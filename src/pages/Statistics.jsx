@@ -83,7 +83,7 @@ const Statistics = () => {
                 <ContentPlaceholder />
               </div>
             ) : (
-              <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{ease:"easeIn",duration:0.75}} className=" relative w-full h-full  overflow-hidden rounded-lg p-2 pt-10 pr-10 select-none">
+              <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{ease:"easeIn",duration:0.75}} className="z-30 relative w-full h-full  overflow-hidden rounded-lg p-2 pt-10 pr-10 select-none">
                 <p className="px-2 text-[#5C85E7] absolute top-4 right-6 ">
                   Views per product{" "}
                 </p>
