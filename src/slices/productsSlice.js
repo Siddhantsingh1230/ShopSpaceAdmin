@@ -6,6 +6,7 @@ import {
   getAllProducts,
   getMostOrderedProducts,
   updateProduct,
+  getTotalViews,
 } from "../api/products.js";
 import Toasts from "../app/Toasts.js";
 
@@ -13,6 +14,7 @@ const initialState = {
   products: [],
   mostOrderedProducts: [],
   status: "idle",
+  totalViews: null,
 };
 
 // ading product related AsyncThunks
@@ -54,6 +56,17 @@ export const updateProductAsync = createAsyncThunk(
   async (dataP, thunkAPI) => {
     try {
       const data = await updateProduct(dataP.id, dataP.product);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const getTotalViewsAsync = createAsyncThunk(
+  "product/totalViews",
+  async (thunkAPI) => {
+    try {
+      const data = await getTotalViews();
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -155,6 +168,25 @@ export const productsSlice = createSlice({
         console.log("success", "Updated Product Successfully");
       })
       .addCase(updateProductAsync.rejected, (state, action) => {
+        state.status = "idle";
+        if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
+          console.log(
+            "error",
+            action.payload.response.data.message || "Error Occurred"
+          );
+        } else {
+          console.log("error", "Network Error");
+        }
+      })
+      .addCase(getTotalViewsAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getTotalViewsAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.totalViews = action.payload.totalViews;
+        console.log("success", "Updated Product Successfully");
+      })
+      .addCase(getTotalViewsAsync.rejected, (state, action) => {
         state.status = "idle";
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
           console.log(

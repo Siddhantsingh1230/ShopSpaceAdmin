@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Toasts from "../app/Toasts";
-import { getAllUsers } from "../api/users";
+import { getAllUsers,getTotalUsers } from "../api/users";
 
 const initialState = {
   users: [],
   status: "idle",
+  totalUsers :null,
 };
 
 export const getAllUsersAsync = createAsyncThunk(
@@ -17,6 +18,14 @@ export const getAllUsersAsync = createAsyncThunk(
             return thunkAPI.rejectWithValue(error);
           }
     }
+);
+
+export const getTotalUsersAsync = createAsyncThunk(
+  "users/total",
+  async () => {
+    const data = await getTotalUsers();
+    return data;
+  }
 );
 
 export const userSlice = createSlice({
@@ -38,7 +47,22 @@ export const userSlice = createSlice({
               } else {
                 Toasts("error","Network Error");
               }
+        }).addCase(getTotalUsersAsync.pending, (state) => {
+          state.status = "loading";
         })
+        .addCase(getTotalUsersAsync.fulfilled, (state, action) => {
+          state.status = "idle";
+          state.totalUsers = action.payload.count;
+        })
+        .addCase(getTotalUsersAsync.rejected, (state, action) => {
+          state.status = "idle";
+          if (action.payload.response) {
+            Toasts("error", action.payload.response.data.message);
+            // console.log(action.payload.response.data.message);
+          } else {
+            Toasts("error", "Network Error"); // no need to show toast here
+          }
+        });
     }
 });
 

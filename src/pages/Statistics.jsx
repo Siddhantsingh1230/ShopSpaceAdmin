@@ -70,10 +70,10 @@ const Statistics = () => {
             toggleUserDropDown();
           }
         }}
-        className="flex flex-col gap-6 overflow-y-auto max-sm:mt-0  mt-2 mb-7  max-sm:w-full max-sm:px-3 h-full"
+        className="flex flex-col gap-6 overflow-y-auto max-sm:mt-0  mt-2 mb-7  max-sm:w-full px-3 h-full"
       >
-        <div className="grid grid-cols-3 gap-6 pr-10">
-          <div className="grid col-span-2 bg-gradient-to-tr from-[#1e2652]  via-[#141721] to-[#161517] h-[325px]  rounded-lg  opacity-75">
+        <div className="grid sm:grid-cols-3 gap-6 sm:pr-10">
+          <div className="sm:grid sm:col-span-2 bg-gradient-to-tr from-[#1e2652]  via-[#141721] to-[#161517] h-[325px]  rounded-lg  opacity-75">
             {/* graph 1 */}
 
             {productsStatus === "loading" ? (
@@ -81,7 +81,7 @@ const Statistics = () => {
                 <ContentPlaceholder />
               </div>
             ) : (
-              <div className=" relative w-full h-full max-sm:w-80  overflow-hidden rounded-lg p-2 pt-10 pr-10 select-none">
+              <div className=" relative w-full h-full  overflow-hidden rounded-lg p-2 pt-10 pr-10 select-none">
                 <p className="px-2 text-[#5C85E7] absolute top-4 right-6 ">
                   Views per product{" "}
                 </p>
@@ -95,14 +95,14 @@ const Statistics = () => {
               </div>
             )}
           </div>
-          <div className="grid col-span-1 h-[325px] bg-[#161517] rounded-lg">
+          <div className="sm:grid sm:col-span-1 h-[325px] bg-[#161517] rounded-lg">
             {/* graph 2 */}
             {orderStatus === "loading" ? (
               <div className="w-full h-full rounded-lg overflow-hidden">
                 <ContentPlaceholder />
               </div>
             ) : (
-              <div className=" flex flex-col gap-4 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-5 px-3 select-none opacity-75">
+              <div className=" flex flex-col gap-4 w-full h-full sm:w-full overflow-hidden rounded-lg pb-2 pt-5 px-3 select-none opacity-75">
                 <p className="px-2 text-[#5C85E7] ">Orders per month </p>
                 <SimpleRadarCharts
                   data={bonusMonths}
@@ -115,7 +115,7 @@ const Statistics = () => {
             )}
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-6 pr-10 ">
+        <div className="grid sm:grid-cols-3 gap-6 sm:pr-10 ">
           <div className="grid h-[250px] bg-[#161517] rounded-lg">
             {/* graph 3 */}
             {orderStatus === "loading" ? (
@@ -123,7 +123,7 @@ const Statistics = () => {
                 <ContentPlaceholder />
               </div>
             ) : (
-              <div className=" flex flex-col gap-2 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-5 px-3 select-none opacity-75">
+              <div className=" flex flex-col gap-2 w-full h-full max-sm:w-80 overflow-hidden rounded-lg pb-2 pt-5 px-2 select-none opacity-75">
                 <p className="px-2 text-[#5C85E7] ">Orders per category </p>
                 <SimplePieChart
                   data={commonCategories}
@@ -170,7 +170,7 @@ const Statistics = () => {
             )}
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-6 pr-10 ">
+        <div className="grid sm:grid-cols-3 gap-6 sm:pr-10 ">
           <div className="grid h-[250px] bg-[#161517] rounded-lg">
             {/* graph 6 */}
             {orderStatus === "loading" ? (

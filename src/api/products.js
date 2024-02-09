@@ -15,7 +15,8 @@ export const getAllProducts = async () => {
 };
 export const getMostOrderedProducts = async () => {
   const { data } = await axios.get(
-    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/mostordered`,options
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/orders/mostordered`,
+    options
   );
   return data;
 };
@@ -30,7 +31,15 @@ export const deleteproduct = async (id) => {
 export const updateProduct = async (id, product) => {
   const { data } = await axios.patch(
     process.env.REACT_APP_SERVER_BASE_URL + `/v1/products/update/` + id,
-    product ,
+    product,
+    options
+  );
+  return data;
+};
+
+export const getTotalViews = async () => {
+  const { data } = await axios.get(
+    process.env.REACT_APP_SERVER_BASE_URL + `/v1/products/getTotalViews`,
     options
   );
   return data;

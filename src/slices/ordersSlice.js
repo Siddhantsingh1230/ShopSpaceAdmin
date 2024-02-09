@@ -9,7 +9,11 @@ import {
   mostCommonCategory,
   bonusMonth,
   deliveryCounts,
+  getTotalEarnings,
+  getTotalOrders,
 } from "../api/orders.js";
+
+import { getTotalCartItems } from "../api/cart.js";
 
 const initialState = {
   orders: [],
@@ -19,6 +23,9 @@ const initialState = {
   bonusMonths: [],
   deliveryCount: [],
   status: "idle",
+  totalCartItems : null,
+  totalEarnings : null,
+  totalOrders: null,
 };
 
 // ading order related AsyncThunks
@@ -99,6 +106,42 @@ export const deliveryCountsAsync = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const data = await deliveryCounts();
+      return data;
+    } catch (error) {
+      console.error("Error fetching most common locations:", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const getTotalEarningsAsync = createAsyncThunk(
+  "orders/totalEarnings",
+  async (_, thunkAPI) => {
+    try {
+      const data = await getTotalEarnings();
+      return data;
+    } catch (error) {
+      console.error("Error fetching most common locations:", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const getTotalOrdersAsync = createAsyncThunk(
+  "orders/totalOrders",
+  async (_, thunkAPI) => {
+    try {
+      const data = await getTotalOrders();
+      return data;
+    } catch (error) {
+      console.error("Error fetching most common locations:", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const getTotalCartItemsAsync = createAsyncThunk(
+  "orders/getTotalCartItems",
+  async (_, thunkAPI) => {
+    try {
+      const data = await getTotalCartItems();
       return data;
     } catch (error) {
       console.error("Error fetching most common locations:", error);
@@ -233,6 +276,63 @@ export const ordersSlice = createSlice({
         state.deliveryCount = action.payload.deliveryCount;
       })
       .addCase(deliveryCountsAsync.rejected, (state, action) => {
+        state.status = "idle";
+        console.error("Error fetching most common locations:", action.error);
+        if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
+          console.log(
+            "error",
+            action.payload.response.data.message || "Error Occurred"
+          );
+        } else {
+          console.log("error", "Network Error");
+        }
+      })
+      .addCase(getTotalEarningsAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getTotalEarningsAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.totalEarnings = action.payload.totalAmountEarned;
+      })
+      .addCase(getTotalEarningsAsync.rejected, (state, action) => {
+        state.status = "idle";
+        console.error("Error fetching most common locations:", action.error);
+        if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
+          console.log(
+            "error",
+            action.payload.response.data.message || "Error Occurred"
+          );
+        } else {
+          console.log("error", "Network Error");
+        }
+      })
+      .addCase(getTotalCartItemsAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getTotalCartItemsAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.totalCartItems = action.payload.count;
+      })
+      .addCase(getTotalCartItemsAsync.rejected, (state, action) => {
+        state.status = "idle";
+        console.error("Error fetching most common locations:", action.error);
+        if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
+          console.log(
+            "error",
+            action.payload.response.data.message || "Error Occurred"
+          );
+        } else {
+          console.log("error", "Network Error");
+        }
+      })
+      .addCase(getTotalOrdersAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getTotalOrdersAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.totalOrders = action.payload.count;
+      })
+      .addCase(getTotalOrdersAsync.rejected, (state, action) => {
         state.status = "idle";
         console.error("Error fetching most common locations:", action.error);
         if (action.payload.response && action.payload.code !== "ERR_NETWORK") {
