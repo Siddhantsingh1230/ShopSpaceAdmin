@@ -165,7 +165,7 @@ export const productsSlice = createSlice({
       .addCase(updateProductAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.products = action.payload.products;
-        console.log("success", "Updated Product Successfully");
+        // console.log("success", "Updated Product Successfully");
       })
       .addCase(updateProductAsync.rejected, (state, action) => {
         state.status = "idle";
@@ -184,7 +184,7 @@ export const productsSlice = createSlice({
       .addCase(getTotalViewsAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.totalViews = action.payload.totalViews;
-        console.log("success", "Updated Product Successfully");
+        // console.log("success", "Updated Product Successfully");
       })
       .addCase(getTotalViewsAsync.rejected, (state, action) => {
         state.status = "idle";

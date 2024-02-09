@@ -227,7 +227,7 @@ const Home = () => {
 
                             <i className="pl-2 ri-time-line"></i>
                           </p>
-                          <div className="flex mt-7 gap-2">
+                          <div className="flex mt-7 gap-2 overflow-hidden h-14">
                             <i
                               className={`${
                                 item.category == "task"
@@ -237,7 +237,10 @@ const Home = () => {
                                   : "ri-focus-2-line "
                               } text-gray-300`}
                             ></i>{" "}
+                            
+
                             {item.title}
+                            
                           </div>
                         </div>
                         {/* <div

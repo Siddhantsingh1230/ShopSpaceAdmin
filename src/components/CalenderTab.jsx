@@ -10,6 +10,7 @@ import CalenderModal from "./CalenderModal";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { getCalender, updateEvent } from "../api/calender";
+import Spinner from "./Spinner";
 
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
@@ -17,6 +18,7 @@ const DnDCalendar = withDragAndDrop(Calendar);
 const CalenderTab = () => {
   const [myEvents, setMyEvents] = useState([]);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.auth.user);
 
   // Fetch Calender
@@ -72,38 +74,42 @@ const CalenderTab = () => {
   const defaultDate = useMemo(() => new Date(), []);
   return (
     <>
-      <div className="h-full w-full relative">
-        <DnDCalendar
-          defaultDate={defaultDate}
-          defaultView={Views.MONTH}
-          events={myEvents}
-          localizer={localizer}
-          onEventDrop={moveEvent}
-          handleDragStart={() => {
-            return;
-          }}
-          onEventResize={resizeEvent}
-          popup
-          resizable
-          style={{ height: "100%", w: "100%" }}
-        />
-        <motion.button
-          initial={{ x: 0, y: 0 }}
-          animate={{ y: [5, -5], x: [2, -5] }}
-          whileHover={{ rotateZ: 360 }}
-          transition={{
-            duration: 2,
-            ease: "easeIn",
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          title="Add event"
-          onClick={() => setOpen(true)}
-          className="absolute text-lg top-3 hover:bg-blue-500 transition-all left-[35%] rounded-full bg-green-300 font-bold   max-sm:top-10 max-sm:left-5 cursor-pointer w-7 h-7 "
-        >
-          <i className="ri-add-line"></i>
-        </motion.button>
-      </div>
+      {!loading ? (
+        <div className="h-full w-full relative">
+          <DnDCalendar
+            defaultDate={defaultDate}
+            defaultView={Views.MONTH}
+            events={myEvents}
+            localizer={localizer}
+            onEventDrop={moveEvent}
+            handleDragStart={() => {
+              return;
+            }}
+            onEventResize={resizeEvent}
+            popup
+            resizable
+            style={{ height: "100%", w: "100%" }}
+          />
+          <motion.button
+            initial={{ x: 0, y: 0 }}
+            animate={{ y: [5, -5], x: [2, -5] }}
+            whileHover={{ rotateZ: 360 }}
+            transition={{
+              duration: 2,
+              ease: "easeIn",
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+            title="Add event"
+            onClick={() => setOpen(true)}
+            className="absolute text-lg top-3 hover:bg-blue-500 transition-all left-[35%] rounded-full bg-green-300 font-bold   max-sm:top-10 max-sm:left-5 cursor-pointer w-7 h-7 "
+          >
+            <i className="ri-add-line"></i>
+          </motion.button>
+        </div>
+      ) : (
+        <Spinner />
+      )}
       {/* calander modal */}
       <CalenderModal open={open} setOpen={setOpen} setEvents={setMyEvents} />
     </>
