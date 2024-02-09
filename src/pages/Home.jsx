@@ -16,6 +16,7 @@ import {
 } from "../slices/ordersSlice.js";
 import { getTotalViewsAsync } from "../slices/productsSlice.js";
 import { getTotalUsersAsync } from "../slices/userSlice.js";
+import DotBg from "../components/DotBg.jsx";
 
 const Home = () => {
   const [userDropDown, setUserDropDown] = useState(false);
@@ -311,9 +312,9 @@ const Home = () => {
           <div className="mt-8 flex max-sm:w-full overflow-x-auto overflow-y-hidden max-sm:h-auto  gap-5 text-gray-500">
             <div className="flex-1 relative max-sm:min-w-full flex-col p-4 w-48 h-36 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
               <div className="bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
-                <i className="ri-eye-fill text-2xl text-white"></i>
-              </div>
-              <div className="flex mt-3">
+                <i className="z-20 relative ri-eye-fill text-2xl text-white"></i>
+              </div> 
+              <div className="z-20 relative flex mt-3">
                 <div className="flex flex-col line">
                   <p className="text-white text-2xl text-center">
                     {totalViews}
@@ -322,12 +323,13 @@ const Home = () => {
                 </div>
                 <i className="ri-pulse-line absolute bottom-4 right-4 text-6xl text-[#fe5950]"></i>
               </div>
+              <DotBg color={"#342424"} />
             </div>
             <div className="flex-1 relative max-sm:min-w-full flex-col p-4 w-48 h-36 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <div className="bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#4772d5]">
+              <div className="z-20 relative bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center hover:bg-[#4772d5]">
                 <i className="ri-shopping-bag-line text-2xl text-white"></i>
               </div>
-              <div className="flex mt-3">
+              <div className="z-20 relative flex mt-3">
                 <div className="flex flex-col line">
                   <p className="text-white text-2xl text-center">
                     {totalOrders}
@@ -336,12 +338,13 @@ const Home = () => {
                 </div>
                 <i className="ri-bar-chart-grouped-fill absolute bottom-4 right-4 text-6xl text-[#3261D2]"></i>
               </div>
+              <DotBg color={"#342424"} />
             </div>
             <div className="flex-1 relative max-sm:min-w-full flex-col p-4 w-48 h-36 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <div className="bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
+              <div className="z-20 relative bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
                 <i className="ri-user-3-line text-2xl text-white"></i>
               </div>
-              <div className="flex mt-3">
+              <div className="z-20 relative flex mt-3">
                 <div className="flex flex-col line">
                   <p className="text-white text-2xl text-center">
                     {totalUsers}
@@ -350,12 +353,13 @@ const Home = () => {
                 </div>
                 <i className="ri-team-fill absolute bottom-4 right-4 text-5xl text-[#37a55e]"></i>
               </div>
+              <DotBg color={"#342424"} />
             </div>
             <div className="flex-1 relative max-sm:min-w-full flex-col p-4 w-48 h-36 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <div className="bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
+              <div className="z-20 relative bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
                 <i className="ri-shopping-cart-line text-2xl text-white"></i>
               </div>
-              <div className="flex mt-3">
+              <div className="z-20 relative flex mt-3">
                 <div className="flex flex-col line">
                   <p className="text-white text-2xl text-center">
                     {totalCartItems}
@@ -364,12 +368,13 @@ const Home = () => {
                 </div>
                 <i className="ri-bar-chart-fill  absolute bottom-4 right-4 text-6xl text-[#5e309f]"></i>
               </div>
+              <DotBg color={"#342424"} />
             </div>
             <div className="flex-1 relative max-sm:min-w-full flex-col p-4 w-48 h-36 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
-              <div className="bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
+              <div className="z-20 relative bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
                 <i className="ri-cash-line text-2xl text-white"></i>
               </div>
-              <div className="flex mt-3">
+              <div className="z-20 relative flex mt-3">
                 <div className="flex flex-col line">
                   <p className="text-white text-2xl text-center">
                     ₹{totalEarnings}
@@ -378,6 +383,7 @@ const Home = () => {
                 </div>
                 <i className="ri-exchange-funds-fill absolute bottom-4 right-4 text-5xl text-[#f2f24b]"></i>
               </div>
+              <DotBg color={"#342424"} />
             </div>
           </div>
         </div>
