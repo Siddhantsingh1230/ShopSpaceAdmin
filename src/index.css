@@ -14,6 +14,9 @@ html {
   box-sizing: border-box;
   scroll-behavior: smooth;
   font-family: "Poppins";
+  /* prevent blue fill color on clicking a button and a link */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 #root {
@@ -423,6 +426,6 @@ input::-webkit-inner-spin-button {
   padding: 1rem;
 }
 
-.rbc-day-slot.rbc-time-column.rbc-now.rbc-today{
+.rbc-day-slot.rbc-time-column.rbc-now.rbc-today {
   background: transparent !important;
 }
