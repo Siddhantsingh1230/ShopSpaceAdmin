@@ -11,14 +11,11 @@ import { getAllNotes } from "../api/notes.js";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   getTotalEarningsAsync,
-  getAllOrdersAsync,
   getTotalCartItemsAsync,
   getTotalOrdersAsync,
 } from "../slices/ordersSlice.js";
 import { getTotalViewsAsync } from "../slices/productsSlice.js";
 import { getTotalUsersAsync } from "../slices/userSlice.js";
-import { getTotalViews } from "../api/products.js";
-import graphIcon from "../assets/images/graphIcon.png";
 
 const Home = () => {
   const [userDropDown, setUserDropDown] = useState(false);
@@ -184,7 +181,7 @@ const Home = () => {
                         <div
                           className={`flex col-span-1 justify-between items-center ${
                             item.category == "task"
-                              ? "bg-[#6f2aee] "
+                              ? "bg-[#844af0] "
                               : item.category == "report"
                               ? "bg-[#f1702f] "
                               : "bg-[#ee2dd4] "
@@ -214,7 +211,7 @@ const Home = () => {
                           }  
                           select-none h-full p-3 max-sm:text-sm whitespace-break-spaces `}
                         >
-                          <p className="text-xs flex items-center absolute top-3 right-3">
+                          <p className=" text-xs flex items-center absolute top-3 right-3">
                             {String(
                               `${String(
                                 new Date(item.createdAt).getDate()
@@ -237,21 +234,9 @@ const Home = () => {
                                   : "ri-focus-2-line "
                               } text-gray-300`}
                             ></i>{" "}
-                            
-
                             {item.title}
-                            
                           </div>
                         </div>
-                        {/* <div
-                          className={`w-full  ${
-                            item.category == "task"
-                              ? "bg-[#7e3ff4] "
-                              : item.category == "report"
-                              ? "bg-[#eb7f48] "
-                              : "bg-[#ee3fd7] "
-                          } py-[2px]`}
-                        ></div> */}
                       </motion.div>
                     ))}
                 </AnimatePresence>

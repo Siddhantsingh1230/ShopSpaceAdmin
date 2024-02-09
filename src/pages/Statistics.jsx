@@ -15,6 +15,7 @@ import PinBarCharts from "../components/charts/PinBarCharts";
 import SimplePieChart from "../components/charts/SimplePieChart";
 import LinedBarGraph from "../components/charts/LinedBarGraph";
 import SimpleRadarCharts from "../components/charts/SimpleRadarCharts";
+import DotBg from "../components/DotBg";
 
 const Statistics = () => {
   const products = useSelector((state) => state.product.products);
@@ -72,8 +73,8 @@ const Statistics = () => {
         }}
         className="flex flex-col gap-6 overflow-y-auto max-sm:mt-0  mt-2 mb-7  max-sm:w-full px-3 h-full"
       >
-        <div className="grid sm:grid-cols-3 gap-6 sm:pr-10">
-          <div className="sm:grid sm:col-span-2 bg-gradient-to-tr from-[#1e2652]  via-[#141721] to-[#161517] h-[325px]  rounded-lg  opacity-75">
+        <div className="grid sm:grid-cols-3 gap-6 sm:pr-10  ">
+          <div className="border border-gray-900 relative sm:grid sm:col-span-2 bg-gradient-to-tr from-[#1e2652]  via-[#0a1b30] to-[#0B0D10] h-[325px]  rounded-lg  opacity-75">
             {/* graph 1 */}
 
             {productsStatus === "loading" ? (
@@ -94,8 +95,9 @@ const Statistics = () => {
                 />
               </div>
             )}
+            <DotBg />
           </div>
-          <div className="sm:grid sm:col-span-1 h-[325px] bg-[#161517] rounded-lg">
+          <div className="sm:grid sm:col-span-1 h-[325px] bg-[#0e1011] rounded-lg">
             {/* graph 2 */}
             {orderStatus === "loading" ? (
               <div className="w-full h-full rounded-lg overflow-hidden">
@@ -116,7 +118,7 @@ const Statistics = () => {
           </div>
         </div>
         <div className="grid sm:grid-cols-3 gap-6 sm:pr-10 ">
-          <div className="grid h-[250px] bg-[#161517] rounded-lg">
+          <div className="grid h-[250px] bg-[#0e1011] rounded-lg">
             {/* graph 3 */}
             {orderStatus === "loading" ? (
               <div className="w-full h-full rounded-lg overflow-hidden">
@@ -133,7 +135,7 @@ const Statistics = () => {
               </div>
             )}
           </div>
-          <div className="grid  h-[250px] bg-[#161517] rounded-lg">
+          <div className="grid  h-[250px] bg-[#0e1011] rounded-lg">
             {/* graph 4 */}
             {orderStatus === "loading" ? (
               <div className="w-full h-full rounded-lg overflow-hidden">
@@ -150,7 +152,7 @@ const Statistics = () => {
               </div>
             )}
           </div>
-          <div className="grid  h-[250px] bg-[#161517] rounded-lg">
+          <div className="grid  h-[250px] bg-[#0e1011] rounded-lg">
             {/* graph 5 */}
             {orderStatus === "loading" ? (
               <div className="w-full h-full rounded-lg overflow-hidden">
@@ -171,7 +173,7 @@ const Statistics = () => {
           </div>
         </div>
         <div className="grid sm:grid-cols-3 gap-6 sm:pr-10 ">
-          <div className="grid h-[250px] bg-[#161517] rounded-lg">
+          <div className="grid h-[250px] bg-[#0e1011] rounded-lg">
             {/* graph 6 */}
             {orderStatus === "loading" ? (
               <div className="w-full h-full rounded-lg overflow-hidden">
@@ -189,7 +191,7 @@ const Statistics = () => {
               </div>
             )}
           </div>
-          <div className="grid  h-[250px] bg-[#161517] rounded-lg">
+          <div className="grid  h-[250px] bg-[#0e1011] rounded-lg">
             {/* graph 7 */}
             {orderStatus === "loading" ? (
               <div className="w-full h-full rounded-lg overflow-hidden">
