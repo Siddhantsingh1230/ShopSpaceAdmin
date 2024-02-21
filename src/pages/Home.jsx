@@ -54,8 +54,12 @@ const Home = () => {
   const productsStatus = useSelector((state) => state.product.status);
 
   const getCards = async () => {
-    const { notes } = await getAllNotes(user._id);
-    setCards(notes);
+    try {
+      const { notes } = await getAllNotes(user._id);
+      setCards(notes);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const totalOrders = useSelector((state) => state.order.totalOrders);
   const totalCartItems = useSelector((state) => state.order.totalCartItems);
@@ -313,7 +317,7 @@ const Home = () => {
             <div className="flex-1 relative max-sm:min-w-full flex-col p-4 w-48 h-36 bg-[#181818] rounded-lg transition-all cursor-pointer hover:bg-[#5C85E7] hover:text-white">
               <div className="bg-[#131313] w-12 h-12 rounded-full flex items-center justify-center">
                 <i className="z-20 relative ri-eye-fill text-2xl text-white"></i>
-              </div> 
+              </div>
               <div className="z-20 relative flex mt-3">
                 <div className="flex flex-col line">
                   <p className="text-white text-2xl text-center">
