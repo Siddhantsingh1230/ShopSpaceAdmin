@@ -1,11 +1,13 @@
-# WORK DONE
-------------------------
-## Project Created
-## Added base components and pages
-## Added Base Libraries such as axios,routers,toasts etc
-## Added and configured Tailwind
-## Started creating login page
-## Completed Signup page
-## Adding Auth API , States and Slices
-## Added 404 page
-## Added Recharts
+# Space/Desk
+Desktop
+![Desk](./Support/spacedeskLoginPC.png)
+![Desk](./Support/spacedeskSignUpPC.png)
+![Desk](./Support/spacedeskHomePC.png)
+![Desk](./Support/spacedeskStatsPC.png)
+![Desk](./Support/spacedeskOffersPC.png)
+![Desk](./Support/spacedeskOrdersPC.png)
+![Desk](./Support/spaceDeskSettingsPC.png)
+![Desk](./Support/spacedeskCalendarPC.png)
+![Desk](./Support/spacedeskKanbanPC.png)
+## Mobile
+![mobile](./Support/spaceDeskSidebarMobile.png)
